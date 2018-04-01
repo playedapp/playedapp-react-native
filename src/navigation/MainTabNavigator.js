@@ -38,6 +38,10 @@ export default TabNavigator(
           ? navigation.navigate("LogPlayModal")
           : jumpToIndex(index)
       },
+      headerStyle: {
+        backgroundColor: Colors.primary,
+      },
+      headerTintColor: Colors.textOnPrimary,
       tabBarIcon: ({ focused }) => {
         const { routeName } = navigation.state
 
@@ -75,5 +79,6 @@ export default TabNavigator(
     tabBarPosition: "bottom",
     animationEnabled: false,
     swipeEnabled: false,
+    title: "Home",
   },
 )

@@ -24,12 +24,17 @@ class Flow extends Component {
         {items.length > 0 && (
           <FlatList
             data={items}
-            renderItem={({ item }) => (
+            refreshing={false}
+            onRefresh={() => {}}
+            renderItem={({
+              item: { games, players, images, location, likes },
+            }) => (
               <Item
-                games={item.games}
-                players={item.players}
-                images={item.images}
-                location={item.location}
+                games={games}
+                players={players}
+                images={images}
+                location={location}
+                likes={likes}
               />
             )}
           />
