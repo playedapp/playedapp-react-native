@@ -19,7 +19,7 @@ exports[`Played X 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -49,7 +49,7 @@ exports[`Played X with 2 others 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -87,7 +87,7 @@ exports[`Played X with Y 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -108,7 +108,7 @@ exports[`Played X with Y 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -138,7 +138,7 @@ exports[`Played X with Y and Z 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -159,7 +159,7 @@ exports[`Played X with Y and Z 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -180,7 +180,7 @@ exports[`Played X with Y and Z 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -210,7 +210,7 @@ exports[`Played X with Y and one other 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -231,7 +231,7 @@ exports[`Played X with Y and one other 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -269,7 +269,7 @@ exports[`Played X with Y and two others 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -290,7 +290,7 @@ exports[`Played X with Y and two others 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -328,7 +328,7 @@ exports[`Played X with Y, Z and W 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -349,7 +349,7 @@ exports[`Played X with Y, Z and W 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -370,7 +370,7 @@ exports[`Played X with Y, Z and W 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -391,7 +391,7 @@ exports[`Played X with Y, Z and W 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -421,7 +421,7 @@ exports[`Played X with Y, Z and one other 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -442,7 +442,7 @@ exports[`Played X with Y, Z and one other 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -463,7 +463,7 @@ exports[`Played X with Y, Z and one other 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -501,7 +501,7 @@ exports[`Played X with Y, Z and two others 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -522,7 +522,7 @@ exports[`Played X with Y, Z and two others 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -543,7 +543,7 @@ exports[`Played X with Y, Z and two others 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
@@ -581,7 +581,7 @@ exports[`Played X with one other 1`] = `
       onPress={[Function]}
       style={
         Object {
-          "color": "#4d00ff",
+          "color": "#314bfc",
           "fontWeight": "bold",
         }
       }
