@@ -18,6 +18,7 @@ import Whitespace from "../../constants/Spacing"
 import Layout from "../../constants/Layout"
 import Swiper from "react-native-swiper"
 import { joinTexts, toOrdinal } from "./utils"
+import StarRating from "../shared/StarRating"
 
 class Item extends Component {
   static propTypes = {
@@ -110,11 +111,19 @@ class Item extends Component {
             </Text>
             {ratings && (
               <Text>
-                {ratings.map(({ game, currentRating /* previousRating */ }) => {
-                  if (game === primaryGame.key) {
-                    return currentRating
-                  }
-                })}
+                {ratings.map(
+                  ({ game, currentRating, previousRating }, index) => {
+                    if (game === primaryGame.key) {
+                      return (
+                        <StarRating
+                          key={index}
+                          rating={currentRating}
+                          compareTo={previousRating}
+                        />
+                      )
+                    }
+                  },
+                )}
               </Text>
             )}
             {comment && (
