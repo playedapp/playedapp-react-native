@@ -16,6 +16,7 @@ import AvatarStack from "./AvatarStack"
 import Colors from "../../constants/Colors"
 import Whitespace from "../../constants/Whitespace"
 import Layout from "../../constants/Layout"
+import Swiper from "react-native-swiper"
 
 const joinTexts = (...texts) => {
   if (texts.length === 1) return texts[0]
@@ -53,7 +54,9 @@ class Item extends Component {
     likes: { count: 0, hasLiked: false },
   }
 
-  state = {}
+  state = {
+    slideshowActive: false,
+  }
 
   handlePlayerPress = ({ name }) => {
     const { navigate } = this.props.navigation
@@ -138,12 +141,16 @@ class Item extends Component {
       ))
   }
 
-  render() {
-    const { images, games, likes } = this.props
+  renderImages() {
+    const { images } = this.props
 
     return (
-      <View style={{ width: Layout.window.width }}>
-        {this.renderHeader()}
+      <Swiper
+        loop={false}
+        bounces={true}
+        style={{ height: 300 }}
+        onTouchStart={() => this.setState({ slideshowActive: true })}
+      >
         {images.map(image => (
           <Image
             key={image.url}
@@ -151,6 +158,18 @@ class Item extends Component {
             source={{ uri: image.url }}
           />
         ))}
+      </Swiper>
+    )
+  }
+
+  render() {
+    const { games, likes } = this.props
+    const { slideshowActive } = this.state
+
+    return (
+      <View style={{ width: Layout.window.width }}>
+        {this.renderHeader()}
+        {this.renderImages()}
         <View
           style={{
             flexDirection: "row",
@@ -158,7 +177,9 @@ class Item extends Component {
             paddingHorizontal: Whitespace.m,
           }}
         >
-          <View style={{ flexShrink: 1, marginVertical: Whitespace.m }}>
+          <View
+            style={{ flexShrink: 1, flexGrow: 1, marginVertical: Whitespace.m }}
+          >
             <View style={{ marginBottom: Whitespace.m }}>
               <SummarySentence
                 games={games}
@@ -170,18 +191,20 @@ class Item extends Component {
             </View>
             {this.renderPlayerDetails()}
           </View>
-          {games.map(game => (
-            <TouchableHighlight
-              key={game}
-              style={styles.gameThumbnailButton}
-              onPress={() => this.handleGamePress(game)}
-            >
-              <Image
-                style={styles.gameThumbnail}
-                source={{ uri: game.thumbnail.url }}
-              />
-            </TouchableHighlight>
-          ))}
+          <View style={slideshowActive && { transform: [{ translateY: 30 }] }}>
+            {games.map(game => (
+              <TouchableHighlight
+                key={game}
+                style={styles.gameThumbnailButton}
+                onPress={() => this.handleGamePress(game)}
+              >
+                <Image
+                  style={styles.gameThumbnail}
+                  source={{ uri: game.thumbnail.url }}
+                />
+              </TouchableHighlight>
+            ))}
+          </View>
         </View>
         <View
           style={{
