@@ -1,22 +1,16 @@
-import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { ExpoLinksView } from "@expo/samples";
-import Flow from "../components/flow/Flow";
+import React from "react"
+import Flow from "../components/flow/Flow"
+import Colors from "../constants/Colors"
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: "Home"
-  };
+    title: "Home",
+    headerStyle: {
+      backgroundColor: Colors.primary,
+    },
+  }
 
   render() {
-    return <Flow />;
+    return <Flow />
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: "#fff"
-  }
-});

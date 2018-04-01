@@ -1,7 +1,7 @@
 import React from "react"
 import { Text, StyleSheet } from "react-native"
 import PropTypes from "prop-types"
-import { primary } from "../../style/colors"
+import Colors from "../../constants/Colors"
 
 export const SummarySentence = ({
   games,
@@ -76,7 +76,7 @@ SummarySentence.defaultProps = {
 
 const styles = StyleSheet.create({
   link: {
-    color: primary,
+    color: Colors.primary,
     fontWeight: "bold",
   },
 })

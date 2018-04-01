@@ -9,11 +9,11 @@ import {
   TouchableHighlight,
 } from "react-native"
 import PropTypes from "prop-types"
-import { primary } from "../../style/colors"
 import Avatar from "./Avatar"
 import LinkedAvatar from "./LinkedAvatar"
 import { SummarySentence } from "./SummarySentence"
 import AvatarStack from "./AvatarStack"
+import Colors from "../../constants/Colors"
 
 const joinTexts = (...texts) => {
   if (texts.length === 1) return texts[0]
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
   },
   link: {
-    color: primary,
+    color: Colors.primary,
     fontWeight: "bold",
   },
 })

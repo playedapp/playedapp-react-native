@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Image, StyleSheet, View, Text } from "react-native"
 import PropTypes from "prop-types"
-import { primary } from "../../style/colors"
+import Colors from "../../constants/Colors"
 
 class Avatar extends Component {
   static propTypes = {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: primary,
+    backgroundColor: Colors.primary,
     alignItems: "center",
     justifyContent: "center",
   },
