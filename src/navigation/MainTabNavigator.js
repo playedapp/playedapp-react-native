@@ -5,15 +5,15 @@ import { TabNavigator, TabBarBottom } from "react-navigation"
 
 import Colors from "../constants/Colors"
 
-import HomeScreen from "../screens/HomeScreen"
 import SearchScreen from "../screens/SearchScreen"
 import AlertsScreen from "../screens/AlertsScreen"
 import ProfileScreen from "../screens/ProfileScreen"
+import HomeStack from "./HomeStack"
 
 export default TabNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeStack,
     },
     Search: {
       screen: SearchScreen,
@@ -38,10 +38,7 @@ export default TabNavigator(
           ? navigation.navigate("LogPlayModal")
           : jumpToIndex(index)
       },
-      headerStyle: {
-        backgroundColor: Colors.primary,
-      },
-      headerTintColor: Colors.textOnPrimary,
+      header: null,
       tabBarIcon: ({ focused }) => {
         const { routeName } = navigation.state
 

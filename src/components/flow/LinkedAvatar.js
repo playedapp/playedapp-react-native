@@ -7,12 +7,12 @@ import { withNavigation } from "react-navigation"
 class LinkedAvatar extends Component {
   static propTypes = {
     navigation: PropTypes.shape({ navigate: PropTypes.func }),
-    player: PropTypes.object,
+    player: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
   }
 
   handlePress = () => {
     const { navigate } = this.props.navigation
-    navigate("Profile", { name: this.props.player.name })
+    navigate("Player", { name: this.props.player.name })
   }
 
   render() {

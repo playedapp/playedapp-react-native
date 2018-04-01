@@ -10,7 +10,6 @@ import {
   Button,
 } from "react-native"
 import PropTypes from "prop-types"
-import Avatar from "./Avatar"
 import { SummarySentence } from "./SummarySentence"
 import AvatarStack from "./AvatarStack"
 import Colors from "../../constants/Colors"
@@ -19,6 +18,7 @@ import Layout from "../../constants/Layout"
 import Swiper from "react-native-swiper"
 import { joinTexts, toOrdinal } from "./utils"
 import StarRating from "../shared/StarRating"
+import LinkedAvatar from "./LinkedAvatar"
 
 class Item extends Component {
   static propTypes = {
@@ -45,7 +45,7 @@ class Item extends Component {
 
   handlePlayerPress = ({ name }) => {
     const { navigate } = this.props.navigation
-    navigate("Profile", { name })
+    navigate("Player", { name })
   }
 
   handleGamePress = ({ title }) => {
@@ -91,14 +91,18 @@ class Item extends Component {
     const { games } = this.props
     const primaryGame = games[0]
 
-    return this.followedPlayers
-      .sort((a, b) => a.rank - b.rank)
-      .map(({ key, name, rank, score, ratings, comment, avatar }) => (
+    return this.followedPlayers.sort((a, b) => a.rank - b.rank).map(player => {
+      const { key, name, rank, score, ratings, comment, avatar } = player
+      return (
         <View
           key={key}
           style={{ flexDirection: "row", marginBottom: Whitespace.m }}
         >
-          <Avatar imageSource={avatar ? avatar.url : null} text={name[0]} />
+          <LinkedAvatar
+            imageSource={avatar ? avatar.url : null}
+            text={name[0]}
+            player={player}
+          />
           <View style={{ marginLeft: Whitespace.m }}>
             <Text>
               <Text>
@@ -131,7 +135,8 @@ class Item extends Component {
             )}
           </View>
         </View>
-      ))
+      )
+    })
   }
 
   renderImages() {

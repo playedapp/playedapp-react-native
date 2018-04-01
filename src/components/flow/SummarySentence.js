@@ -15,7 +15,7 @@ export const SummarySentence = ({
       <Text
         key={player.key}
         style={styles.link}
-        onPress={() => onPlayerPress && onPlayerPress(games[0])}
+        onPress={() => onPlayerPress && onPlayerPress(player)}
       >
         {player.name}
       </Text>

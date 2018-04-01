@@ -39,15 +39,25 @@ class AvatarStack extends Component {
     if (isExpanded) {
       return (
         <View style={styles.container}>
-          {players.map(({ key, avatar, name, ...player }, index) => (
-            <View key={key} style={index > 0 && { marginLeft: 5 }}>
-              <LinkedAvatar
-                imageSource={avatar ? avatar.url : null}
-                text={name[0]}
-                player={player}
-              />
-            </View>
-          ))}
+          {players.map((player, index) => {
+            const { key, avatar, name } = player
+            return (
+              <View key={key} style={index > 0 && { marginLeft: 5 }}>
+                {name ? (
+                  <LinkedAvatar
+                    imageSource={avatar ? avatar.url : null}
+                    text={name[0]}
+                    player={player}
+                  />
+                ) : (
+                  <Avatar
+                    imageSource={avatar ? avatar.url : null}
+                    text={name[0]}
+                  />
+                )}
+              </View>
+            )
+          })}
         </View>
       )
     }
