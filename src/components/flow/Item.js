@@ -16,13 +16,15 @@ import Colors from "../../constants/Colors"
 import Whitespace from "../../constants/Spacing"
 import Layout from "../../constants/Layout"
 import Swiper from "react-native-swiper"
-import { joinTexts, toOrdinal } from "./utils"
+import { joinTexts } from "./utils"
 import StarRating from "../shared/StarRating"
 import LinkedAvatar from "./LinkedAvatar"
+import { toOrdinal } from "../../lib/utils"
 
 class Item extends Component {
   static propTypes = {
     navigation: PropTypes.shape({ navigate: PropTypes.func }),
+    id: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(
       PropTypes.shape({ url: PropTypes.string.isRequired }),
     ),
@@ -51,6 +53,11 @@ class Item extends Component {
   handleGamePress = ({ title }) => {
     const { navigate } = this.props.navigation
     navigate("Game", { title })
+  }
+
+  handleDetailsPress = () => {
+    const { navigate } = this.props.navigation
+    navigate("Session", { id: this.props.id })
   }
 
   handleLikePress = () => {}
@@ -214,6 +221,7 @@ class Item extends Component {
         >
           <Button title={`❤️ ${likes.count}`} onPress={this.handleLikePress} />
           <Button title={`💬`} onPress={this.handleLikePress} />
+          <Button title="Details" onPress={this.handleDetailsPress} />
         </View>
       </View>
     )

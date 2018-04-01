@@ -27,9 +27,10 @@ class Flow extends Component {
             refreshing={false}
             onRefresh={() => {}}
             renderItem={({
-              item: { games, players, images, location, likes },
+              item: { key, games, players, images, location, likes },
             }) => (
               <Item
+                id={key}
                 games={games}
                 players={players}
                 images={images}

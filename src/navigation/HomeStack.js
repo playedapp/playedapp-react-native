@@ -4,12 +4,14 @@ import HomeScreen from "../screens/HomeScreen"
 import Colors from "../constants/Colors"
 import GameScreen from "../screens/GameScreen"
 import PlayerScreen from "../screens/PlayerScreen"
+import SessionScreen from "../screens/SessionScreen"
 
 const HomeStackNavigator = StackNavigator(
   {
     Main: { screen: HomeScreen },
     Game: { screen: GameScreen },
     Player: { screen: PlayerScreen },
+    Session: { screen: SessionScreen },
   },
   {
     initialRouteName: "Main",

@@ -10,6 +10,46 @@ export default class SearchScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
+        <Text>Nothing to see here yet…</Text>
       </ScrollView>
     )
   }
