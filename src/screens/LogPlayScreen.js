@@ -1,6 +1,5 @@
 import React from "react"
-import { ScrollView, StyleSheet } from "react-native"
-import { ExpoLinksView } from "@expo/samples"
+import { ScrollView, StyleSheet, Text } from "react-native"
 
 export default class LogPlayScreen extends React.Component {
   static navigationOptions = {
@@ -10,9 +9,7 @@ export default class LogPlayScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
+        <Text>Nothing to see here yet…</Text>
       </ScrollView>
     )
   }
@@ -21,7 +18,7 @@ export default class LogPlayScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
+    padding: 15,
     backgroundColor: "#fff",
   },
 })
