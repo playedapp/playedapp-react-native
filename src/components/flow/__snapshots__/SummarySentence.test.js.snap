@@ -1,0 +1,601 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Played X 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+  </Text>
+</Text>
+`;
+
+exports[`Played X with 2 others 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    2 others
+  </Text>
+</Text>
+`;
+
+exports[`Played X with Y 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+  </Text>
+</Text>
+`;
+
+exports[`Played X with Y and Z 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       and 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+  </Text>
+</Text>
+`;
+
+exports[`Played X with Y and one other 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       and 
+    </Text>
+    one other
+  </Text>
+</Text>
+`;
+
+exports[`Played X with Y and two others 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       and 
+    </Text>
+    2 others
+  </Text>
+</Text>
+`;
+
+exports[`Played X with Y, Z and W 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      , 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       and 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+  </Text>
+</Text>
+`;
+
+exports[`Played X with Y, Z and one other 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      , 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       and 
+    </Text>
+    one other
+  </Text>
+</Text>
+`;
+
+exports[`Played X with Y, Z and two others 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      , 
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Nina
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       and 
+    </Text>
+    2 others
+  </Text>
+</Text>
+`;
+
+exports[`Played X with one other 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Played 
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "#4d00ff",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      Clans of Caledonia
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+       with 
+    </Text>
+    one other
+  </Text>
+</Text>
+`;
