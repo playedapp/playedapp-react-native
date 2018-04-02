@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { withNavigation } from "react-navigation"
+import { withNavigation, NavigationActions } from "react-navigation"
 import {
   Image,
   View,
@@ -23,7 +23,10 @@ import { toOrdinal } from "../../lib/utils"
 
 class Item extends Component {
   static propTypes = {
-    navigation: PropTypes.shape({ navigate: PropTypes.func }),
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func,
+      dispatch: PropTypes.func,
+    }),
     id: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(
       PropTypes.shape({ url: PropTypes.string.isRequired }),
@@ -61,6 +64,16 @@ class Item extends Component {
   }
 
   handleLikePress = () => {}
+
+  handleCommentsPress = () => {
+    const { dispatch } = this.props.navigation
+    const action = NavigationActions.navigate({
+      routeName: "Session",
+      params: { id: this.props.id },
+      action: NavigationActions.navigate({ routeName: "Comments" }),
+    })
+    dispatch(action)
+  }
 
   get followedPlayers() {
     return this.props.players.filter(player => player.isFollowing)
@@ -220,7 +233,7 @@ class Item extends Component {
           }}
         >
           <Button title={`❤️ ${likes.count}`} onPress={this.handleLikePress} />
-          <Button title={`💬`} onPress={this.handleLikePress} />
+          <Button title={`💬`} onPress={this.handleCommentsPress} />
           <Button title="Details" onPress={this.handleDetailsPress} />
         </View>
       </View>
