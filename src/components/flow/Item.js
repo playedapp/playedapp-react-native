@@ -114,8 +114,9 @@ class Item extends Component {
     return this.followedParticipants
       .sort((a, b) => a.rank - b.rank)
       .map(participant => {
-        const { id, rank, score, person } = participant
+        const { id, rank, score, person, ratings } = participant
         const { name } = person
+        const comment = ratings.length ? ratings[0].comment.content : null
 
         return (
           <View
@@ -133,26 +134,24 @@ class Item extends Component {
                   {toOrdinal(rank)} {score}p
                 </Text>
               </Text>
-              {/* {ratings && (
+              {ratings && (
                 <Text>
-                  {ratings.map(
-                    ({ game, currentRating, previousRating }, index) => {
-                      if (game === primaryGame.key) {
-                        return (
-                          <StarRating
-                            key={index}
-                            rating={currentRating}
-                            compareTo={previousRating}
-                          />
-                        )
-                      }
-                    },
-                  )}
+                  {ratings
+                    .slice(0, 1)
+                    .map(({ value, previous: { value: prevValue } }, index) => {
+                      return (
+                        <StarRating
+                          key={index}
+                          rating={value}
+                          compareTo={prevValue}
+                        />
+                      )
+                    })}
                 </Text>
-              )} */}
-              {/* {comment && (
+              )}
+              {comment && (
                 <Text style={{ marginTop: Whitespace.s }}>{comment}</Text>
-              )} */}
+              )}
             </View>
           </View>
         )

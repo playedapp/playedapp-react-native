@@ -4,6 +4,8 @@ import { HttpLink } from "apollo-link-http"
 import { onError } from "apollo-link-error"
 import { ApolloLink } from "apollo-link"
 
+// TODO: Use cached data: https://www.apollographql.com/docs/react/features/performance.html#cache-redirects
+
 const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {

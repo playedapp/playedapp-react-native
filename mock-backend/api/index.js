@@ -139,6 +139,10 @@ addMockFunctionsToSchema({
     }),
     Participant: () => ({
       score: casual.integer(30, 130),
+      rank: casual.integer(1, 8),
+    }),
+    Rating: () => ({
+      value: casual.integer(0, 10) / 2,
     }),
     Session: () => ({
       playtime: casual.integer(20, 200),
