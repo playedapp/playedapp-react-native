@@ -8,6 +8,21 @@ import SessionDetailsScreen from "./SessionDetailsScreen"
 import SessionScoreboardScreen from "./SessionScoreboardScreen"
 import SessionRatingsScreen from "./SessionRatingsScreen"
 import SessionCommentsScreen from "./SessionCommentsScreen"
+import { Query } from "react-apollo"
+import gql from "graphql-tag"
+
+const GET_SESSION = gql`
+  query getSession($id: ID!) {
+    session(id: $id) {
+      games {
+        title
+      }
+      images {
+        url
+      }
+    }
+  }
+`
 
 const Tabs = TabNavigator(
   {
@@ -63,50 +78,37 @@ export default class SessionScreen extends React.Component {
     return { title: "Session details" }
   }
 
-  state = { isLoading: true, session: null }
-
-  componentDidMount() {
-    fetch(
-      `http://192.168.0.4:3000/api/session/${
-        this.props.navigation.state.params.id
-      }`,
-    )
-      .then(res => res.json())
-      .then(session => {
-        this.setState({
-          isLoading: false,
-          session,
-        })
-      })
-  }
-
   render() {
-    const { isLoading, session } = this.state
-
-    if (isLoading) {
-      return <Text>Loading…</Text>
-    }
-
-    const { images } = session
+    const { id } = this.props.navigation.state.params
 
     return (
-      <ScrollView style={styles.container}>
-        <Swiper
-          loop={false}
-          bounces={true}
-          style={{ height: 300 }}
-          onTouchStart={() => this.setState({ slideshowActive: true })}
-        >
-          {images.map(image => (
-            <Image
-              key={image.url}
-              style={{ width: "100%", height: 300 }}
-              source={{ uri: image.url }}
-            />
-          ))}
-        </Swiper>
-        <Tabs />
-      </ScrollView>
+      <Query query={GET_SESSION} variables={{ id }}>
+        {({ loading, error, data }) => {
+          if (loading) return <Text>Loading…</Text>
+          if (error) return <Text>Error!</Text>
+          console.log(data.images)
+
+          return (
+            <ScrollView style={styles.container}>
+              <Swiper
+                loop={false}
+                bounces={true}
+                style={{ height: 300 }}
+                onTouchStart={() => this.setState({ slideshowActive: true })}
+              >
+                {data.images.map(image => (
+                  <Image
+                    key={image.url}
+                    style={{ width: "100%", height: 300 }}
+                    source={{ uri: image.url }}
+                  />
+                ))}
+              </Swiper>
+              <Tabs />
+            </ScrollView>
+          )
+        }}
+      </Query>
     )
   }
 }

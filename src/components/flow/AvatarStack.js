@@ -1,99 +1,50 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import {
-  View,
-  StyleSheet,
-  Animated,
-  TouchableWithoutFeedback,
-} from "react-native"
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native"
 import Avatar from "./Avatar"
-import LinkedAvatar from "./LinkedAvatar"
 
 class AvatarStack extends Component {
   static propTypes = {
-    players: PropTypes.arrayOf(
+    users: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         avatar: PropTypes.shape({ url: PropTypes.string }),
       }),
-    ),
-  }
-
-  state = {
-    isExpanded: false,
-    avatarMargin: -25, // new Animated.Value(-25)
+    ).isRequired,
   }
 
   handleTogglePress = () => {
-    //  Animated.timing(this.state.avatarMargin, {
-    //    toValue: 5,
-    //    duration: 1000,
-    //  }).start()
-    this.setState({ isExpanded: !this.state.isExpanded })
+    // TODO: go to session details
   }
 
   render() {
-    const { avatarMargin, isExpanded } = this.state
-    const { players } = this.props
-
-    if (isExpanded) {
-      return (
-        <View style={styles.container}>
-          {players.map((player, index) => {
-            const { key, avatar, name } = player
-            return (
-              <View key={key} style={index > 0 && { marginLeft: 5 }}>
-                {name ? (
-                  <LinkedAvatar
-                    imageSource={avatar ? avatar.url : null}
-                    text={name[0]}
-                    player={player}
-                  />
-                ) : (
-                  <Avatar
-                    imageSource={avatar ? avatar.url : null}
-                    text={name[0]}
-                  />
-                )}
-              </View>
-            )
-          })}
-        </View>
-      )
-    }
+    const { users } = this.props
 
     return (
       <TouchableWithoutFeedback onPress={this.handleTogglePress}>
-        {players.length < 4 ? (
+        {users.length < 4 ? (
           <View style={styles.container}>
-            {players.map(({ key, avatar, name }, index) => (
-              <Animated.View
-                key={key}
-                style={index > 0 && { marginLeft: avatarMargin }}
-              >
-                <Avatar
-                  imageSource={avatar ? avatar.url : null}
-                  text={name[0]}
-                />
-              </Animated.View>
+            {users.map(({ id, avatar, name }) => (
+              <Avatar
+                key={id}
+                imageSource={avatar ? avatar.url : null}
+                text={name[0]}
+              />
             ))}
           </View>
         ) : (
           <View style={styles.container}>
-            {players.slice(0, 2).map(({ key, avatar, name }, index) => (
-              <Animated.View
-                key={key}
-                style={index > 0 && { marginLeft: avatarMargin }}
-              >
+            {users
+              .slice(0, 2)
+              .map(({ id, avatar, name }) => (
                 <Avatar
+                  key={id}
                   imageSource={avatar ? avatar.url : null}
                   text={name[0]}
                 />
-              </Animated.View>
-            ))}
-            <Animated.View style={{ marginLeft: avatarMargin }}>
-              <Avatar text={`+${players.length - 2}`} />
-            </Animated.View>
+              ))}
+
+            <Avatar text={`+${users.length - 2}`} />
           </View>
         )}
       </TouchableWithoutFeedback>

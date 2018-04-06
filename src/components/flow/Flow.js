@@ -1,49 +1,69 @@
-import React, { Component } from "react"
-import { FlatList, View, StyleSheet, StatusBar } from "react-native"
+import React from "react"
+import { Text, FlatList, View, StyleSheet, StatusBar } from "react-native"
 import Item from "./Item"
 import Colors from "../../constants/Colors"
+import { Query } from "react-apollo"
+import gql from "graphql-tag"
 
-class Flow extends Component {
-  state = {
-    items: [],
+const GET_SESSIONS = gql`
+  {
+    sessions {
+      id
+      games {
+        title
+        thumbnail {
+          url
+        }
+      }
+      players {
+        score
+        rank
+        comment
+        user {
+          id
+          name
+          isFollowing
+        }
+      }
+      images {
+        url
+      }
+    }
   }
+`
 
-  componentDidMount() {
-    fetch("http://192.168.0.4:3000/api/flow")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({ items: json.items })
-      })
-  }
+const Flow = () => (
+  <Query query={GET_SESSIONS}>
+    {({ loading, error, data }) => {
+      if (loading) return <Text>Loading…</Text>
+      if (error) return <Text>Error!</Text>
 
-  render() {
-    const { items } = this.state
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        {items.length > 0 && (
+      return (
+        <View style={styles.container}>
+          <StatusBar barStyle="light-content" />
           <FlatList
-            data={items}
+            data={data.sessions}
+            keyExtractor={item => item.id}
             refreshing={false}
             onRefresh={() => {}}
-            renderItem={({
-              item: { key, games, players, images, location, likes },
-            }) => (
-              <Item
-                id={key}
-                games={games}
-                players={players}
-                images={images}
-                location={location}
-                likes={likes}
-              />
-            )}
+            renderItem={
+              ({ item: { id, games, players, images, location } }) => (
+                <Item
+                  id={id}
+                  games={games}
+                  players={players}
+                  images={images}
+                  location={location}
+                />
+              )
+              // likes={likes}
+            }
           />
-        )}
-      </View>
-    )
-  }
-}
+        </View>
+      )
+    }}
+  </Query>
+)
 
 const styles = StyleSheet.create({
   container: {

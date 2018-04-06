@@ -76,12 +76,14 @@ class Item extends Component {
   }
 
   get followedPlayers() {
-    return this.props.players.filter(player => player.isFollowing)
+    return this.props.players.filter(
+      player => player.user && player.user.isFollowing,
+    )
   }
 
   get notFollowedPlayers() {
     return this.props.players.filter(
-      player => player.accountId && !player.isFollowing,
+      player => player.user && !player.user.isFollowing,
     )
   }
 
@@ -91,14 +93,12 @@ class Item extends Component {
 
   renderHeader() {
     const { location } = this.props
-
-    const playerLinks = joinTexts(
-      ...this.followedPlayers.map(({ name }) => name),
-    )
+    const followedUsers = this.followedPlayers.map(({ user }) => user)
+    const playerLinks = joinTexts(...followedUsers.map(({ name }) => name))
 
     return (
       <View style={[styles.header, { alignItems: "center" }]}>
-        <AvatarStack players={this.followedPlayers} />
+        <AvatarStack users={followedUsers} />
         <View style={{ marginLeft: Whitespace.m }}>
           <Text style={styles.text}>{playerLinks}</Text>
           {location && <Text style={styles.mutedText}>{location.name}</Text>}
@@ -112,10 +112,11 @@ class Item extends Component {
     const primaryGame = games[0]
 
     return this.followedPlayers.sort((a, b) => a.rank - b.rank).map(player => {
-      const { key, name, rank, score, ratings, comment, avatar } = player
+      const { id, rank, score, comment, user } = player
+      const { name, ratings, avatar } = user
       return (
         <View
-          key={key}
+          key={id}
           style={{ flexDirection: "row", marginBottom: Whitespace.m }}
         >
           <LinkedAvatar
