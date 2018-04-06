@@ -2,21 +2,45 @@ import React, { Component } from "react"
 import { Image, StyleSheet, View, Text } from "react-native"
 import PropTypes from "prop-types"
 import Colors from "../../constants/Colors"
+import gql from "graphql-tag"
+import { Query } from "react-apollo"
+
+const GET_PERSON = gql`
+  query GET_PERSON($id: ID!) {
+    person(id: $id) {
+      name
+      avatar {
+        url
+      }
+    }
+  }
+`
 
 class Avatar extends Component {
   static propTypes = {
-    imageSource: PropTypes.string,
-    text: PropTypes.string,
+    id: PropTypes.string,
   }
 
   render() {
-    const { imageSource, text } = this.props
-    return imageSource ? (
-      <Image style={styles.imageAvatar} source={{ uri: imageSource }} />
-    ) : (
-      <View style={styles.textAvatar}>
-        <Text style={styles.text}>{text}</Text>
-      </View>
+    const { id } = this.props
+
+    return (
+      <Query query={GET_PERSON} variables={{ id }}>
+        {({ loading, error, data: { person } }) => {
+          if (loading || error) return null
+
+          return person.avatar ? (
+            <Image
+              style={styles.imageAvatar}
+              source={{ uri: person.avatar.url }}
+            />
+          ) : (
+            <View style={styles.textAvatar}>
+              <Text style={styles.text}>{person.name[0].toUppercase()}</Text>
+            </View>
+          )
+        }}
+      </Query>
     )
   }
 }

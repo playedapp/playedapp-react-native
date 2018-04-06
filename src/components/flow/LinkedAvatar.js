@@ -7,18 +7,18 @@ import { withNavigation } from "react-navigation"
 class LinkedAvatar extends Component {
   static propTypes = {
     navigation: PropTypes.shape({ navigate: PropTypes.func }),
-    player: PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired,
+    id: PropTypes.string.isRequired,
   }
 
   handlePress = () => {
     const { navigate } = this.props.navigation
-    navigate("Player", { name: this.props.player.name })
+    navigate("Player", { id: this.props.id })
   }
 
   render() {
     return (
       <TouchableOpacity onPress={this.handlePress}>
-        <Avatar {...this.props} />
+        <Avatar id={this.props.id} />
       </TouchableOpacity>
     )
   }

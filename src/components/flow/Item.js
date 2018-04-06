@@ -115,18 +115,14 @@ class Item extends Component {
       .sort((a, b) => a.rank - b.rank)
       .map(participant => {
         const { id, rank, score, person } = participant
-        const { name, avatar } = person
+        const { name } = person
 
         return (
           <View
             key={id}
             style={{ flexDirection: "row", marginBottom: Whitespace.m }}
           >
-            <LinkedAvatar
-              imageSource={avatar ? avatar.url : null}
-              text={name[0]}
-              player={person}
-            />
+            <LinkedAvatar id={id} />
             <View style={{ marginLeft: Whitespace.m }}>
               <Text>
                 <Text>

@@ -112,6 +112,7 @@ const schemaString = `
    type Person {
       id: ID,
       name: String,
+      avatar: Image,
       sessions: [Session],
       ratings: [Rating]
       stats(game: ID): [Stats]
@@ -135,10 +136,6 @@ addMockFunctionsToSchema({
     Person: (o, { id }) => ({
       id,
       name: casual.first_name,
-      avatar: casual.random_element([
-        "http://192.168.0.4:3000/static/avatars/frdh.jpg",
-        "http://192.168.0.4:3000/static/avatars/micke.jpg",
-      ]),
     }),
     Participant: () => ({
       score: casual.integer(30, 130),
@@ -165,16 +162,22 @@ addMockFunctionsToSchema({
       lng: casual.longitude,
     }),
     Image: (obj, args, context, { fieldName }) => {
-      return {
-        url:
-          fieldName === "cover"
-            ? "http://192.168.0.4:3000/static/covers/clansofcaledonia.png"
-            : casual.random_element([
-                "http://192.168.0.4:3000/static/photos/IMG_2669.jpg",
-                "http://192.168.0.4:3000/static/photos/pic3809378.jpg",
-                "http://192.168.0.4:3000/static/photos/IMG_2667.jpg",
-              ]),
+      let url
+      switch (fieldName) {
+        case "cover":
+          url = "http://192.168.0.4:3000/static/covers/clansofcaledonia.png"
+          break
+        case "avatar":
+          url = "http://192.168.0.4:3000/static/avatars/frdh.jpg"
+          break
+        default:
+          url = casual.random_element([
+            "http://192.168.0.4:3000/static/photos/IMG_2669.jpg",
+            "http://192.168.0.4:3000/static/photos/pic3809378.jpg",
+            "http://192.168.0.4:3000/static/photos/IMG_2667.jpg",
+          ])
       }
+      return { url }
     },
     Comment: () => ({
       content: casual.sentence,
