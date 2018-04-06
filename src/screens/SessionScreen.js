@@ -84,9 +84,9 @@ export default class SessionScreen extends React.Component {
     return (
       <Query query={GET_SESSION} variables={{ id }}>
         {({ loading, error, data }) => {
+          console.log(data)
           if (loading) return <Text>Loading…</Text>
           if (error) return <Text>Error!</Text>
-          console.log(data.images)
 
           return (
             <ScrollView style={styles.container}>

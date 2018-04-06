@@ -32,7 +32,7 @@ class Item extends Component {
       PropTypes.shape({ url: PropTypes.string.isRequired }),
     ),
     games: PropTypes.array,
-    players: PropTypes.array,
+    participants: PropTypes.array,
     location: PropTypes.shape({ name: PropTypes.string }),
     likes: PropTypes.shape({
       count: PropTypes.number,
@@ -48,9 +48,9 @@ class Item extends Component {
     slideshowActive: false,
   }
 
-  handlePlayerPress = ({ name }) => {
+  handlePersonPress = ({ name }) => {
     const { navigate } = this.props.navigation
-    navigate("Player", { name })
+    navigate("Person", { name })
   }
 
   handleGamePress = ({ title }) => {
@@ -75,89 +75,92 @@ class Item extends Component {
     dispatch(action)
   }
 
-  get followedPlayers() {
-    return this.props.players.filter(
-      player => player.user && player.user.isFollowing,
+  get followedParticipants() {
+    return this.props.participants.filter(
+      participant => participant.person && participant.person.isFollowingMe,
     )
   }
 
-  get notFollowedPlayers() {
-    return this.props.players.filter(
-      player => player.user && !player.user.isFollowing,
+  get notFollowedParticipants() {
+    return this.props.participants.filter(
+      participant => participant.person && !participant.person.isFollowingMe,
     )
   }
 
-  get anonymousPlayers() {
-    return this.props.players.filter(player => !player.accountId)
+  get anonymousParticipants() {
+    return this.props.participants.filter(participant => !participant.user)
   }
 
   renderHeader() {
     const { location } = this.props
-    const followedUsers = this.followedPlayers.map(({ user }) => user)
-    const playerLinks = joinTexts(...followedUsers.map(({ name }) => name))
+    const followed = this.followedParticipants.map(({ person }) => person)
+    const personLinks = joinTexts(...followed.map(({ name }) => name))
 
     return (
       <View style={[styles.header, { alignItems: "center" }]}>
-        <AvatarStack users={followedUsers} />
+        <AvatarStack people={followed} />
         <View style={{ marginLeft: Whitespace.m }}>
-          <Text style={styles.text}>{playerLinks}</Text>
+          <Text style={styles.text}>{personLinks}</Text>
           {location && <Text style={styles.mutedText}>{location.name}</Text>}
         </View>
       </View>
     )
   }
 
-  renderPlayerDetails() {
+  renderParticipantDetails() {
     const { games } = this.props
     const primaryGame = games[0]
 
-    return this.followedPlayers.sort((a, b) => a.rank - b.rank).map(player => {
-      const { id, rank, score, comment, user } = player
-      const { name, ratings, avatar } = user
-      return (
-        <View
-          key={id}
-          style={{ flexDirection: "row", marginBottom: Whitespace.m }}
-        >
-          <LinkedAvatar
-            imageSource={avatar ? avatar.url : null}
-            text={name[0]}
-            player={player}
-          />
-          <View style={{ marginLeft: Whitespace.m }}>
-            <Text>
+    return this.followedParticipants
+      .sort((a, b) => a.rank - b.rank)
+      .map(participant => {
+        const { id, rank, score, person } = participant
+        const { name, avatar } = person
+
+        return (
+          <View
+            key={id}
+            style={{ flexDirection: "row", marginBottom: Whitespace.m }}
+          >
+            <LinkedAvatar
+              imageSource={avatar ? avatar.url : null}
+              text={name[0]}
+              player={person}
+            />
+            <View style={{ marginLeft: Whitespace.m }}>
               <Text>
-                {rank === 1 && "👑"}
-                {name}{" "}
+                <Text>
+                  {rank === 1 && "👑"}
+                  {name}{" "}
+                </Text>
+                <Text style={styles.mutedText}>
+                  {toOrdinal(rank)} {score}p
+                </Text>
               </Text>
-              <Text style={styles.mutedText}>
-                {toOrdinal(rank)} {score}p
-              </Text>
-            </Text>
-            {ratings && (
-              <Text>
-                {ratings.map(
-                  ({ game, currentRating, previousRating }, index) => {
-                    if (game === primaryGame.key) {
-                      return (
-                        <StarRating
-                          key={index}
-                          rating={currentRating}
-                          compareTo={previousRating}
-                        />
-                      )
-                    }
-                  },
-                )}
-              </Text>
-            )}
-            {comment && (
-              <Text style={{ marginTop: Whitespace.s }}>{comment}</Text>
-            )}
+              {/* {ratings && (
+                <Text>
+                  {ratings.map(
+                    ({ game, currentRating, previousRating }, index) => {
+                      if (game === primaryGame.key) {
+                        return (
+                          <StarRating
+                            key={index}
+                            rating={currentRating}
+                            compareTo={previousRating}
+                          />
+                        )
+                      }
+                    },
+                  )}
+                </Text>
+              )} */}
+              {/* {comment && (
+                <Text style={{ marginTop: Whitespace.s }}>{comment}</Text>
+              )} */}
+            </View>
           </View>
-        </View>
-      )
-    })
+        )
+      })
   }
 
   renderImages() {
@@ -205,21 +208,21 @@ class Item extends Component {
                 notFollowedPlayers={this.notFollowedPlayers}
                 anonymousPlayers={this.anonymousPlayers}
                 onGamePress={this.handleGamePress}
-                onPlayerPress={this.handlePlayerPress}
+                onPlayerPress={this.handlePersonPress}
               />
             </View>
-            {this.renderPlayerDetails()}
+            {this.renderParticipantDetails()}
           </View>
           <View style={slideshowActive && { transform: [{ translateY: 30 }] }}>
             {games.map(game => (
               <TouchableHighlight
-                key={game}
+                key={game.id}
                 style={styles.gameThumbnailButton}
                 onPress={() => this.handleGamePress(game)}
               >
                 <Image
                   style={styles.gameThumbnail}
-                  source={{ uri: game.thumbnail.url }}
+                  source={{ uri: game.cover.url }}
                 />
               </TouchableHighlight>
             ))}

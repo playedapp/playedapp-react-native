@@ -5,7 +5,7 @@ import Avatar from "./Avatar"
 
 class AvatarStack extends Component {
   static propTypes = {
-    users: PropTypes.arrayOf(
+    people: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
         avatar: PropTypes.shape({ url: PropTypes.string }),
@@ -13,41 +13,33 @@ class AvatarStack extends Component {
     ).isRequired,
   }
 
-  handleTogglePress = () => {
-    // TODO: go to session details
-  }
-
   render() {
-    const { users } = this.props
+    const { people } = this.props
 
-    return (
-      <TouchableWithoutFeedback onPress={this.handleTogglePress}>
-        {users.length < 4 ? (
-          <View style={styles.container}>
-            {users.map(({ id, avatar, name }) => (
-              <Avatar
-                key={id}
-                imageSource={avatar ? avatar.url : null}
-                text={name[0]}
-              />
-            ))}
-          </View>
-        ) : (
-          <View style={styles.container}>
-            {users
-              .slice(0, 2)
-              .map(({ id, avatar, name }) => (
-                <Avatar
-                  key={id}
-                  imageSource={avatar ? avatar.url : null}
-                  text={name[0]}
-                />
-              ))}
+    return people.length < 4 ? (
+      <View style={styles.container}>
+        {people.map(({ id, avatar, name }) => (
+          <Avatar
+            key={id}
+            imageSource={avatar ? avatar.url : null}
+            text={name[0]}
+          />
+        ))}
+      </View>
+    ) : (
+      <View style={styles.container}>
+        {people
+          .slice(0, 2)
+          .map(({ id, avatar, name }) => (
+            <Avatar
+              key={id}
+              imageSource={avatar ? avatar.url : null}
+              text={name[0]}
+            />
+          ))}
 
-            <Avatar text={`+${users.length - 2}`} />
-          </View>
-        )}
-      </TouchableWithoutFeedback>
+        <Avatar text={`+${people.length - 2}`} />
+      </View>
     )
   }
 }

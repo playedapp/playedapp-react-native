@@ -5,24 +5,34 @@ import Colors from "../../constants/Colors"
 import { Query } from "react-apollo"
 import gql from "graphql-tag"
 
-const GET_SESSIONS = gql`
+const GET_FLOW = gql`
   {
-    sessions {
+    flow {
       id
       games {
+        id
         title
-        thumbnail {
+        cover {
           url
         }
       }
-      players {
+      participants {
+        id
         score
         rank
-        comment
-        user {
+        ratings {
+          value
+          comment {
+            content
+          }
+          previous {
+            value
+          }
+        }
+        person {
           id
           name
-          isFollowing
+          isFollowingMe
         }
       }
       images {
@@ -33,7 +43,7 @@ const GET_SESSIONS = gql`
 `
 
 const Flow = () => (
-  <Query query={GET_SESSIONS}>
+  <Query query={GET_FLOW}>
     {({ loading, error, data }) => {
       if (loading) return <Text>Loading…</Text>
       if (error) return <Text>Error!</Text>
@@ -42,16 +52,16 @@ const Flow = () => (
         <View style={styles.container}>
           <StatusBar barStyle="light-content" />
           <FlatList
-            data={data.sessions}
+            data={data.flow}
             keyExtractor={item => item.id}
             refreshing={false}
             onRefresh={() => {}}
             renderItem={
-              ({ item: { id, games, players, images, location } }) => (
+              ({ item: { id, games, participants, images, location } }) => (
                 <Item
                   id={id}
                   games={games}
-                  players={players}
+                  participants={participants}
                   images={images}
                   location={location}
                 />

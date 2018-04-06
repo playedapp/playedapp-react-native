@@ -58,6 +58,7 @@ const schemaString = `
       location: Location,
       comments: [Comment],
       participants: [Participant],
+      images: [Image]
       # createdAt: Date,
    }
 
@@ -66,7 +67,8 @@ const schemaString = `
       person: Person,
       score: Int,
       rank: Int,
-      role: String
+      role: String,
+      ratings: [Rating],
    }
 
    type Location {
@@ -89,7 +91,8 @@ const schemaString = `
 
    type Rating {
       id: ID,
-      rating: Float,
+      value: Float,
+      previous: Rating,
       comment: Comment,
       # createdAt: Date,
       game: Game
@@ -114,6 +117,7 @@ const schemaString = `
       stats(game: ID): [Stats]
       followedBy: [Person],
       follows: [Person],
+      isFollowingMe: Boolean,
       # Needs an account?
    }
 `
@@ -125,6 +129,9 @@ const schema = makeExecutableSchema({ typeDefs: schemaString })
 addMockFunctionsToSchema({
   schema,
   mocks: {
+    Query: () => ({
+      flow: () => new MockList(10),
+    }),
     Person: (o, { id }) => ({
       id,
       name: casual.first_name,
@@ -138,6 +145,7 @@ addMockFunctionsToSchema({
     }),
     Session: () => ({
       playtime: casual.integer(20, 200),
+      games: () => new MockList([1, 2]),
       participants: () => new MockList([1, 8]),
     }),
     Game: () => ({
@@ -156,8 +164,20 @@ addMockFunctionsToSchema({
       lat: casual.latitude,
       lng: casual.longitude,
     }),
-    Image: () => ({
-      url: "http://192.168.0.4:3000/static/covers/clansofcaledonia.png",
+    Image: (obj, args, context, { fieldName }) => {
+      return {
+        url:
+          fieldName === "cover"
+            ? "http://192.168.0.4:3000/static/covers/clansofcaledonia.png"
+            : casual.random_element([
+                "http://192.168.0.4:3000/static/photos/IMG_2669.jpg",
+                "http://192.168.0.4:3000/static/photos/pic3809378.jpg",
+                "http://192.168.0.4:3000/static/photos/IMG_2667.jpg",
+              ]),
+      }
+    },
+    Comment: () => ({
+      content: casual.sentence,
     }),
   },
 })
