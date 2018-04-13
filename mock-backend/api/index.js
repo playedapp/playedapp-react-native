@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 const schemaString = `
    type Query {
       games: [Game],
+      game(id: ID!): Game,
       flow: [Session],
       session(id: ID!): Session,
       person(id: ID!): Person
@@ -39,6 +40,7 @@ const schemaString = `
       title: String,
       cover: Image,
       sessions: [Session],
+      averageRating: Float,
       # Add BGG data
    }
 
@@ -126,6 +128,9 @@ const schemaString = `
 // Make a GraphQL schema with no resolvers
 const schema = makeExecutableSchema({ typeDefs: schemaString })
 
+const host = "http://192.168.0.4:3000"
+// const host = "http://172.20.10.4:3000"
+
 // Add mocks, modifies schema in place
 addMockFunctionsToSchema({
   schema,
@@ -154,6 +159,7 @@ addMockFunctionsToSchema({
         "Clans of Caledonia",
         "Caverna: The Cave Farmers",
       ]),
+      averageRating: casual.integer(0, 10) / 2,
     }),
     Location: () => ({
       name: casual.random_element([
@@ -169,16 +175,19 @@ addMockFunctionsToSchema({
       let url
       switch (fieldName) {
         case "cover":
-          url = "http://192.168.0.4:3000/static/covers/clansofcaledonia.png"
+          url = `${host}/static/covers/clansofcaledonia.png`
           break
         case "avatar":
-          url = "http://192.168.0.4:3000/static/avatars/frdh.jpg"
+          url = casual.random_element([
+            `${host}/static/avatars/frdh.jpg`,
+            `${host}/static/avatars/micke.jpg`,
+          ])
           break
         default:
           url = casual.random_element([
-            "http://192.168.0.4:3000/static/photos/IMG_2669.jpg",
-            "http://192.168.0.4:3000/static/photos/pic3809378.jpg",
-            "http://192.168.0.4:3000/static/photos/IMG_2667.jpg",
+            `${host}/static/photos/IMG_2669.jpg`,
+            `${host}/static/photos/pic3809378.jpg`,
+            `${host}/static/photos/IMG_2667.jpg`,
           ])
       }
       return { url }

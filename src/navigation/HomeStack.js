@@ -5,6 +5,7 @@ import Colors from "../constants/Colors"
 import GameScreen from "../screens/GameScreen"
 import PlayerScreen from "../screens/PlayerScreen"
 import SessionScreen from "../screens/SessionScreen"
+import SessionTabNavigator from "../navigation/SessionTabNavigator"
 
 const HomeStackNavigator = StackNavigator(
   {
@@ -12,6 +13,7 @@ const HomeStackNavigator = StackNavigator(
     Game: { screen: GameScreen },
     Player: { screen: PlayerScreen },
     Session: { screen: SessionScreen },
+    // Session: { screen: SessionTabNavigator },
   },
   {
     initialRouteName: "Main",

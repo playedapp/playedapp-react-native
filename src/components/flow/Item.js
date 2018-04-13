@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { withNavigation, NavigationActions } from "react-navigation"
 import {
-  Image,
   View,
   StyleSheet,
   Dimensions,
@@ -15,11 +14,12 @@ import AvatarStack from "./AvatarStack"
 import Colors from "../../constants/Colors"
 import Whitespace from "../../constants/Spacing"
 import Layout from "../../constants/Layout"
-import Swiper from "react-native-swiper"
 import { joinTexts } from "./utils"
 import StarRating from "../shared/StarRating"
 import LinkedAvatar from "./LinkedAvatar"
 import { toOrdinal } from "../../lib/utils"
+import Cover from "../shared/Cover"
+import Slideshow from "../shared/Slideshow"
 
 class Item extends Component {
   static propTypes = {
@@ -51,11 +51,6 @@ class Item extends Component {
   handlePersonPress = ({ name }) => {
     const { navigate } = this.props.navigation
     navigate("Person", { name })
-  }
-
-  handleGamePress = ({ title }) => {
-    const { navigate } = this.props.navigation
-    navigate("Game", { title })
   }
 
   handleDetailsPress = () => {
@@ -97,13 +92,15 @@ class Item extends Component {
     const personLinks = joinTexts(...followed.map(({ name }) => name))
 
     return (
-      <View style={[styles.header, { alignItems: "center" }]}>
-        <AvatarStack people={followed} />
-        <View style={{ marginLeft: Whitespace.m }}>
-          <Text style={styles.text}>{personLinks}</Text>
-          {location && <Text style={styles.mutedText}>{location.name}</Text>}
+      <TouchableHighlight onPress={this.handleDetailsPress}>
+        <View style={[styles.header, { alignItems: "center" }]}>
+          <AvatarStack people={followed} />
+          <View style={{ marginLeft: Whitespace.m }}>
+            <Text style={styles.text}>{personLinks}</Text>
+            {location && <Text style={styles.mutedText}>{location.name}</Text>}
+          </View>
         </View>
-      </View>
+      </TouchableHighlight>
     )
   }
 
@@ -162,20 +159,10 @@ class Item extends Component {
     const { images } = this.props
 
     return (
-      <Swiper
-        loop={false}
-        bounces={true}
-        style={{ height: 300 }}
+      <Slideshow
+        images={images}
         onTouchStart={() => this.setState({ slideshowActive: true })}
-      >
-        {images.map(image => (
-          <Image
-            key={image.url}
-            style={styles.image}
-            source={{ uri: image.url }}
-          />
-        ))}
-      </Swiper>
+      />
     )
   }
 
@@ -209,18 +196,7 @@ class Item extends Component {
             {this.renderParticipantDetails()}
           </View>
           <View style={slideshowActive && { transform: [{ translateY: 30 }] }}>
-            {games.map(game => (
-              <TouchableHighlight
-                key={game.id}
-                style={styles.gameThumbnailButton}
-                onPress={() => this.handleGamePress(game)}
-              >
-                <Image
-                  style={styles.gameThumbnail}
-                  source={{ uri: game.cover.url }}
-                />
-              </TouchableHighlight>
-            ))}
+            {games.map(({ id }) => <Cover key={id} id={id} />)}
           </View>
         </View>
         <View
@@ -250,16 +226,6 @@ const styles = StyleSheet.create({
   image: {
     width: Dimensions.get("window").width,
     height: 300,
-  },
-  gameThumbnailButton: {
-    marginTop: -Whitespace.l,
-  },
-  gameThumbnail: {
-    width: 100,
-    height: 100,
-    borderRadius: 5,
-    borderWidth: 3,
-    borderColor: "#fff",
   },
   link: {
     color: Colors.primary,
