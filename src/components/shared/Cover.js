@@ -62,9 +62,7 @@ class Cover extends Component {
 export default withNavigation(Cover)
 
 const styles = StyleSheet.create({
-  gameThumbnailButton: {
-    marginTop: -Whitespace.l,
-  },
+  gameThumbnailButton: {},
   gameThumbnail: {
     width: 100,
     height: 100,

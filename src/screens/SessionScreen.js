@@ -62,7 +62,7 @@ export default class SessionScreen extends Component {
           return (
             <View style={{ flex: 1 }}>
               <Slideshow images={data.session.images} />
-              <SessionTabNavigator />
+              <SessionTabNavigator screenProps={{ id }} />
             </View>
           )
         }}

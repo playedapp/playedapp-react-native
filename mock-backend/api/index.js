@@ -144,7 +144,7 @@ addMockFunctionsToSchema({
     }),
     Participant: () => ({
       score: casual.integer(30, 130),
-      rank: casual.integer(1, 8),
+      rank: casual.integer(1, 3),
     }),
     Rating: () => ({
       value: casual.integer(0, 10) / 2,
