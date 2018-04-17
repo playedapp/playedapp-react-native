@@ -20,6 +20,7 @@ import LinkedAvatar from "./LinkedAvatar"
 import { toOrdinal } from "../../lib/utils"
 import Cover from "../shared/Cover"
 import Slideshow from "../shared/Slideshow"
+import Fonts from "../../constants/Fonts"
 
 class Item extends Component {
   static propTypes = {
@@ -96,7 +97,7 @@ class Item extends Component {
         <View style={[styles.header, { alignItems: "center" }]}>
           <AvatarStack people={followed} />
           <View style={{ marginLeft: Whitespace.m }}>
-            <Text style={styles.text}>{personLinks}</Text>
+            <Text style={Fonts.default}>{personLinks}</Text>
             {location && <Text style={styles.mutedText}>{location.name}</Text>}
           </View>
         </View>
@@ -122,7 +123,7 @@ class Item extends Component {
           >
             <LinkedAvatar id={id} />
             <View style={{ marginLeft: Whitespace.m }}>
-              <Text>
+              <Text style={Fonts.default}>
                 <Text>
                   {rank === 1 && "👑"}
                   {name}{" "}
@@ -132,7 +133,7 @@ class Item extends Component {
                 </Text>
               </Text>
               {ratings && (
-                <Text>
+                <Text style={Fonts.default}>
                   {ratings
                     .slice(0, 1)
                     .map(({ value, previous: { value: prevValue } }, index) => {
@@ -147,7 +148,9 @@ class Item extends Component {
                 </Text>
               )}
               {comment && (
-                <Text style={{ marginTop: Whitespace.s }}>{comment}</Text>
+                <Text style={[Fonts.default, { marginTop: Whitespace.s }]}>
+                  {comment}
+                </Text>
               )}
             </View>
           </View>
@@ -230,9 +233,6 @@ const styles = StyleSheet.create({
   link: {
     color: Colors.primary,
     fontWeight: "bold",
-  },
-  text: {
-    color: Colors.text,
   },
   mutedText: {
     color: Colors.textMuted,

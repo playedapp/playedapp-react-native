@@ -1,5 +1,6 @@
 import React from "react"
 import { ScrollView, StyleSheet, Text } from "react-native"
+import Fonts from "../constants/Fonts"
 
 export default class LogPlayScreen extends React.Component {
   static navigationOptions = {
@@ -9,7 +10,7 @@ export default class LogPlayScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text>Nothing to see here yet…</Text>
+        <Text style={styles.text}>Nothing to see here yet…</Text>
       </ScrollView>
     )
   }
@@ -20,5 +21,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     backgroundColor: "#fff",
+  },
+  text: {
+    fontFamily: Fonts.nunito.regular,
   },
 })

@@ -5,6 +5,7 @@ import { StackNavigator } from "react-navigation"
 import MainTabNavigator from "./MainTabNavigator"
 import registerForPushNotificationsAsync from "../api/registerForPushNotificationsAsync"
 import LogPlayScreen from "../screens/LogPlayScreen"
+import headerStyles from "./headerStyles"
 
 const RootStackNavigator = StackNavigator(
   {
@@ -18,9 +19,7 @@ const RootStackNavigator = StackNavigator(
   {
     mode: "modal",
     navigationOptions: () => ({
-      headerTitleStyle: {
-        fontWeight: "normal",
-      },
+      ...headerStyles,
     }),
   },
 )

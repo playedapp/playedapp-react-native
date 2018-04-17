@@ -2,6 +2,7 @@ import React from "react"
 import { Text, StyleSheet } from "react-native"
 import PropTypes from "prop-types"
 import Colors from "../../constants/Colors"
+import Fonts from "../../constants/Fonts"
 
 export const SummarySentence = ({
   games,
@@ -29,7 +30,7 @@ export const SummarySentence = ({
   }
 
   return (
-    <Text>
+    <Text style={Fonts.default}>
       <Text key="game">
         {"Played "}
         <Text
