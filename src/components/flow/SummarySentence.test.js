@@ -4,7 +4,7 @@ import renderer from "react-test-renderer"
 import { SummarySentence } from "./SummarySentence"
 
 const game = {
-  key: "123",
+  id: "123",
   title: "Clans of Caledonia",
   thumbnail: {
     url: "http://192.168.0.4:3000/static/covers/clansofcaledonia.png",
@@ -12,39 +12,37 @@ const game = {
 }
 
 const notFollowedPlayer1 = {
-  key: 115,
-  name: "Nina",
-  avatar: {
-    url: "http://192.168.0.4:3000/static/avatars/frdh.jpg",
+  id: "115",
+  person: {
+    id: "115",
+    name: "Nina",
+    isFollowedByMe: false,
   },
-  accountId: 5,
-  isFollowing: false,
   score: 27,
   rank: 4,
   ratings: [{ game: "123", currentRating: 4 }],
 }
 
 const notFollowedPlayer2 = {
-  key: 116,
-  name: "Nina",
-  avatar: {
-    url: "http://192.168.0.4:3000/static/avatars/frdh.jpg",
+  key: "116",
+  person: {
+    key: "116",
+    name: "Nina",
+
+    isFollowedByMe: false,
   },
-  accountId: 5,
-  isFollowing: false,
   score: 27,
   rank: 4,
   ratings: [{ game: "123", currentRating: 4 }],
 }
 
 const notFollowedPlayer3 = {
-  key: 114,
-  name: "Nina",
-  avatar: {
-    url: "http://192.168.0.4:3000/static/avatars/frdh.jpg",
+  key: "114",
+  person: {
+    key: "114",
+    name: "Nina",
+    isFollowedByMe: false,
   },
-  accountId: 5,
-  isFollowing: false,
   score: 27,
   rank: 4,
   ratings: [{ game: "123", currentRating: 4 }],
