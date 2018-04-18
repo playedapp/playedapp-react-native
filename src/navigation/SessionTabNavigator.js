@@ -4,6 +4,7 @@ import SessionDetailsScreen from "../screens/SessionDetailsScreen"
 import SessionScoreboardScreen from "../screens/SessionScoreboardScreen"
 import SessionRatingsScreen from "../screens/SessionRatingsScreen"
 import SessionCommentsScreen from "../screens/SessionCommentsScreen"
+import Fonts from "../constants/Fonts"
 
 const Tabs = TabNavigator(
   {
@@ -35,8 +36,8 @@ const Tabs = TabNavigator(
         backgroundColor: Colors.white,
       },
       labelStyle: {
-        fontSize: 16,
-        fontWeight: "bold",
+        fontFamily: Fonts.families.nunito.bold,
+        fontSize: Fonts.sizes.default,
         padding: 0,
         margin: 0,
       },

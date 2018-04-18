@@ -1,8 +1,7 @@
 import React from "react"
-import { Text, StyleSheet } from "react-native"
+import { Text } from "react-native"
 import PropTypes from "prop-types"
-import Colors from "../../constants/Colors"
-import Fonts from "../../constants/Fonts"
+import { DefaultText, Link } from "../shared/TextStyles"
 
 export const SummarySentence = ({
   games,
@@ -13,13 +12,12 @@ export const SummarySentence = ({
 }) => {
   const players = [
     ...notFollowedPlayers.map(player => (
-      <Text
-        key={player.key}
-        style={styles.link}
+      <Link
+        key={player.id}
         onPress={() => onPlayerPress && onPlayerPress(player)}
       >
-        {player.name}
-      </Text>
+        {player.person.name}
+      </Link>
     )),
   ]
 
@@ -30,15 +28,12 @@ export const SummarySentence = ({
   }
 
   return (
-    <Text style={Fonts.default}>
+    <DefaultText>
       <Text key="game">
         {"Played "}
-        <Text
-          style={styles.link}
-          onPress={() => onGamePress && onGamePress(games[0])}
-        >
+        <Link onPress={() => onGamePress && onGamePress(games[0])}>
           {games[0].title}
-        </Text>
+        </Link>
         {players.length > 0 && <Text> with </Text>}
         {players.reduce((arr, player, index, players) => {
           if (index === 0) {
@@ -50,14 +45,14 @@ export const SummarySentence = ({
           }
         }, [])}
       </Text>
-    </Text>
+    </DefaultText>
   )
 }
 
 const playerList = PropTypes.arrayOf(
   PropTypes.shape({
-    key: PropTypes.any.isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    person: PropTypes.shape({ name: PropTypes.string.isRequired }),
   }),
 )
 
@@ -74,10 +69,3 @@ SummarySentence.defaultProps = {
   notFollowedPlayers: [],
   anonymousPlayers: [],
 }
-
-const styles = StyleSheet.create({
-  link: {
-    color: Colors.primary,
-    fontWeight: "bold",
-  },
-})

@@ -11,8 +11,8 @@ export default {
     <Text style={style}>{String(children).toUpperCase()}</Text>
   ),
   headerTitleStyle: {
-    fontFamily: Fonts.fredokaOne.regular,
-    fontSize: 15,
+    fontFamily: Fonts.families.fredokaOne.regular,
+    fontSize: Fonts.sizes.default,
     letterSpacing: 2,
   },
   headerTintColor: Colors.textOnPrimary,

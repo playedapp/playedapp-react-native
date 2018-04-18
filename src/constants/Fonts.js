@@ -1,21 +1,16 @@
-import Colors from "./Colors"
-
-const nunito = {
-  regular: "nunito-regular",
-  semibold: "nunito-semibold",
-  bold: "nunito-bold",
-}
-
-const fredokaOne = {
-  regular: "fredokaone-regular",
-}
-
 export default {
-  nunito,
-  fredokaOne,
-  default: {
-    fontFamily: nunito.regular,
-    fontSize: 15,
-    color: Colors.text,
+  families: {
+    nunito: {
+      regular: "nunito-regular",
+      semibold: "nunito-semibold",
+      bold: "nunito-bold",
+    },
+    fredokaOne: {
+      regular: "fredokaone-regular",
+    },
+  },
+  sizes: {
+    default: 15,
+    small: 12,
   },
 }

@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   text: {
-    fontFamily: Fonts.nunito.regular,
+    fontFamily: Fonts.families.nunito.regular,
   },
 })

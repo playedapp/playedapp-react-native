@@ -20,7 +20,7 @@ import LinkedAvatar from "./LinkedAvatar"
 import { toOrdinal } from "../../lib/utils"
 import Cover from "../shared/Cover"
 import Slideshow from "../shared/Slideshow"
-import Fonts from "../../constants/Fonts"
+import { DefaultText } from "../shared/TextStyles"
 
 class Item extends Component {
   static propTypes = {
@@ -97,7 +97,7 @@ class Item extends Component {
         <View style={[styles.header, { alignItems: "center" }]}>
           <AvatarStack people={followed} />
           <View style={{ marginLeft: Whitespace.m }}>
-            <Text style={Fonts.default}>{personLinks}</Text>
+            <DefaultText>{personLinks}</DefaultText>
             {location && <Text style={styles.mutedText}>{location.name}</Text>}
           </View>
         </View>
@@ -123,7 +123,7 @@ class Item extends Component {
           >
             <LinkedAvatar id={id} />
             <View style={{ marginLeft: Whitespace.m }}>
-              <Text style={Fonts.default}>
+              <DefaultText>
                 <Text>
                   {rank === 1 && "👑"}
                   {name}{" "}
@@ -131,9 +131,9 @@ class Item extends Component {
                 <Text style={styles.mutedText}>
                   {toOrdinal(rank)} {score}p
                 </Text>
-              </Text>
+              </DefaultText>
               {ratings && (
-                <Text style={Fonts.default}>
+                <DefaultText>
                   {ratings
                     .slice(0, 1)
                     .map(({ value, previous: { value: prevValue } }, index) => {
@@ -145,12 +145,12 @@ class Item extends Component {
                         />
                       )
                     })}
-                </Text>
+                </DefaultText>
               )}
               {comment && (
-                <Text style={[Fonts.default, { marginTop: Whitespace.s }]}>
+                <DefaultText style={{ marginTop: Whitespace.s }}>
                   {comment}
-                </Text>
+                </DefaultText>
               )}
             </View>
           </View>
@@ -190,8 +190,8 @@ class Item extends Component {
             <View style={{ marginBottom: Whitespace.m }}>
               <SummarySentence
                 games={games}
-                notFollowedPlayers={this.notFollowedPlayers}
-                anonymousPlayers={this.anonymousPlayers}
+                notFollowedPlayers={this.notFollowedParticipants}
+                anonymousPlayers={this.anonymousParticipants}
                 onGamePress={this.handleGamePress}
                 onPlayerPress={this.handlePersonPress}
               />
