@@ -1,9 +1,10 @@
 import React from "react"
-import { Text, FlatList, View, StyleSheet, StatusBar } from "react-native"
+import { FlatList, View, StyleSheet, StatusBar } from "react-native"
 import Item from "./Item"
 import Colors from "../../constants/Colors"
 import { Query } from "react-apollo"
 import gql from "graphql-tag"
+import { DefaultText } from "../shared/TextStyles"
 
 const GET_FLOW = gql`
   {
@@ -32,7 +33,7 @@ const GET_FLOW = gql`
         person {
           id
           name
-          isFollowingMe
+          isFollowedByMe
         }
       }
       images {
@@ -45,8 +46,8 @@ const GET_FLOW = gql`
 const Flow = () => (
   <Query query={GET_FLOW}>
     {({ loading, error, data }) => {
-      if (loading) return <Text>Loading…</Text>
-      if (error) return <Text>Error!</Text>
+      if (loading) return <DefaultText>Loading…</DefaultText>
+      if (error) return <DefaultText>Error!</DefaultText>
 
       return (
         <View style={styles.container}>

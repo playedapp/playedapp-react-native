@@ -1,5 +1,4 @@
 import React from "react"
-import { Text } from "react-native"
 import PropTypes from "prop-types"
 import { DefaultText, Link } from "../shared/TextStyles"
 
@@ -29,22 +28,20 @@ export const SummarySentence = ({
 
   return (
     <DefaultText>
-      <Text key="game">
-        {"Played "}
-        <Link onPress={() => onGamePress && onGamePress(games[0])}>
-          {games[0].title}
-        </Link>
-        {players.length > 0 && <Text> with </Text>}
-        {players.reduce((arr, player, index, players) => {
-          if (index === 0) {
-            return [...arr, player]
-          } else if (index === players.length - 1) {
-            return [...arr, <Text key={index}> and </Text>, player]
-          } else {
-            return [...arr, <Text key={index}>, </Text>, player]
-          }
-        }, [])}
-      </Text>
+      {"Played "}
+      <Link onPress={() => onGamePress && onGamePress(games[0])}>
+        {games[0].title}
+      </Link>
+      {players.length > 0 && " with "}
+      {players.reduce((arr, player, index, players) => {
+        if (index === 0) {
+          return [...arr, player]
+        } else if (index === players.length - 1) {
+          return [...arr, " and ", player]
+        } else {
+          return [...arr, ", ", player]
+        }
+      }, [])}
     </DefaultText>
   )
 }

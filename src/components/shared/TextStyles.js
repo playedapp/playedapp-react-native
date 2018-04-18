@@ -14,6 +14,26 @@ export class DefaultText extends Component {
   }
 }
 
+export class MutedText extends Component {
+  static propTypes = {
+    style: PropTypes.object,
+  }
+
+  render() {
+    return <Text {...this.props} style={[this.props.style, styles.muted]} />
+  }
+}
+
+export class BoldText extends Component {
+  static propTypes = {
+    style: PropTypes.object,
+  }
+
+  render() {
+    return <Text {...this.props} style={[this.props.style, styles.bold]} />
+  }
+}
+
 export class Link extends Component {
   static propTypes = {
     style: PropTypes.object,
@@ -29,6 +49,16 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.families.nunito.regular,
     fontSize: Fonts.sizes.default,
     color: Colors.text,
+  },
+  bold: {
+    fontFamily: Fonts.families.nunito.bold,
+    fontSize: Fonts.sizes.default,
+    color: Colors.text,
+  },
+  muted: {
+    fontFamily: Fonts.families.nunito.regular,
+    fontSize: Fonts.sizes.small,
+    color: Colors.textMuted,
   },
   link: {
     fontFamily: Fonts.families.nunito.bold,

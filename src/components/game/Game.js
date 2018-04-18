@@ -1,10 +1,10 @@
 import React, { Component } from "react"
-import { Text } from "react-native"
+import { DefaultText } from "../shared/TextStyles"
 
 class Game extends Component {
   state = {}
   render() {
-    return <Text>{this.props.navigation.state.params.title}</Text>
+    return <DefaultText>{this.props.navigation.state.params.title}</DefaultText>
   }
 }
 

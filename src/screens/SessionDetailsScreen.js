@@ -5,6 +5,8 @@ import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import Box from "../components/shared/Box"
 import Cover from "../components/shared/Cover"
+import { MutedText, DefaultText } from "../components/shared/TextStyles"
+import Spacing from "../constants/Spacing"
 
 const GET_SESSION = gql`
   query GET_SESSION($id: ID!) {
@@ -63,34 +65,36 @@ class SessionDetailsScreen extends Component {
           } = data.session
 
           return (
-            <ScrollView>
+            <ScrollView style={{ padding: Spacing.m }}>
               {games.map(({ title, averageRating, id }) => (
                 <Box key={id}>
                   <Cover id={id} key={id} />
-                  <Text>{title}</Text>
-                  <Text>{averageRating}</Text>
+                  <DefaultText>{title}</DefaultText>
+                  <DefaultText>{averageRating}</DefaultText>
                 </Box>
               ))}
               <Box>
                 {playtime && (
-                  <View>
-                    <Text>PLAYTIME</Text>
-                    <Text>Total {playtime}</Text>
-                    <Text>Per player {playtime / participants.length}</Text>
+                  <View style={{ padding: Spacing.m }}>
+                    <MutedText>PLAYTIME</MutedText>
+                    <DefaultText>Total {playtime}</DefaultText>
+                    <DefaultText>
+                      Per player {playtime / participants.length}
+                    </DefaultText>
                   </View>
                 )}
                 {variants && (
-                  <View>
-                    <Text>VARIANTS</Text>
-                    <Text>{variants}</Text>
+                  <View style={{ padding: Spacing.m }}>
+                    <MutedText>VARIANTS</MutedText>
+                    <DefaultText>{variants}</DefaultText>
                   </View>
                 )}
                 {location && (
-                  <View>
-                    <Text>LOCATION</Text>
-                    <Text>
+                  <View style={{ padding: Spacing.m }}>
+                    <MutedText>LOCATION</MutedText>
+                    <DefaultText>
                       {location.name} {location.address}
-                    </Text>
+                    </DefaultText>
                   </View>
                 )}
               </Box>

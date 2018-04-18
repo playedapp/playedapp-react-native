@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  Text,
   TouchableHighlight,
   Button,
 } from "react-native"
@@ -20,7 +19,7 @@ import LinkedAvatar from "./LinkedAvatar"
 import { toOrdinal } from "../../lib/utils"
 import Cover from "../shared/Cover"
 import Slideshow from "../shared/Slideshow"
-import { DefaultText } from "../shared/TextStyles"
+import { DefaultText, MutedText, BoldText } from "../shared/TextStyles"
 
 class Item extends Component {
   static propTypes = {
@@ -73,13 +72,13 @@ class Item extends Component {
 
   get followedParticipants() {
     return this.props.participants.filter(
-      participant => participant.person && participant.person.isFollowingMe,
+      participant => participant.person && participant.person.isFollowedByMe,
     )
   }
 
   get notFollowedParticipants() {
     return this.props.participants.filter(
-      participant => participant.person && !participant.person.isFollowingMe,
+      participant => participant.person && !participant.person.isFollowedByMe,
     )
   }
 
@@ -98,7 +97,9 @@ class Item extends Component {
           <AvatarStack people={followed} />
           <View style={{ marginLeft: Whitespace.m }}>
             <DefaultText>{personLinks}</DefaultText>
-            {location && <Text style={styles.mutedText}>{location.name}</Text>}
+            {location && (
+              <MutedText style={styles.mutedText}>{location.name}</MutedText>
+            )}
           </View>
         </View>
       </TouchableHighlight>
@@ -123,30 +124,27 @@ class Item extends Component {
           >
             <LinkedAvatar id={id} />
             <View style={{ marginLeft: Whitespace.m }}>
-              <DefaultText>
-                <Text>
+              <View style={{ flexDirection: "row", alignItems: "baseline" }}>
+                <BoldText>
                   {rank === 1 && "👑"}
-                  {name}{" "}
-                </Text>
-                <Text style={styles.mutedText}>
-                  {toOrdinal(rank)} {score}p
-                </Text>
-              </DefaultText>
-              {ratings && (
-                <DefaultText>
-                  {ratings
-                    .slice(0, 1)
-                    .map(({ value, previous: { value: prevValue } }, index) => {
-                      return (
-                        <StarRating
-                          key={index}
-                          rating={value}
-                          compareTo={prevValue}
-                        />
-                      )
-                    })}
-                </DefaultText>
-              )}
+                  {name}
+                </BoldText>
+                <MutedText style={{ marginLeft: Whitespace.m }}>
+                  {toOrdinal(rank)}, {score}p
+                </MutedText>
+              </View>
+              {ratings &&
+                ratings
+                  .slice(0, 1)
+                  .map(({ value, previous: { value: prevValue } }, index) => {
+                    return (
+                      <StarRating
+                        key={index}
+                        rating={value}
+                        compareTo={prevValue}
+                      />
+                    )
+                  })}
               {comment && (
                 <DefaultText style={{ marginTop: Whitespace.s }}>
                   {comment}
@@ -233,8 +231,5 @@ const styles = StyleSheet.create({
   link: {
     color: Colors.primary,
     fontWeight: "bold",
-  },
-  mutedText: {
-    color: Colors.textMuted,
   },
 })

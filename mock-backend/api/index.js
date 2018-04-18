@@ -121,6 +121,7 @@ const schemaString = `
       followedBy: [Person],
       follows: [Person],
       isFollowingMe: Boolean,
+      isFollowedByMe: Boolean,
       # Needs an account?
    }
 `

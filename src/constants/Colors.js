@@ -1,4 +1,4 @@
-const tintColor = "#2f95dc"
+const tintColor = "#00fff0"
 
 export default {
   primary: "#314bfc",
@@ -6,7 +6,7 @@ export default {
   white: "#fff",
   mainBackground: "#f3f0e7",
   text: "#1c1a13",
-  textMuted: "#7f7049",
+  textMuted: "#89836b",
   tintColor,
   tabIconDefault: "#ccc",
   tabIconSelected: tintColor,
