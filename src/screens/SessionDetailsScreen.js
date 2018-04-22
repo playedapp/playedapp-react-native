@@ -7,6 +7,7 @@ import Box from "../components/shared/Box"
 import Cover from "../components/shared/Cover"
 import { MutedText, DefaultText } from "../components/shared/TextStyles"
 import Spacing from "../constants/Spacing"
+import { formatDuration } from "../lib/utils"
 
 const GET_SESSION = gql`
   query GET_SESSION($id: ID!) {
@@ -77,9 +78,10 @@ class SessionDetailsScreen extends Component {
                 {playtime && (
                   <View style={{ padding: Spacing.m }}>
                     <MutedText>PLAYTIME</MutedText>
-                    <DefaultText>Total {playtime}</DefaultText>
+                    <DefaultText>Total {formatDuration(playtime)}</DefaultText>
                     <DefaultText>
-                      Per player {playtime / participants.length}
+                      Per player{" "}
+                      {formatDuration(playtime / participants.length)}
                     </DefaultText>
                   </View>
                 )}

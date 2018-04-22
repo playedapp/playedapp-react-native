@@ -8,3 +8,18 @@ export const toOrdinal = number => {
   if (j == 3 && k != 13) return number + "rd"
   return number + "th"
 }
+
+export const formatDuration = duration => {
+  const hours = Math.floor(duration / 60)
+  const minutes = Math.floor(duration % 60)
+
+  let str = ""
+  if (hours) {
+    str = `${hours} h `
+  }
+  if (minutes) {
+    str += `${minutes} min`
+  }
+
+  return str
+}
