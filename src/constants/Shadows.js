@@ -9,4 +9,12 @@ export default {
       height: 3,
     },
   },
+  inputInset: {
+    shadowColor: Colors.insetShadow,
+    shadowRadius: 5,
+    shadowOffset: {
+      height: 2,
+    },
+    borderWidth: 20,
+  },
 }

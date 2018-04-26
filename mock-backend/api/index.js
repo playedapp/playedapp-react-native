@@ -24,23 +24,51 @@ app.use((req, res, next) => {
 // The GraphQL schema in string form
 const schemaString = `
    type Query {
-      games: [Game],
-      game(id: ID!): Game,
-      flow: [Session],
-      session(id: ID!): Session,
+      games(search: String): [Game]
+      game(id: ID!): Game
+      flow: [Session]
+      session(id: ID!): Session
+      people(search: String): [Person]
       person(id: ID!): Person
+      search(search: String): SearchResult
    }
 
-   #type Mutations {}
+   type Mutation {
+     createSession(
+       input: SessionInput
+     ): CreateSessionPayload
+     augmentSession(
+       id: ID!
+     ): Session
+   }
+
+   input SessionInput {
+     games: [ID!]
+   }
+
+   type CreateSessionPayload {
+     session: Session
+    }
+
+    type AugmentSessionPayload {
+      session: Session
+    }
 
    #scalar Date {}
 
+    type SearchResult {
+      games: [Game]
+      locations: [Location]
+      people: [Person]
+    }
+
    type Game {
-      id: ID,
-      title: String,
-      cover: Image,
-      sessions: [Session],
-      averageRating: Float,
+      id: ID
+      title: String
+      cover: Image
+      sessions: [Session]
+      averageRating: Float
+      yearPublished: Int
       # Add BGG data
    }
 
@@ -51,77 +79,85 @@ const schemaString = `
    }
 
    type Session {
-      id: ID,
-      winningCondition: WinningCondition,
-      cooperative: Boolean,
-      games: [Game],
-      playtime: Int,
-      variants: String,
-      location: Location,
-      comments: [Comment],
-      participants: [Participant],
+      id: ID
+      winningCondition: WinningCondition
+      cooperative: Boolean
+      games: [Game]
+      playtime: Int
+      variants: String
+      location: Location
+      comments: [Comment]
+      participants: [Participant]
       images: [Image]
-      # createdAt: Date,
+      # createdAt: Date
    }
 
    type Participant {
-      id: ID,
-      person: Person,
-      score: Int,
-      rank: Int,
-      role: String,
-      ratings: [Rating],
+      id: ID
+      person: Person
+      score: Int
+      rank: Int
+      role: String
+      ratings: [Rating]
    }
 
    type Location {
-      id: ID,
-      name: String,
-      address: String,
-      lat: Float,
-      lng: Float,
+      id: ID
+      name: String
+      address: String
+      lat: Float
+      lng: Float
       sessions: [Session]
    }
 
    type Image {
-      id: ID,
-      photographer: Person,
-      url: String,
-      session: [Session],
-      isReported: Boolean,
+      id: ID
+      photographer: Person
+      url: String
+      session: [Session]
+      isReported: Boolean
       # createdAt: Date
    }
 
    type Rating {
-      id: ID,
-      value: Float,
-      previous: Rating,
-      comment: Comment,
-      # createdAt: Date,
+      id: ID
+      value: Float
+      previous: Rating
+      comment: Comment
+      # createdAt: Date
       game: Game
+      session: Session
    }
 
    type Comment {
-      id: ID,
-      content: String,
-      # createdAt: Date,
+      id: ID
+      content: String
+      # createdAt: Date
       writtenBy: Person
    }
 
    type Stats {
-      id: ID,
+      id: ID
+      plays: Int
+      wins: Int
+      best: Int
+      worst: Int
+      average: Int
+      person: Person
+      game: Game
    }
 
    type Person {
-      id: ID,
-      name: String,
-      avatar: Image,
-      sessions: [Session],
+      id: ID
+      name: String
+      avatar: Image
+      sessions: [Session]
       ratings: [Rating]
-      stats(game: ID): [Stats]
-      followedBy: [Person],
-      follows: [Person],
-      isFollowingMe: Boolean,
-      isFollowedByMe: Boolean,
+      stats(games: [ID]): [Stats]
+      followedBy: [Person]
+      follows: [Person]
+      isFollowingMe: Boolean
+      isFollowedByMe: Boolean
       # Needs an account?
    }
 `
@@ -161,6 +197,7 @@ addMockFunctionsToSchema({
         "Caverna: The Cave Farmers",
       ]),
       averageRating: casual.integer(0, 10) / 2,
+      yearPublished: casual.year,
     }),
     Location: () => ({
       name: casual.random_element([

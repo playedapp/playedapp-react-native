@@ -36,18 +36,18 @@ npm manifest:
       "expo": "26.0.0",
       "graphql": "^0.13.2",
       "graphql-tag": "^2.8.0",
+      "lodash-es": "^4.17.8",
       "prop-types": "^15.6.1",
       "react": "16.3.0-alpha.1",
       "react-apollo": "^2.1.2",
-      "react-native":
-        "https://github.com/expo/react-native/archive/sdk-26.0.0.tar.gz",
+      "react-native": "https://github.com/expo/react-native/archive/sdk-26.0.0.tar.gz",
       "react-native-swiper": "^1.5.13",
       "react-navigation": "^1.5.9"
     },
     "devDependencies": {
       "apollo-server-express": "^1.3.4",
-      "body-parser": "^1.18.2",
       "babel-eslint": "^8.2.2",
+      "body-parser": "^1.18.2",
       "casual": "^1.5.19",
       "eslint": "^4.19.1",
       "eslint-plugin-react": "^7.7.0",
@@ -4841,7 +4841,7 @@ Lockfile:
     version "0.1.4"
     resolved "https://registry.yarnpkg.com/lock/-/lock-0.1.4.tgz#fec7deaef17e7c3a0a55e1da042803e25d91745d"
   
-  lodash-es@^4.17.5, lodash-es@^4.2.1:
+  lodash-es@^4.17.5, lodash-es@^4.17.8, lodash-es@^4.2.1:
     version "4.17.8"
     resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.8.tgz#6fa8c8c5d337481df0bdf1c0d899d42473121e45"
   

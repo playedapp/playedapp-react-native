@@ -18,4 +18,5 @@ export default {
   noticeBackground: tintColor,
   noticeText: "#fff",
   shadow: "#bdb9a9",
+  insetShadow: "#89836b",
 }
