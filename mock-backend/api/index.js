@@ -31,6 +31,7 @@ const schemaString = `
       people(search: String): [Person]
       person(id: ID!): Person
       search(search: String): SearchResult
+      currentUser: Person
    }
 
    type Mutation {
@@ -44,6 +45,7 @@ const schemaString = `
 
    input SessionInput {
      games: [ID!]
+     participants: [ParticipantInput]
    }
 
    type CreateSessionPayload {
@@ -93,12 +95,20 @@ const schemaString = `
    }
 
    type Participant {
-      id: ID
-      person: Person
+      id: ID!
+      person: Person!
       score: Int
       rank: Int
       role: String
       ratings: [Rating]
+   }
+
+  input ParticipantInput {
+      person: ID!
+      score: Int
+      rank: Int
+      role: String
+      ratings: [RatingInput]
    }
 
    type Location {
@@ -120,20 +130,36 @@ const schemaString = `
    }
 
    type Rating {
-      id: ID
+      id: ID!
       value: Float
       previous: Rating
       comment: Comment
       # createdAt: Date
       game: Game
       session: Session
+      participant: Participant
+      person: Person
+   }
+
+   input RatingInput {
+     value: Float
+     comment: CommentInput
+     game: ID!
+     session: ID
+     participant: ID
+     person: ID!
    }
 
    type Comment {
       id: ID
-      content: String
+      content: String!
       # createdAt: Date
       writtenBy: Person
+   }
+
+   input CommentInput {
+     content: String!
+     writtenBy: ID!
    }
 
    type Stats {

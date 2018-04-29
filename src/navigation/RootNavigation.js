@@ -4,8 +4,8 @@ import { StackNavigator } from "react-navigation"
 
 import MainTabNavigator from "./MainTabNavigator"
 import registerForPushNotificationsAsync from "../api/registerForPushNotificationsAsync"
-import LogPlayScreen from "../screens/LogPlayScreen"
 import headerStyles from "./headerStyles"
+import LogPlayStack from "./LogPlayStack"
 
 const RootStackNavigator = StackNavigator(
   {
@@ -13,7 +13,7 @@ const RootStackNavigator = StackNavigator(
       screen: MainTabNavigator,
     },
     LogPlayModal: {
-      screen: LogPlayScreen,
+      screen: LogPlayStack,
     },
   },
   {

@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import {
   ScrollView,
   View,
@@ -10,7 +11,7 @@ import {
 } from "react-native"
 import Fonts from "../constants/Fonts"
 import gql from "graphql-tag"
-import { Query } from "react-apollo"
+import { Query, Mutation } from "react-apollo"
 import { debounce } from "lodash-es"
 import Box from "../components/shared/Box"
 import Spacing from "../constants/Spacing"
@@ -49,10 +50,24 @@ const SEARCH_PEOPLE = gql`
     }
   }
 `
+const CREATE_SESSION = gql`
+  mutation createSession($input: SessionInput) {
+    createSession(input: $input) {
+      session {
+        playtime
+      }
+    }
+  }
+`
 
 export default class LogPlayScreen extends React.Component {
-  static navigationOptions = {
-    title: "Log play",
+  static navigationOptions = { title: "Log play" }
+
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func,
+      dispatch: PropTypes.func,
+    }),
   }
 
   state = {
@@ -64,17 +79,35 @@ export default class LogPlayScreen extends React.Component {
   }
 
   addGame = game => {
-    this.setState({ games: [...this.state.games, game], gameSearchText: "" })
+    this.setState({
+      games: [...this.state.games, game],
+      gameSearchText: "",
+    })
   }
 
   removeGame = game => {
-    this.setState({ games: removeFromArray(this.state.games, game) })
+    this.setState({
+      games: removeFromArray(this.state.games, game),
+    })
   }
 
   addParticipant = person => {
     this.setState({
-      participants: [...this.state.participants, { person }],
+      participants: [...this.state.participants, { person, score: 0 }],
       personSearchText: "",
+    })
+  }
+
+  updateParticipant = (updateIndex, data) => {
+    this.setState({
+      participants: this.state.participants.map((participant, index) => {
+        return index !== updateIndex
+          ? participant
+          : {
+              ...participant,
+              ...data,
+            }
+      }),
     })
   }
 
@@ -82,6 +115,31 @@ export default class LogPlayScreen extends React.Component {
     this.setState({
       participants: removeFromArray(this.state.participants, participant),
     })
+  }
+
+  get inputObject() {
+    const { games, comment, participants } = this.state
+
+    return {
+      games: games.map(({ id }) => id),
+      participants: participants.map(({ person }) => ({
+        person: person.id,
+        ratings: [
+          {
+            game: games[0].id,
+            person: person.id,
+            comment: {
+              content: comment,
+            },
+          },
+        ],
+      })),
+    }
+  }
+
+  handleComplete = () => {
+    const { navigate } = this.props.navigation
+    navigate("Home")
   }
 
   render() {
@@ -159,7 +217,13 @@ export default class LogPlayScreen extends React.Component {
                     <Cover id={id} />
                     <Button title="…" />
                   </View>
-                  <BoldText style={{ textAlign: "center" }}>{title}</BoldText>
+                  <BoldText
+                    style={{
+                      textAlign: "center",
+                    }}
+                  >
+                    {title}
+                  </BoldText>
                   <MutedText
                     style={{
                       paddingHorizontal: Spacing.l,
@@ -186,7 +250,7 @@ export default class LogPlayScreen extends React.Component {
         <View style={{ padding: Spacing.m }}>
           <DefaultText>PLAYERS</DefaultText>
           <Box>
-            {participants.map(participant => (
+            {participants.map((participant, index) => (
               <View
                 key={participant.id}
                 style={{
@@ -200,6 +264,14 @@ export default class LogPlayScreen extends React.Component {
                   onPress={() => this.removeParticipant(participant)}
                 />
                 <Text>{participant.person.name}</Text>
+                <TextInput
+                  value={String(participant.score)}
+                  keyboardType="number-pad"
+                  onChangeText={score =>
+                    this.updateParticipant(index, { score: parseInt(score) })
+                  }
+                  style={{ width: 100 }}
+                />
               </View>
             ))}
             <TextInput
@@ -239,7 +311,11 @@ export default class LogPlayScreen extends React.Component {
                               }}
                             >
                               <Avatar id={id} />
-                              <DefaultText style={{ flexGrow: 1 }}>
+                              <DefaultText
+                                style={{
+                                  flexGrow: 1,
+                                }}
+                              >
                                 {name}
                               </DefaultText>
                             </View>
@@ -253,6 +329,25 @@ export default class LogPlayScreen extends React.Component {
             )}
           </Box>
         </View>
+        <Mutation mutation={CREATE_SESSION} onCompleted={this.handleComplete}>
+          {(createSession, { error, loading }) => {
+            return (
+              <View>
+                {error && <Text>{error}</Text>}
+                <Button
+                  title={loading ? "Publishing" : "Publish"}
+                  onPress={() => {
+                    createSession({
+                      variables: {
+                        input: this.inputObject,
+                      },
+                    })
+                  }}
+                />
+              </View>
+            )
+          }}
+        </Mutation>
       </ScrollView>
     )
   }
