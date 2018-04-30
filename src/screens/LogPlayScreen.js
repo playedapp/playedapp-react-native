@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import PropTypes from "prop-types"
 import {
   ScrollView,
@@ -23,12 +23,7 @@ import {
 } from "../components/shared/TextStyles"
 import Cover from "../components/shared/Cover"
 import Avatar from "../components/flow/Avatar"
-
-const removeFromArray = (array, item) => {
-  const newArray = array.slice()
-  newArray.splice(newArray.indexOf(item), 1)
-  return newArray
-}
+import { SessionContext } from "./session-context"
 
 const SEARCH_GAMES = gql`
   query SEARCH_GAMES($search: String) {
@@ -73,48 +68,11 @@ export default class LogPlayScreen extends React.Component {
   state = {
     gameSearchText: "",
     personSearchText: "",
-    games: [],
-    comment: "",
-    participants: [],
   }
 
-  addGame = game => {
-    this.setState({
-      games: [...this.state.games, game],
-      gameSearchText: "",
-    })
-  }
-
-  removeGame = game => {
-    this.setState({
-      games: removeFromArray(this.state.games, game),
-    })
-  }
-
-  addParticipant = person => {
-    this.setState({
-      participants: [...this.state.participants, { person, score: 0 }],
-      personSearchText: "",
-    })
-  }
-
-  updateParticipant = (updateIndex, data) => {
-    this.setState({
-      participants: this.state.participants.map((participant, index) => {
-        return index !== updateIndex
-          ? participant
-          : {
-              ...participant,
-              ...data,
-            }
-      }),
-    })
-  }
-
-  removeParticipant = participant => {
-    this.setState({
-      participants: removeFromArray(this.state.participants, participant),
-    })
+  showParticipantScreen = (participant, index) => {
+    const { navigate } = this.props.navigation
+    navigate("EditParticipantScreen", { participant, index })
   }
 
   get inputObject() {
@@ -143,13 +101,7 @@ export default class LogPlayScreen extends React.Component {
   }
 
   render() {
-    const {
-      gameSearchText,
-      personSearchText,
-      comment,
-      games,
-      participants,
-    } = this.state
+    const { gameSearchText, personSearchText, comment } = this.state
 
     return (
       <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
@@ -172,71 +124,81 @@ export default class LogPlayScreen extends React.Component {
                 if (error) return <Text>Error!</Text>
 
                 return (
-                  <Box>
-                    {data.games.map(game => {
-                      const { id, title, yearPublished } = game
-                      return (
-                        <TouchableOpacity
-                          key={id}
-                          onPress={() => this.addGame(game)}
-                        >
-                          <View
-                            style={{
-                              padding: Spacing.m,
-                              flexDirection: "row",
-                              alignItems: "center",
-                              width: "100%",
-                            }}
-                          >
-                            <Text style={{ flexGrow: 1 }}>
-                              <DefaultText>{title}</DefaultText>
-                              <MutedText>{yearPublished}</MutedText>
-                            </Text>
-                            <Cover id={id} />
-                          </View>
-                        </TouchableOpacity>
-                      )
-                    })}
-                  </Box>
+                  <SessionContext.Consumer>
+                    {({ addGame }) => (
+                      <Box>
+                        {data.games.map(game => {
+                          const { id, title, yearPublished } = game
+
+                          return (
+                            <TouchableOpacity
+                              key={id}
+                              onPress={() => {
+                                addGame(game)
+                                this.setState({ gameSearchText: "" })
+                              }}
+                            >
+                              <View
+                                style={{
+                                  padding: Spacing.m,
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  width: "100%",
+                                }}
+                              >
+                                <Text style={{ flexGrow: 1 }}>
+                                  <DefaultText>{title}</DefaultText>
+                                  <MutedText>{yearPublished}</MutedText>
+                                </Text>
+                                <Cover id={id} />
+                              </View>
+                            </TouchableOpacity>
+                          )
+                        })}
+                      </Box>
+                    )}
+                  </SessionContext.Consumer>
                 )
               }}
             </Query>
           )}
-          {games.map(game => {
-            const { id, title } = game
-            return (
-              <Box key={id}>
-                <View style={{ justifyContent: "center", padding: Spacing.m }}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Button title="×" onPress={() => this.removeGame(game)} />
-                    <Cover id={id} />
-                    <Button title="…" />
-                  </View>
-                  <BoldText
-                    style={{
-                      textAlign: "center",
-                    }}
-                  >
-                    {title}
-                  </BoldText>
-                  <MutedText
-                    style={{
-                      paddingHorizontal: Spacing.l,
-                      textAlign: "center",
-                    }}
-                  >
-                    You’ve rated this game before. Adjusting the rating here
-                    will change your overall rating for this game.
-                  </MutedText>
-                </View>
-              </Box>
-            )
-          })}
+          <SessionContext.Consumer>
+            {({ games, removeGame }) =>
+              games.map(game => {
+                const { id, title } = game
+                return (
+                  <Box key={id}>
+                    <View
+                      style={{ justifyContent: "center", padding: Spacing.m }}
+                    >
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Button title="×" onPress={() => removeGame(game)} />
+                        <Cover id={id} />
+                        <Button title="…" />
+                      </View>
+                      <BoldText style={{ textAlign: "center" }}>
+                        {title}
+                      </BoldText>
+                      <MutedText
+                        style={{
+                          paddingHorizontal: Spacing.l,
+                          textAlign: "center",
+                        }}
+                      >
+                        You’ve rated this game before. Adjusting the rating here
+                        will change your overall rating for this game.
+                      </MutedText>
+                    </View>
+                  </Box>
+                )
+              })
+            }
+          </SessionContext.Consumer>
         </View>
         <View style={{ padding: Spacing.m }}>
           <DefaultText>REVIEW OR NOTES</DefaultText>
@@ -250,83 +212,103 @@ export default class LogPlayScreen extends React.Component {
         <View style={{ padding: Spacing.m }}>
           <DefaultText>PLAYERS</DefaultText>
           <Box>
-            {participants.map((participant, index) => (
-              <View
-                key={participant.id}
-                style={{
-                  padding: Spacing.m,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Button
-                  title="×"
-                  onPress={() => this.removeParticipant(participant)}
-                />
-                <Text>{participant.person.name}</Text>
-                <TextInput
-                  value={String(participant.score)}
-                  keyboardType="number-pad"
-                  onChangeText={score =>
-                    this.updateParticipant(index, { score: parseInt(score) })
-                  }
-                  style={{ width: 100 }}
-                />
-              </View>
-            ))}
-            <TextInput
-              style={styles.textInput}
-              placeholder="Search or invite people"
-              value={personSearchText}
-              returnKeyType="done"
-              onChangeText={debounce(
-                text => this.setState({ personSearchText: text }),
-                300,
-              )}
-            />
-            {personSearchText && (
-              <Query
-                query={SEARCH_PEOPLE}
-                variables={{ search: personSearchText }}
-              >
-                {({ loading, error, data }) => {
-                  if (loading) return <Text>Loading…</Text>
-                  if (error) return <Text>Error!</Text>
+            <SessionContext.Consumer>
+              {({ participants, removeParticipant, updateParticipant }) =>
+                participants.map((participant, index) => (
+                  <View
+                    key={participant.id}
+                    style={{
+                      padding: Spacing.m,
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Button
+                      title="×"
+                      onPress={() => removeParticipant(participant)}
+                    />
+                    <Text>{participant.person.name}</Text>
+                    <TextInput
+                      value={String(participant.score)}
+                      keyboardType="number-pad"
+                      onChangeText={score =>
+                        updateParticipant(index, {
+                          score: parseInt(score),
+                        })
+                      }
+                      style={{ width: 100 }}
+                    />
+                    <Button
+                      title=">"
+                      onPress={() =>
+                        this.showParticipantScreen(participant, index)
+                      }
+                    />
+                  </View>
+                ))
+              }
+            </SessionContext.Consumer>
+            <SessionContext.Consumer>
+              {({ addParticipant }) => (
+                <Fragment>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Search or invite people"
+                    value={personSearchText}
+                    returnKeyType="done"
+                    onChangeText={debounce(
+                      text =>
+                        this.setState({
+                          personSearchText: text,
+                        }),
+                      300,
+                    )}
+                  />
+                  {personSearchText && (
+                    <Query
+                      query={SEARCH_PEOPLE}
+                      variables={{ search: personSearchText }}
+                    >
+                      {({ loading, error, data }) => {
+                        if (loading) return <Text>Loading…</Text>
+                        if (error) return <Text>Error!</Text>
 
-                  return (
-                    <Box>
-                      {data.people.map(person => {
-                        const { id, name } = person
                         return (
-                          <TouchableOpacity
-                            key={id}
-                            onPress={() => this.addParticipant(person)}
-                          >
-                            <View
-                              style={{
-                                padding: Spacing.m,
-                                flexDirection: "row",
-                                alignItems: "center",
-                                width: "100%",
-                              }}
-                            >
-                              <Avatar id={id} />
-                              <DefaultText
-                                style={{
-                                  flexGrow: 1,
-                                }}
-                              >
-                                {name}
-                              </DefaultText>
-                            </View>
-                          </TouchableOpacity>
+                          <Box>
+                            {data.people.map(person => {
+                              const { id, name } = person
+                              return (
+                                <TouchableOpacity
+                                  key={id}
+                                  onPress={() => {
+                                    this.setState({ personSearchText: "" })
+                                    addParticipant(person)
+                                  }}
+                                >
+                                  <View
+                                    style={{
+                                      padding: Spacing.m,
+                                      flexDirection: "row",
+                                      alignItems: "center",
+                                      width: "100%",
+                                    }}
+                                  >
+                                    <Avatar id={id} />
+                                    <DefaultText style={{ flexGrow: 1 }}>
+                                      {name}
+                                    </DefaultText>
+                                  </View>
+                                </TouchableOpacity>
+                              )
+                            })}
+                          </Box>
                         )
-                      })}
-                    </Box>
-                  )
-                }}
-              </Query>
-            )}
+                      }}
+                    </Query>
+                  )}
+                </Fragment>
+              )}
+            </SessionContext.Consumer>
           </Box>
         </View>
         <Mutation mutation={CREATE_SESSION} onCompleted={this.handleComplete}>

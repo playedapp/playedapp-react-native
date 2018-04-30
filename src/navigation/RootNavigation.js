@@ -14,6 +14,9 @@ const RootStackNavigator = StackNavigator(
     },
     LogPlayModal: {
       screen: LogPlayStack,
+      navigationOptions: {
+        header: null,
+      },
     },
   },
   {
