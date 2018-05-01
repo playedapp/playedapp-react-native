@@ -71,9 +71,9 @@ export default class LogPlayScreen extends React.Component {
     personSearchText: "",
   }
 
-  showParticipantScreen = index => {
+  showParticipantScreen = (index, name) => {
     const { navigate } = this.props.navigation
-    navigate("EditParticipantScreen", { index })
+    navigate("EditParticipantScreen", { index, name })
   }
 
   get inputObject() {
@@ -253,7 +253,7 @@ export default class LogPlayScreen extends React.Component {
                       <Button
                         title=">"
                         style={{ fontSize: 60 }}
-                        onPress={() => this.showParticipantScreen(index)}
+                        onPress={() => this.showParticipantScreen(index, name)}
                       />
                     </View>
                   )
