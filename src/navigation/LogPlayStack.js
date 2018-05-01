@@ -4,6 +4,7 @@ import { StackNavigator } from "react-navigation"
 import LogPlayScreen from "../screens/LogPlay/LogPlayScreen"
 import { SessionContext } from "../contexts/session-context"
 import EditParticipantScreen from "../screens/LogPlay/EditParticipantScreen"
+import AddParticipantsScreen from "../screens/LogPlay/AddParticipantsScreen"
 import headerStyles from "./headerStyles"
 
 const removeFromArray = (array, item) => {
@@ -16,6 +17,7 @@ const LogPlayStackNavigator = StackNavigator(
   {
     Main: { screen: LogPlayScreen },
     EditParticipantScreen: { screen: EditParticipantScreen },
+    AddParticipantsScreen: { screen: AddParticipantsScreen },
   },
   {
     initialRouteName: "Main",

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import {
   ScrollView,
@@ -35,17 +35,6 @@ const SEARCH_GAMES = gql`
     }
   }
 `
-const SEARCH_PEOPLE = gql`
-  query SEARCH_PEOPLE($search: String) {
-    people(search: $search) {
-      id
-      name
-      avatar {
-        url
-      }
-    }
-  }
-`
 const CREATE_SESSION = gql`
   mutation createSession($input: SessionInput) {
     createSession(input: $input) {
@@ -71,9 +60,14 @@ export default class LogPlayScreen extends React.Component {
     personSearchText: "",
   }
 
-  showParticipantScreen = (index, name) => {
+  showEditParticipantScreen = (index, name) => {
     const { navigate } = this.props.navigation
     navigate("EditParticipantScreen", { index, name })
+  }
+
+  showAddParticipantsScreen = () => {
+    const { navigate } = this.props.navigation
+    navigate("AddParticipantsScreen")
   }
 
   get inputObject() {
@@ -253,74 +247,16 @@ export default class LogPlayScreen extends React.Component {
                       <Button
                         title=">"
                         style={{ fontSize: 60 }}
-                        onPress={() => this.showParticipantScreen(index, name)}
+                        onPress={() =>
+                          this.showEditParticipantScreen(index, name)
+                        }
                       />
                     </View>
                   )
                 })
               }
             </SessionContext.Consumer>
-            <SessionContext.Consumer>
-              {({ addParticipant }) => (
-                <Fragment>
-                  <TextInput
-                    style={styles.textInput}
-                    placeholder="Search or invite people"
-                    value={personSearchText}
-                    returnKeyType="done"
-                    onChangeText={debounce(
-                      text =>
-                        this.setState({
-                          personSearchText: text,
-                        }),
-                      300,
-                    )}
-                  />
-                  {personSearchText && (
-                    <Query
-                      query={SEARCH_PEOPLE}
-                      variables={{ search: personSearchText }}
-                    >
-                      {({ loading, error, data }) => {
-                        if (loading) return <Text>Loading…</Text>
-                        if (error) return <Text>Error!</Text>
-
-                        return (
-                          <Box>
-                            {data.people.map(person => {
-                              const { id, name } = person
-                              return (
-                                <TouchableOpacity
-                                  key={id}
-                                  onPress={() => {
-                                    this.setState({ personSearchText: "" })
-                                    addParticipant(person)
-                                  }}
-                                >
-                                  <View
-                                    style={{
-                                      padding: Spacing.m,
-                                      flexDirection: "row",
-                                      alignItems: "center",
-                                      width: "100%",
-                                    }}
-                                  >
-                                    <Avatar id={id} />
-                                    <DefaultText style={{ flexGrow: 1 }}>
-                                      {name}
-                                    </DefaultText>
-                                  </View>
-                                </TouchableOpacity>
-                              )
-                            })}
-                          </Box>
-                        )
-                      }}
-                    </Query>
-                  )}
-                </Fragment>
-              )}
-            </SessionContext.Consumer>
+            <Button onPress={this.showAddParticipantsScreen} title="+" />
           </Box>
         </View>
         <Mutation mutation={CREATE_SESSION} onCompleted={this.handleComplete}>

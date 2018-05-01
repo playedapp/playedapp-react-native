@@ -29,6 +29,7 @@ const schemaString = `
       flow: [Session]
       session(id: ID!): Session
       people(search: String): [Person]
+      friends: [Person]
       person(id: ID!): Person
       search(search: String): SearchResult
       currentUser: Person
@@ -201,6 +202,7 @@ addMockFunctionsToSchema({
   mocks: {
     Query: () => ({
       flow: () => new MockList(10),
+      friends: () => new MockList(20),
     }),
     Person: (o, { id }) => ({
       id,
