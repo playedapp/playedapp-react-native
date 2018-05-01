@@ -100,6 +100,7 @@ const schemaString = `
       score: Int
       rank: Int
       role: String
+      isFirstPlay: Boolean
       ratings: [Rating]
    }
 
