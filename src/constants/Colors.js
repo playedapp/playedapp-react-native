@@ -7,6 +7,7 @@ export default {
   mainBackground: "#f3f0e7",
   text: "#1c1a13",
   textMuted: "#89836b",
+  danger: "red",
   tintColor,
   tabIconDefault: "#ccc",
   tabIconSelected: tintColor,

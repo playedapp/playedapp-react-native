@@ -6,7 +6,6 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  Button,
 } from "react-native"
 import { SessionContext } from "../../contexts/session-context"
 import Colors from "../../constants/Colors"
@@ -16,7 +15,8 @@ import Avatar from "../../components/flow/Avatar"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import { debounce } from "lodash-es"
-import { DefaultText, BoldText } from "../../components/shared/TextStyles"
+import { DefaultText } from "../../components/shared/TextStyles"
+import { Feather } from "@expo/vector-icons"
 
 const GET_FRIENDS = gql`
   query GET_FRIENDS {
@@ -84,7 +84,7 @@ class AddParticipantsScreen extends Component {
               >
                 <Avatar id={id} />
                 <DefaultText style={{ flexGrow: 1 }}>{name}</DefaultText>
-                {isParticipating && <BoldText>×</BoldText>}
+                {isParticipating && <Feather name="check" size={32} />}
               </View>
             </TouchableOpacity>
           )
@@ -98,39 +98,41 @@ class AddParticipantsScreen extends Component {
 
     return (
       <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
-        <TextInput
-          style={styles.textInput}
-          placeholder="Search or invite people"
-          value={searchText}
-          returnKeyType="done"
-          onChangeText={debounce(
-            text =>
-              this.setState({
-                searchText: text,
-              }),
-            300,
+        <View style={{ padding: Spacing.m }}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Search or invite people"
+            value={searchText}
+            returnKeyType="done"
+            onChangeText={debounce(
+              text =>
+                this.setState({
+                  searchText: text,
+                }),
+              300,
+            )}
+          />
+          {searchText && (
+            <Query query={SEARCH_PEOPLE} variables={{ search: searchText }}>
+              {({ loading, error, data }) => {
+                if (loading) return <DefaultText>Loading…</DefaultText>
+                if (error) return <DefaultText>Error!</DefaultText>
+
+                return this.renderList(data.people)
+              }}
+            </Query>
           )}
-        />
-        {searchText && (
-          <Query query={SEARCH_PEOPLE} variables={{ search: searchText }}>
-            {({ loading, error, data }) => {
-              if (loading) return <DefaultText>Loading…</DefaultText>
-              if (error) return <DefaultText>Error!</DefaultText>
+          {!searchText && (
+            <Query query={GET_FRIENDS}>
+              {({ loading, error, data }) => {
+                if (loading) return <DefaultText>Loading…</DefaultText>
+                if (error) return <DefaultText>Error!</DefaultText>
 
-              return this.renderList(data.people)
-            }}
-          </Query>
-        )}
-        {!searchText && (
-          <Query query={GET_FRIENDS}>
-            {({ loading, error, data }) => {
-              if (loading) return <DefaultText>Loading…</DefaultText>
-              if (error) return <DefaultText>Error!</DefaultText>
-
-              return this.renderList(data.friends)
-            }}
-          </Query>
-        )}
+                return this.renderList(data.friends)
+              }}
+            </Query>
+          )}
+        </View>
       </ScrollView>
     )
   }

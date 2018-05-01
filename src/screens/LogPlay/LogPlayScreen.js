@@ -8,7 +8,6 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
-  KeyboardAvoidingView,
 } from "react-native"
 import Fonts from "../../constants/Fonts"
 import gql from "graphql-tag"
@@ -26,6 +25,7 @@ import Cover from "../../components/shared/Cover"
 import Avatar from "../../components/flow/Avatar"
 import { SessionContext } from "../../contexts/session-context"
 import DividerHeading from "../../components/shared/DividerHeading"
+import { Feather } from "@expo/vector-icons"
 
 const SEARCH_GAMES = gql`
   query SEARCH_GAMES($search: String) {
@@ -219,21 +219,24 @@ export default class LogPlayScreen extends React.Component {
                     rank,
                   } = participant
                   return (
-                    <View
+                    <TouchableOpacity
                       key={id}
+                      onPress={() =>
+                        this.showEditParticipantScreen(index, name)
+                      }
                       style={{
                         padding: Spacing.m,
                         width: "100%",
                         flexDirection: "row",
                         alignItems: "center",
-                        justifyContent: "space-between",
+                        flexGrow: 1,
                       }}
                     >
-                      <Button
-                        title="×"
-                        color="red"
+                      <TouchableOpacity
                         onPress={() => removeParticipant(participant)}
-                      />
+                      >
+                        <Feather name="x" size={32} color={Colors.danger} />
+                      </TouchableOpacity>
                       <Avatar id={id} />
                       <View style={{ flexGrow: 1 }}>
                         <BoldText>
@@ -245,19 +248,22 @@ export default class LogPlayScreen extends React.Component {
                           {role}
                         </MutedText>
                       </View>
-                      <Button
-                        title=">"
-                        style={{ fontSize: 60 }}
-                        onPress={() =>
-                          this.showEditParticipantScreen(index, name)
-                        }
+                      <Feather
+                        name="chevron-right"
+                        size={32}
+                        color={Colors.primary}
                       />
-                    </View>
+                    </TouchableOpacity>
                   )
                 })
               }
             </SessionContext.Consumer>
-            <Button onPress={this.showAddParticipantsScreen} title="+" />
+            <TouchableOpacity
+              onPress={this.showAddParticipantsScreen}
+              style={{ flexDirection: "row", justifyContent: "center" }}
+            >
+              <Feather name="plus" size={32} color={Colors.primary} />
+            </TouchableOpacity>
           </Box>
         </View>
         <Mutation mutation={CREATE_SESSION} onCompleted={this.handleComplete}>
