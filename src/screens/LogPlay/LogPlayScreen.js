@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  KeyboardAvoidingView,
 } from "react-native"
 import Fonts from "../../constants/Fonts"
 import gql from "graphql-tag"
