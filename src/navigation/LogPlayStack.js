@@ -1,8 +1,9 @@
 import React, { Component } from "react"
+import { KeyboardAvoidingView } from "react-native"
 import { StackNavigator } from "react-navigation"
-import LogPlayScreen from "../screens/LogPlayScreen"
-import { SessionContext } from "../screens/session-context"
-import EditParticipantScreen from "../screens/EditParticipantScreen"
+import LogPlayScreen from "../screens/LogPlay/LogPlayScreen"
+import { SessionContext } from "../contexts/session-context"
+import EditParticipantScreen from "../screens/LogPlay/EditParticipantScreen"
 import headerStyles from "./headerStyles"
 
 const removeFromArray = (array, item) => {
@@ -76,7 +77,9 @@ class LogPlayStack extends Component {
   render() {
     return (
       <SessionContext.Provider value={this.state}>
-        <LogPlayStackNavigator />
+        <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
+          <LogPlayStackNavigator />
+        </KeyboardAvoidingView>
       </SessionContext.Provider>
     )
   }

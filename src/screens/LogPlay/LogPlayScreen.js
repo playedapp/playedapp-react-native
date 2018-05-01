@@ -9,21 +9,22 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native"
-import Fonts from "../constants/Fonts"
+import Fonts from "../../constants/Fonts"
 import gql from "graphql-tag"
 import { Query, Mutation } from "react-apollo"
 import { debounce } from "lodash-es"
-import Box from "../components/shared/Box"
-import Spacing from "../constants/Spacing"
-import Colors from "../constants/Colors"
+import Box from "../../components/shared/Box"
+import Spacing from "../../constants/Spacing"
+import Colors from "../../constants/Colors"
 import {
   DefaultText,
   MutedText,
   BoldText,
-} from "../components/shared/TextStyles"
-import Cover from "../components/shared/Cover"
-import Avatar from "../components/flow/Avatar"
-import { SessionContext } from "./session-context"
+} from "../../components/shared/TextStyles"
+import Cover from "../../components/shared/Cover"
+import Avatar from "../../components/flow/Avatar"
+import { SessionContext } from "../../contexts/session-context"
+import DividerHeading from "../../components/shared/DividerHeading"
 
 const SEARCH_GAMES = gql`
   query SEARCH_GAMES($search: String) {
@@ -70,9 +71,9 @@ export default class LogPlayScreen extends React.Component {
     personSearchText: "",
   }
 
-  showParticipantScreen = (participant, index) => {
+  showParticipantScreen = index => {
     const { navigate } = this.props.navigation
-    navigate("EditParticipantScreen", { participant, index })
+    navigate("EditParticipantScreen", { index })
   }
 
   get inputObject() {
@@ -104,7 +105,7 @@ export default class LogPlayScreen extends React.Component {
     const { gameSearchText, personSearchText, comment } = this.state
 
     return (
-      <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
+      <ScrollView keyboardShouldPersistTaps="always" style={styles.container}>
         <View style={{ padding: Spacing.m }}>
           <TextInput
             style={styles.textInput}
@@ -200,8 +201,8 @@ export default class LogPlayScreen extends React.Component {
             }
           </SessionContext.Consumer>
         </View>
+        <DividerHeading>Review or notes</DividerHeading>
         <View style={{ padding: Spacing.m }}>
-          <DefaultText>REVIEW OR NOTES</DefaultText>
           <TextInput
             style={styles.textInput}
             placeholder="Add…"
@@ -209,43 +210,54 @@ export default class LogPlayScreen extends React.Component {
             onChangeText={text => this.setState({ comment: text })}
           />
         </View>
+        <DividerHeading>Players</DividerHeading>
         <View style={{ padding: Spacing.m }}>
-          <DefaultText>PLAYERS</DefaultText>
           <Box>
             <SessionContext.Consumer>
-              {({ participants, removeParticipant, updateParticipant }) =>
-                participants.map((participant, index) => (
-                  <View
-                    key={participant.id}
-                    style={{
-                      padding: Spacing.m,
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Button
-                      title="×"
-                      onPress={() => removeParticipant(participant)}
-                    />
-                    <Text>{participant.person.name}</Text>
-                    <TextInput
-                      value={String(participant.score)}
-                      keyboardType="number-pad"
-                      onChangeText={score =>
-                        updateParticipant(index, {
-                          score: parseInt(score),
-                        })
-                      }
-                      style={{ width: 100 }}
-                    />
-                    <Button
-                      title=">"
-                      onPress={() =>
-                        this.showParticipantScreen(participant, index)
-                      }
-                    />
-                  </View>
-                ))
+              {({ participants, removeParticipant }) =>
+                participants.map((participant, index) => {
+                  const {
+                    person: { id, name },
+                    score,
+                    role,
+                    isFirstPlay,
+                    rank,
+                  } = participant
+                  return (
+                    <View
+                      key={id}
+                      style={{
+                        padding: Spacing.m,
+                        width: "100%",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Button
+                        title="×"
+                        color="red"
+                        onPress={() => removeParticipant(participant)}
+                      />
+                      <Avatar id={id} />
+                      <View style={{ flexGrow: 1 }}>
+                        <BoldText>
+                          {name} <MutedText>{score}p</MutedText>
+                        </BoldText>
+                        <MutedText>
+                          {isFirstPlay && "First play "}
+                          {rank === 1 && "👑 "}
+                          {role}
+                        </MutedText>
+                      </View>
+                      <Button
+                        title=">"
+                        style={{ fontSize: 60 }}
+                        onPress={() => this.showParticipantScreen(index)}
+                      />
+                    </View>
+                  )
+                })
               }
             </SessionContext.Consumer>
             <SessionContext.Consumer>
