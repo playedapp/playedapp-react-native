@@ -87,7 +87,7 @@ class EditParticipantScreen extends Component {
 export default class X extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: `Edit ${navigation.state.params.name}`,
+      title: navigation.state.params.name,
     }
   }
 

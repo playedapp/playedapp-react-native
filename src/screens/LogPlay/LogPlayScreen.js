@@ -25,7 +25,7 @@ import Cover from "../../components/shared/Cover"
 import Avatar from "../../components/flow/Avatar"
 import { SessionContext } from "../../contexts/session-context"
 import DividerHeading from "../../components/shared/DividerHeading"
-import { Feather } from "@expo/vector-icons"
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons"
 
 const SEARCH_GAMES = gql`
   query SEARCH_GAMES($search: String) {
@@ -58,7 +58,6 @@ export default class LogPlayScreen extends React.Component {
 
   state = {
     gameSearchText: "",
-    personSearchText: "",
   }
 
   showEditParticipantScreen = (index, name) => {
@@ -97,7 +96,7 @@ export default class LogPlayScreen extends React.Component {
   }
 
   render() {
-    const { gameSearchText, personSearchText, comment } = this.state
+    const { gameSearchText, comment } = this.state
 
     return (
       <ScrollView keyboardShouldPersistTaps="always" style={styles.container}>
@@ -173,9 +172,17 @@ export default class LogPlayScreen extends React.Component {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Button title="×" onPress={() => removeGame(game)} />
+                        <TouchableOpacity onPress={() => removeGame(game)}>
+                          <Feather name="x" size={32} color={Colors.danger} />
+                        </TouchableOpacity>
                         <Cover id={id} />
-                        <Button title="…" />
+                        <TouchableOpacity onPress={() => removeGame(game)}>
+                          <MaterialCommunityIcons
+                            name="dots-horizontal"
+                            size={32}
+                            color={Colors.primary}
+                          />
+                        </TouchableOpacity>
                       </View>
                       <BoldText style={{ textAlign: "center" }}>
                         {title}
@@ -242,11 +249,13 @@ export default class LogPlayScreen extends React.Component {
                         <BoldText>
                           {name} <MutedText>{score}p</MutedText>
                         </BoldText>
-                        <MutedText>
-                          {isFirstPlay && "First play "}
-                          {rank === 1 && "👑 "}
-                          {role}
-                        </MutedText>
+                        {(isFirstPlay || rank || role) && (
+                          <MutedText>
+                            {isFirstPlay && "First play "}
+                            {rank === 1 && "👑 "}
+                            {role}
+                          </MutedText>
+                        )}
                       </View>
                       <Feather
                         name="chevron-right"
@@ -266,6 +275,7 @@ export default class LogPlayScreen extends React.Component {
             </TouchableOpacity>
           </Box>
         </View>
+        <DividerHeading>Add-ons</DividerHeading>
         <Mutation mutation={CREATE_SESSION} onCompleted={this.handleComplete}>
           {(createSession, { error, loading }) => {
             return (
