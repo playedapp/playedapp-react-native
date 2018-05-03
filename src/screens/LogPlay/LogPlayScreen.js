@@ -2,12 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import {
   ScrollView,
+  Image,
   View,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   Button,
+  ActionSheetIOS,
 } from "react-native"
 import Fonts from "../../constants/Fonts"
 import gql from "graphql-tag"
@@ -26,6 +28,9 @@ import Avatar from "../../components/flow/Avatar"
 import { SessionContext } from "../../contexts/session-context"
 import DividerHeading from "../../components/shared/DividerHeading"
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons"
+import Expo from "expo"
+
+const { ImagePicker, Permissions } = Expo
 
 const SEARCH_GAMES = gql`
   query SEARCH_GAMES($search: String) {
@@ -212,6 +217,81 @@ export default class LogPlayScreen extends React.Component {
             onChangeText={text => this.setState({ comment: text })}
           />
         </View>
+        <DividerHeading>Photos</DividerHeading>
+        <SessionContext.Consumer>
+          {({ photos, addPhoto, removePhoto }) => {
+            return (
+              <View
+                style={{
+                  padding: Spacing.m,
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                }}
+              >
+                {photos.map(photo => (
+                  <TouchableOpacity
+                    key={photo.uri}
+                    onPress={() => removePhoto(photo)}
+                  >
+                    <Image
+                      source={{ uri: photo.uri }}
+                      style={{ width: 100, height: 100 }}
+                    />
+                  </TouchableOpacity>
+                ))}
+                <TouchableOpacity
+                  onPress={async () => {
+                    const options = ["Camera", "Library", "Cancel"]
+                    ActionSheetIOS.showActionSheetWithOptions(
+                      {
+                        options,
+                        cancelButtonIndex: 2,
+                      },
+                      async index => {
+                        switch (options[index]) {
+                          case "Camera": {
+                            const { status } = await Permissions.askAsync(
+                              Permissions.CAMERA,
+                            )
+                            if (status === "granted") {
+                              const {
+                                uri,
+                                width,
+                                height,
+                              } = await ImagePicker.launchCameraAsync()
+                              addPhoto({ uri, width, height })
+                            }
+                            break
+                          }
+                          case "Library": {
+                            const { status } = await Permissions.askAsync(
+                              Permissions.CAMERA_ROLL,
+                            )
+                            if (status === "granted") {
+                              const {
+                                cancelled,
+                                uri,
+                                width,
+                                height,
+                              } = await ImagePicker.launchImageLibraryAsync()
+                              if (cancelled) return
+                              addPhoto({ uri, width, height })
+                            }
+                            break
+                          }
+                        }
+                      },
+                    )
+                  }}
+                  style={{ flexDirection: "row", justifyContent: "center" }}
+                >
+                  <Feather name="plus" size={32} color={Colors.primary} />
+                </TouchableOpacity>
+              </View>
+            )
+          }}
+        </SessionContext.Consumer>
+
         <DividerHeading>Players</DividerHeading>
         <View style={{ padding: Spacing.m }}>
           <Box>

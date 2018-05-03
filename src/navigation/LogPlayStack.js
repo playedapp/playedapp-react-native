@@ -65,15 +65,30 @@ class LogPlayStack extends Component {
     })
   }
 
+  addPhoto = photo => {
+    this.setState({
+      photos: [...this.state.photos, photo],
+    })
+  }
+
+  removePhoto = photo => {
+    this.setState({
+      photos: removeFromArray(this.state.photos, photo),
+    })
+  }
+
   state = {
     games: [],
-    comment: "",
-    participants: [],
     addGame: this.addGame,
     removeGame: this.removeGame,
+    comment: "",
+    participants: [],
     addParticipant: this.addParticipant,
     removeParticipant: this.removeParticipant,
     updateParticipant: this.updateParticipant,
+    photos: [],
+    addPhoto: this.addPhoto,
+    removePhoto: this.removePhoto,
   }
 
   render() {

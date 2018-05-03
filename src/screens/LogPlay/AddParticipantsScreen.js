@@ -17,6 +17,9 @@ import { Query } from "react-apollo"
 import { debounce } from "lodash-es"
 import { DefaultText } from "../../components/shared/TextStyles"
 import { Feather } from "@expo/vector-icons"
+import Expo from "expo"
+
+const { Haptic } = Expo
 
 const GET_FRIENDS = gql`
   query GET_FRIENDS {
@@ -66,6 +69,7 @@ class AddParticipantsScreen extends Component {
             <TouchableOpacity
               key={id}
               onPress={() => {
+                Haptic.selection()
                 this.setState({ searchText: "" })
                 isParticipating
                   ? removeParticipant(
