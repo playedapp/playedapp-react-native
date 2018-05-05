@@ -9,7 +9,12 @@ const DividerHeading = ({ children }) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.line} />
-      <DefaultText style={{ marginHorizontal: Spacing.m }}>
+      <DefaultText
+        style={{
+          marginHorizontal: Spacing.m,
+          color: Colors.textMuted,
+        }}
+      >
         {children.toUpperCase()}
       </DefaultText>
       <View style={styles.line} />
@@ -25,7 +30,8 @@ const styles = StyleSheet.create({
   wrapper: { flexDirection: "row", width: "100%", alignItems: "center" },
   line: {
     height: 1,
-    backgroundColor: Colors.text,
+    backgroundColor: Colors.textMuted,
+    opacity: 0.5,
     flexGrow: 1,
   },
 })

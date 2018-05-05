@@ -4,6 +4,7 @@ export default {
       regular: "nunito-regular",
       semibold: "nunito-semibold",
       bold: "nunito-bold",
+      extrabold: "nunito-extrabold",
     },
     fredokaOne: {
       regular: "fredokaone-regular",

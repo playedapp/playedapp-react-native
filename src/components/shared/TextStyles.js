@@ -4,44 +4,39 @@ import PropTypes from "prop-types"
 import Fonts from "../../constants/Fonts"
 import Colors from "../../constants/Colors"
 
-export class DefaultText extends Component {
-  static propTypes = {
-    style: PropTypes.object,
-  }
-
-  render() {
-    return <Text {...this.props} style={[this.props.style, styles.default]} />
-  }
+export const DefaultText = ({ style, ...props }) => (
+  <Text {...props} style={[styles.default, style]} />
+)
+DefaultText.propTypes = {
+  style: PropTypes.object,
 }
 
-export class MutedText extends Component {
-  static propTypes = {
-    style: PropTypes.object,
-  }
-
-  render() {
-    return <Text {...this.props} style={[this.props.style, styles.muted]} />
-  }
+export const MutedText = ({ style, ...props }) => (
+  <Text {...props} style={[styles.muted, style]} />
+)
+MutedText.propTypes = {
+  style: PropTypes.object,
 }
 
-export class BoldText extends Component {
-  static propTypes = {
-    style: PropTypes.object,
-  }
-
-  render() {
-    return <Text {...this.props} style={[this.props.style, styles.bold]} />
-  }
+export const BoldText = ({ style, ...props }) => (
+  <Text {...props} style={[styles.bold, style]} />
+)
+BoldText.propTypes = {
+  style: PropTypes.object,
 }
 
-export class Link extends Component {
-  static propTypes = {
-    style: PropTypes.object,
-  }
+export const ExtraBoldText = ({ style, ...props }) => (
+  <Text {...props} style={[styles.extraBold, style]} />
+)
+ExtraBoldText.propTypes = {
+  style: PropTypes.object,
+}
 
-  render() {
-    return <Text {...this.props} style={[this.props.style, styles.link]} />
-  }
+export const Link = ({ style, ...props }) => (
+  <Text {...props} style={[styles.link, style]} />
+)
+Link.propTypes = {
+  style: PropTypes.object,
 }
 
 const styles = StyleSheet.create({
@@ -52,6 +47,11 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontFamily: Fonts.families.nunito.bold,
+    fontSize: Fonts.sizes.default,
+    color: Colors.text,
+  },
+  extraBold: {
+    fontFamily: Fonts.families.nunito.extrabold,
     fontSize: Fonts.sizes.default,
     color: Colors.text,
   },

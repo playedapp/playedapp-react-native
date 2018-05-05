@@ -45,6 +45,7 @@ export default class App extends React.Component {
         "nunito-regular": require("./assets/fonts/Nunito/Nunito-Regular.ttf"),
         "nunito-bold": require("./assets/fonts/Nunito/Nunito-Bold.ttf"),
         "nunito-semibold": require("./assets/fonts/Nunito/Nunito-SemiBold.ttf"),
+        "nunito-extrabold": require("./assets/fonts/Nunito/Nunito-ExtraBold.ttf"),
       }),
     ])
   }

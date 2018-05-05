@@ -4,10 +4,13 @@ import PropTypes from "prop-types"
 import Colors from "../../constants/Colors"
 import Shadows from "../../constants/Shadows"
 
-const Box = ({ children }) => <View style={styles.box}>{children}</View>
+const Box = ({ children, style = {} }) => (
+  <View style={[styles.box, style]}>{children}</View>
+)
 
 Box.propTypes = {
   children: PropTypes.node,
+  style: PropTypes.object,
 }
 
 const styles = StyleSheet.create({
