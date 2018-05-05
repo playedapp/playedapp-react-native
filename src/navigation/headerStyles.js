@@ -6,6 +6,7 @@ import Fonts from "../constants/Fonts"
 export default {
   headerStyle: {
     backgroundColor: Colors.primary,
+    borderBottomWidth: 0,
   },
   headerTitle: ({ style, children }) => (
     <Text style={style}>{String(children).toUpperCase()}</Text>

@@ -7,7 +7,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Button,
 } from "react-native"
 import Fonts from "../../constants/Fonts"
 import gql from "graphql-tag"
@@ -102,10 +101,14 @@ export default class LogPlayScreen extends React.Component {
 
     return (
       <ScrollView keyboardShouldPersistTaps="always" style={styles.container}>
-        <View style={{ padding: Spacing.m }}>
+        <View style={{ padding: Spacing.m, backgroundColor: Colors.primary }}>
           <TextInput
-            style={styles.textInput}
+            style={[
+              styles.textInput,
+              { color: Colors.cyan, backgroundColor: "transparent" },
+            ]}
             placeholder="Search games and expansions"
+            placeholderTextColor={Colors.cyan}
             autoCorrect={false}
             value={gameSearchText}
             returnKeyType="done"
@@ -114,6 +117,8 @@ export default class LogPlayScreen extends React.Component {
               300,
             )}
           />
+        </View>
+        <View style={{ padding: Spacing.m }}>
           {gameSearchText && (
             <Query query={SEARCH_GAMES} variables={{ search: gameSearchText }}>
               {({ loading, error, data }) => {

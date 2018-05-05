@@ -3,7 +3,7 @@ const tintColor = "#00fff0"
 export default {
   primary: "#314bfc",
   primaryDarker: "#3d00cc",
-  cyan: "#00FFEF66",
+  cyan: "#80FFF7",
   textOnPrimary: "#fff",
   white: "#fff",
   mainBackground: "#f3f0e7",
