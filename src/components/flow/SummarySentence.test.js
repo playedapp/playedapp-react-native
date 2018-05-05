@@ -6,7 +6,7 @@ import { SummarySentence } from "./SummarySentence"
 const game = {
   id: "123",
   title: "Clans of Caledonia",
-  thumbnail: {
+  cover: {
     url: "http://192.168.0.4:3000/static/covers/clansofcaledonia.png",
   },
 }

@@ -83,7 +83,7 @@ class Item extends Component {
   }
 
   get anonymousParticipants() {
-    return this.props.participants.filter(participant => !participant.user)
+    return this.props.participants.filter(participant => !participant.person)
   }
 
   renderHeader() {
@@ -107,9 +107,6 @@ class Item extends Component {
   }
 
   renderParticipantDetails() {
-    const { games } = this.props
-    const primaryGame = games[0]
-
     return this.followedParticipants
       .sort((a, b) => a.rank - b.rank)
       .map(participant => {

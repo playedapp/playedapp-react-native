@@ -7,12 +7,12 @@ exports[`Played X 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -24,12 +24,12 @@ exports[`Played X 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -45,12 +45,12 @@ exports[`Played X with 2 others 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -62,12 +62,12 @@ exports[`Played X with 2 others 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -85,12 +85,12 @@ exports[`Played X with Y 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -102,12 +102,12 @@ exports[`Played X with Y 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -121,12 +121,12 @@ exports[`Played X with Y 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -142,12 +142,12 @@ exports[`Played X with Y and Z 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -159,12 +159,12 @@ exports[`Played X with Y and Z 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -178,12 +178,12 @@ exports[`Played X with Y and Z 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -197,12 +197,12 @@ exports[`Played X with Y and Z 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -218,12 +218,12 @@ exports[`Played X with Y and one other 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -235,12 +235,12 @@ exports[`Played X with Y and one other 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -254,12 +254,12 @@ exports[`Played X with Y and one other 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -277,12 +277,12 @@ exports[`Played X with Y and two others 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -294,12 +294,12 @@ exports[`Played X with Y and two others 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -313,12 +313,12 @@ exports[`Played X with Y and two others 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -336,12 +336,12 @@ exports[`Played X with Y, Z and W 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -353,12 +353,12 @@ exports[`Played X with Y, Z and W 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -372,12 +372,12 @@ exports[`Played X with Y, Z and W 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -391,12 +391,12 @@ exports[`Played X with Y, Z and W 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -410,12 +410,12 @@ exports[`Played X with Y, Z and W 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -431,12 +431,12 @@ exports[`Played X with Y, Z and one other 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -448,12 +448,12 @@ exports[`Played X with Y, Z and one other 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -467,12 +467,12 @@ exports[`Played X with Y, Z and one other 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -486,12 +486,12 @@ exports[`Played X with Y, Z and one other 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -509,12 +509,12 @@ exports[`Played X with Y, Z and two others 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -526,12 +526,12 @@ exports[`Played X with Y, Z and two others 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -545,12 +545,12 @@ exports[`Played X with Y, Z and two others 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -564,12 +564,12 @@ exports[`Played X with Y, Z and two others 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
@@ -587,12 +587,12 @@ exports[`Played X with one other 1`] = `
   ellipsizeMode="tail"
   style={
     Array [
-      undefined,
       Object {
         "color": "#1c1a13",
         "fontFamily": "nunito-regular",
         "fontSize": 15,
       },
+      undefined,
     ]
   }
 >
@@ -604,12 +604,12 @@ exports[`Played X with one other 1`] = `
     onPress={[Function]}
     style={
       Array [
-        undefined,
         Object {
           "color": "#314bfc",
           "fontFamily": "nunito-bold",
           "fontSize": 15,
         },
+        undefined,
       ]
     }
   >
