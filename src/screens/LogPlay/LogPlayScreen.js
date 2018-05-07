@@ -27,6 +27,7 @@ import DividerHeading from "../../components/shared/DividerHeading"
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons"
 import PhotosSection from "./PhotosSection"
 import ButtonPrimary from "../../components/shared/ButtonPrimary"
+import AddOnsSection from "./AddOnsSection"
 
 const SEARCH_GAMES = gql`
   query SEARCH_GAMES($search: String) {
@@ -285,7 +286,7 @@ export default class LogPlayScreen extends React.Component {
             </TouchableOpacity>
           </Box>
         </View>
-        <DividerHeading>Add-ons</DividerHeading>
+        <AddOnsSection />
         <Mutation mutation={CREATE_SESSION} onCompleted={this.handleComplete}>
           {(createSession, { error, loading }) => {
             return (

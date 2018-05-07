@@ -8,35 +8,35 @@ export const DefaultText = ({ style, ...props }) => (
   <Text {...props} style={[styles.default, style]} />
 )
 DefaultText.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.any,
 }
 
 export const MutedText = ({ style, ...props }) => (
   <Text {...props} style={[styles.muted, style]} />
 )
 MutedText.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.any,
 }
 
 export const BoldText = ({ style, ...props }) => (
   <Text {...props} style={[styles.bold, style]} />
 )
 BoldText.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.any,
 }
 
 export const ExtraBoldText = ({ style, ...props }) => (
   <Text {...props} style={[styles.extraBold, style]} />
 )
 ExtraBoldText.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.any,
 }
 
 export const Link = ({ style, ...props }) => (
   <Text {...props} style={[styles.link, style]} />
 )
 Link.propTypes = {
-  style: PropTypes.object,
+  style: PropTypes.any,
 }
 
 const styles = StyleSheet.create({

@@ -2,12 +2,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import { TouchableOpacity, View, StyleSheet } from "react-native"
 import Colors from "../../constants/Colors"
-import Shadows from "../../constants/Shadows"
 import { ExtraBoldText } from "./TextStyles"
 
-const ButtonPrimary = ({ title, style = {}, ...props }) => {
+const ButtonPrimary = ({ title, ...props }) => {
   return (
-    <TouchableOpacity {...props} style={[styles.outer, style]}>
+    <TouchableOpacity {...props} style={styles.outer}>
       <View style={styles.inner}>
         <ExtraBoldText style={styles.text}>{title.toUpperCase()}</ExtraBoldText>
       </View>

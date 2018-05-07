@@ -77,10 +77,22 @@ class LogPlayStack extends Component {
     })
   }
 
+  setPlaytime = playtime => this.setState({ playtime })
+
+  setRounds = rounds => this.setState({ rounds })
+
+  setVariants = variants => this.setState({ variants })
+
   state = {
     games: [],
     addGame: this.addGame,
     removeGame: this.removeGame,
+    playtime: undefined,
+    setPlaytime: this.setPlaytime,
+    rounds: undefined,
+    setRounds: this.setRounds,
+    variants: undefined,
+    setVariants: this.setVariants,
     comment: "",
     participants: [],
     addParticipant: this.addParticipant,
@@ -89,6 +101,7 @@ class LogPlayStack extends Component {
     photos: [],
     addPhoto: this.addPhoto,
     removePhoto: this.removePhoto,
+    location: undefined,
   }
 
   render() {

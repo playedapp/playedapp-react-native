@@ -25,7 +25,14 @@ const ButtonSquare = ({ title, icon, color, ...props }) => {
         >
           <Feather name={icon} size={32} color={color} />
         </View>
-        <DefaultText>{title.toUpperCase()}</DefaultText>
+        <DefaultText
+          style={{
+            color: Colors.textMuted,
+            fontSize: 11,
+          }}
+        >
+          {title.toUpperCase()}
+        </DefaultText>
       </Box>
     </TouchableOpacity>
   )
