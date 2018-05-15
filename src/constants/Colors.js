@@ -10,7 +10,7 @@ export default {
   text: "#1c1a13",
   textMuted: "#89836b",
   danger: "red",
-  success: "85D900",
+  success: "#85D900",
   tintColor,
   tabIconDefault: "#ccc",
   tabIconSelected: tintColor,

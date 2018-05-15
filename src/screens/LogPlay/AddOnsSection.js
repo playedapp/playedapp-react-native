@@ -1,61 +1,65 @@
-import React, { Component } from "react"
 import PropTypes from "prop-types"
+import React, { Component } from "react"
 import { View } from "react-native"
+import Box from "../../components/shared/Box"
 import DividerHeading from "../../components/shared/DividerHeading"
 import Spacing from "../../constants/Spacing"
-import ButtonSquare from "../../components/shared/ButtonSquare"
 import { SessionContext } from "../../contexts/session-context"
-import Colors from "../../constants/Colors"
-
-const AddOnButton = ({ title, icon, done = false, onPress }) => {
-  return (
-    <ButtonSquare
-      title={title}
-      icon={done ? "check" : icon}
-      color={done ? Colors.success : Colors.primary}
-      onPress={onPress}
-    />
-  )
-}
-
-AddOnButton.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  done: PropTypes.bool.isRequired,
-  onPress: PropTypes.func.isRequired,
-}
+import { Button as LocationButton, Row as LocationRow } from "./addons/Location"
+import { Button as PlaytimeButton, Row as PlaytimeRow } from "./addons/Playtime"
+import { Button as RoundsButton, Row as RoundsRow } from "./addons/Rounds"
+import { Button as VariantsButton, Row as VariantsRow } from "./addons/Variants"
 
 class AddOnsSection extends Component {
   static propTypes = {
     location: PropTypes.shape({}),
   }
 
-  state = {}
   render() {
-    const { location } = this.props
-
     return (
       <View>
         <DividerHeading>Add-ons</DividerHeading>
-        <View style={{ padding: Spacing.m, flexDirection: "row" }}>
-          <AddOnButton
-            title="Location"
-            icon="map-pin"
-            done={location !== undefined}
-          />
-          <AddOnButton title="Playtime" icon="clock" />
-          <AddOnButton title="Rounds" icon="repeat" />
-          <AddOnButton title="Variants" icon="corner-left-done" />
-        </View>
+        <SessionContext.Consumer>
+          {({ location, playtime, rounds, variants }) => {
+            const hasAddons =
+              location !== undefined ||
+              playtime !== undefined ||
+              rounds !== undefined ||
+              variants !== undefined
+
+            return (
+              <View>
+                <View style={{ padding: Spacing.m, flexDirection: "row" }}>
+                  <LocationButton />
+                  <PlaytimeButton />
+                  <RoundsButton />
+                  <VariantsButton />
+                </View>
+                {hasAddons && (
+                  <View style={{ padding: Spacing.m }}>
+                    <Box>
+                      <LocationRow />
+                      <PlaytimeRow />
+                      <RoundsRow />
+                      <VariantsRow />
+                    </Box>
+                  </View>
+                )}
+              </View>
+            )
+          }}
+        </SessionContext.Consumer>
       </View>
     )
   }
 }
 
-export default () => (
-  <SessionContext.Consumer>
-    {({ location }) => {
-      return <AddOnsSection location={location} />
-    }}
-  </SessionContext.Consumer>
-)
+export default AddOnsSection
+
+// export default () => (
+//   <SessionContext.Consumer>
+//     {({ location, setLocation }) => {
+//       return <AddOnsSection location={location} setLocation={setLocation} />
+//     }}
+//   </SessionContext.Consumer>
+// )

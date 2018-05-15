@@ -23,3 +23,9 @@ export const formatDuration = duration => {
 
   return str
 }
+
+export const removeFromArray = (array, item) => {
+  const newArray = array.slice()
+  newArray.splice(newArray.indexOf(item), 1)
+  return newArray
+}

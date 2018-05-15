@@ -1,6 +1,13 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { ScrollView, View, TextInput, StyleSheet, Switch } from "react-native"
+import {
+  TouchableOpacity,
+  ScrollView,
+  View,
+  TextInput,
+  StyleSheet,
+  Switch,
+} from "react-native"
 import { SessionContext } from "../../contexts/session-context"
 import Colors from "../../constants/Colors"
 import Spacing from "../../constants/Spacing"
@@ -8,78 +15,110 @@ import Box from "../../components/shared/Box"
 import Avatar from "../../components/flow/Avatar"
 
 class EditParticipantScreen extends Component {
-  state = {}
-
   static propTypes = {
-    participant: PropTypes.shape({
-      score: PropTypes.number,
-      rank: PropTypes.number,
-      role: PropTypes.string,
-      isFirstPlay: PropTypes.bool,
-      person: PropTypes.shape({
-        name: PropTypes.string,
+    participants: PropTypes.arrayOf(
+      PropTypes.shape({
+        score: PropTypes.number,
+        rank: PropTypes.number,
+        role: PropTypes.string,
+        isFirstPlay: PropTypes.bool,
+        person: PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        }),
       }),
-    }).isRequired,
+    ).isRequired,
     index: PropTypes.number.isRequired,
     updateParticipant: PropTypes.func.isRequired,
+    onChangeParticipant: PropTypes.func,
+  }
+
+  state = {
+    current: this.props.index,
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.index === this.props.index) return
+
+    this.setState({ current: nextProps.index })
+  }
+
+  handleChangeParticipant = index => {
+    const { onChangeParticipant, participants } = this.props
+    this.setState({ current: index })
+    onChangeParticipant && onChangeParticipant(participants[index])
   }
 
   render() {
-    const { participant, index, updateParticipant } = this.props
+    const { participants, updateParticipant } = this.props
+    const { current } = this.state
+    const participant = participants[current]
 
     return (
-      <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
+      <View style={styles.container}>
         <View style={{ padding: Spacing.m, flexDirection: "row" }}>
-          <View style={{ marginRight: Spacing.m }}>
-            <Avatar id={participant.person.id} />
-          </View>
-          <Box>
-            <View style={{ padding: Spacing.m }}>
-              <TextInput
-                value={participant.score ? String(participant.score) : ""}
-                placeholder="Score"
-                keyboardType="number-pad"
-                returnKeyType="done"
-                onChangeText={score =>
-                  updateParticipant(index, {
-                    score: parseInt(score),
-                  })
-                }
-                style={styles.textInput}
-              />
-              <TextInput
-                value={participant.rank ? String(participant.rank) : ""}
-                placeholder="Rank"
-                keyboardType="number-pad"
-                returnKeyType="done"
-                onChangeText={rank =>
-                  updateParticipant(index, {
-                    rank: parseInt(rank),
-                  })
-                }
-                style={styles.textInput}
-              />
-              <TextInput
-                value={participant.role}
-                placeholder="Role"
-                returnKeyType="done"
-                onChangeText={role =>
-                  updateParticipant(index, {
-                    role,
-                  })
-                }
-                style={styles.textInput}
-              />
-              <Switch
-                value={participant.isFirstPlay}
-                onValueChange={isFirstPlay =>
-                  updateParticipant(index, { isFirstPlay })
-                }
-              />
-            </View>
-          </Box>
+          {participants.map(({ person: { id } }, index) => (
+            <TouchableOpacity
+              key={id}
+              onPress={() => this.handleChangeParticipant(index)}
+            >
+              <Avatar id={id} />
+            </TouchableOpacity>
+          ))}
         </View>
-      </ScrollView>
+        <ScrollView keyboardShouldPersistTaps="always">
+          <View style={{ padding: Spacing.m, flexDirection: "row" }}>
+            <View style={{ marginRight: Spacing.m }}>
+              <Avatar id={participant.person.id} />
+            </View>
+            <Box>
+              <View style={{ padding: Spacing.m }}>
+                <TextInput
+                  value={participant.score ? String(participant.score) : ""}
+                  placeholder="Score"
+                  keyboardType="number-pad"
+                  returnKeyType="done"
+                  onChangeText={score =>
+                    updateParticipant(current, {
+                      score: parseInt(score),
+                    })
+                  }
+                  style={styles.textInput}
+                />
+                <TextInput
+                  value={participant.rank ? String(participant.rank) : ""}
+                  placeholder="Rank"
+                  keyboardType="number-pad"
+                  returnKeyType="done"
+                  onChangeText={rank =>
+                    updateParticipant(current, {
+                      rank: parseInt(rank),
+                    })
+                  }
+                  style={styles.textInput}
+                />
+                <TextInput
+                  value={participant.role}
+                  placeholder="Role"
+                  returnKeyType="done"
+                  onChangeText={role =>
+                    updateParticipant(current, {
+                      role,
+                    })
+                  }
+                  style={styles.textInput}
+                />
+                <Switch
+                  value={participant.isFirstPlay}
+                  onValueChange={isFirstPlay =>
+                    updateParticipant(current, { isFirstPlay })
+                  }
+                />
+              </View>
+            </Box>
+          </View>
+        </ScrollView>
+      </View>
     )
   }
 }
@@ -93,14 +132,20 @@ export default class X extends Component {
 
   render() {
     const { index } = this.props.navigation.state.params
+
     return (
       <SessionContext.Consumer>
         {({ participants, updateParticipant }) => {
           return (
             <EditParticipantScreen
               index={index}
-              participant={participants[index]}
+              participants={participants}
               updateParticipant={updateParticipant}
+              onChangeParticipant={participant =>
+                this.props.navigation.setParams({
+                  name: participant.person.name,
+                })
+              }
             />
           )
         }}

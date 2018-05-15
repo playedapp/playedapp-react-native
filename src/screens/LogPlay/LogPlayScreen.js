@@ -290,7 +290,7 @@ export default class LogPlayScreen extends React.Component {
         <Mutation mutation={CREATE_SESSION} onCompleted={this.handleComplete}>
           {(createSession, { error, loading }) => {
             return (
-              <View style={{ padding: Spacing.m }}>
+              <View style={{ padding: Spacing.m, paddingBottom: Spacing.xl }}>
                 {error && <Text>{error}</Text>}
                 <ButtonPrimary
                   title={loading ? "Publishing" : "Publish"}
