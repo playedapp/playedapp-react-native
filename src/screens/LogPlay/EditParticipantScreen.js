@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   ScrollView,
   View,
-  TextInput,
   StyleSheet,
   Switch,
 } from "react-native"
@@ -13,6 +12,7 @@ import Colors from "../../constants/Colors"
 import Spacing from "../../constants/Spacing"
 import Box from "../../components/shared/Box"
 import Avatar from "../../components/flow/Avatar"
+import TextInput from "../../components/shared/TextInput"
 
 class EditParticipantScreen extends Component {
   static propTypes = {
@@ -83,7 +83,6 @@ class EditParticipantScreen extends Component {
                       score: parseInt(score),
                     })
                   }
-                  style={styles.textInput}
                 />
                 <TextInput
                   value={participant.rank ? String(participant.rank) : ""}
@@ -95,7 +94,6 @@ class EditParticipantScreen extends Component {
                       rank: parseInt(rank),
                     })
                   }
-                  style={styles.textInput}
                 />
                 <TextInput
                   value={participant.role}
@@ -106,7 +104,6 @@ class EditParticipantScreen extends Component {
                       role,
                     })
                   }
-                  style={styles.textInput}
                 />
                 <Switch
                   value={participant.isFirstPlay}
@@ -158,12 +155,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.mainBackground,
-  },
-  textInput: {
-    padding: Spacing.m,
-    borderRadius: 12,
-    backgroundColor: Colors.white,
-    borderWidth: 1,
-    width: 100,
   },
 })

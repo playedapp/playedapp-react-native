@@ -5,7 +5,6 @@ import {
   View,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
 } from "react-native"
 import Fonts from "../../constants/Fonts"
@@ -28,6 +27,7 @@ import { Feather, MaterialCommunityIcons } from "@expo/vector-icons"
 import PhotosSection from "./PhotosSection"
 import ButtonPrimary from "../../components/shared/ButtonPrimary"
 import AddOnsSection from "./AddOnsSection"
+import TextInput from "../../components/shared/TextInput"
 
 const SEARCH_GAMES = gql`
   query SEARCH_GAMES($search: String) {

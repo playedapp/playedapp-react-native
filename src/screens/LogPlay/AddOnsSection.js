@@ -1,14 +1,19 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
-import { View } from "react-native"
+import { View, ScrollView } from "react-native"
 import Box from "../../components/shared/Box"
 import DividerHeading from "../../components/shared/DividerHeading"
 import Spacing from "../../constants/Spacing"
+import styled from "styled-components"
 import { SessionContext } from "../../contexts/session-context"
 import { Button as LocationButton, Row as LocationRow } from "./addons/Location"
 import { Button as PlaytimeButton, Row as PlaytimeRow } from "./addons/Playtime"
 import { Button as RoundsButton, Row as RoundsRow } from "./addons/Rounds"
 import { Button as VariantsButton, Row as VariantsRow } from "./addons/Variants"
+
+const Item = styled.View`
+  margin-left: ${Spacing.m};
+`
 
 class AddOnsSection extends Component {
   static propTypes = {
@@ -29,12 +34,31 @@ class AddOnsSection extends Component {
 
             return (
               <View>
-                <View style={{ padding: Spacing.m, flexDirection: "row" }}>
-                  <LocationButton />
-                  <PlaytimeButton />
-                  <RoundsButton />
-                  <VariantsButton />
-                </View>
+                <ScrollView horizontal={true}>
+                  <View
+                    style={{
+                      paddingVertical: Spacing.m,
+                      paddingRight: Spacing.m,
+                      flexDirection: "row",
+                    }}
+                  >
+                    <Item>
+                      <LocationButton />
+                    </Item>
+                    <Item>
+                      <PlaytimeButton />
+                    </Item>
+                    <Item>
+                      <RoundsButton />
+                    </Item>
+                    <Item>
+                      <VariantsButton />
+                    </Item>
+                    <Item>
+                      <VariantsButton />
+                    </Item>
+                  </View>
+                </ScrollView>
                 {hasAddons && (
                   <View style={{ padding: Spacing.m }}>
                     <Box>
@@ -55,11 +79,3 @@ class AddOnsSection extends Component {
 }
 
 export default AddOnsSection
-
-// export default () => (
-//   <SessionContext.Consumer>
-//     {({ location, setLocation }) => {
-//       return <AddOnsSection location={location} setLocation={setLocation} />
-//     }}
-//   </SessionContext.Consumer>
-// )

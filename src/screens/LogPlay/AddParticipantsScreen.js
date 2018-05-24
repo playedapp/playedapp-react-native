@@ -1,12 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import {
-  ScrollView,
-  View,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native"
+import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native"
 import { SessionContext } from "../../contexts/session-context"
 import Colors from "../../constants/Colors"
 import Spacing from "../../constants/Spacing"
@@ -18,6 +12,7 @@ import { debounce } from "lodash-es"
 import { DefaultText } from "../../components/shared/TextStyles"
 import { Feather } from "@expo/vector-icons"
 import Expo from "expo"
+import TextInput from "../../components/shared/TextInput"
 
 const { Haptic } = Expo
 
@@ -104,7 +99,6 @@ class AddParticipantsScreen extends Component {
       <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
         <View style={{ padding: Spacing.m }}>
           <TextInput
-            style={styles.textInput}
             placeholder="Search or invite people"
             value={searchText}
             returnKeyType="done"
@@ -166,12 +160,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.mainBackground,
-  },
-  textInput: {
-    padding: Spacing.m,
-    borderRadius: 12,
-    backgroundColor: Colors.white,
-    borderWidth: 1,
-    width: 100,
   },
 })

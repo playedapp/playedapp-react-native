@@ -6,12 +6,20 @@ import EditParticipantScreen from "../screens/LogPlay/EditParticipantScreen"
 import AddParticipantsScreen from "../screens/LogPlay/AddParticipantsScreen"
 import headerStyles from "./headerStyles"
 import LogPlayProvider from "../contexts/LogPlayProvider"
+import { Screen as LocationScreen } from "../screens/LogPlay/addons/Location"
+import { Screen as PlaytimeScreen } from "../screens/LogPlay/addons/Playtime"
+import { Screen as RoundsScreen } from "../screens/LogPlay/addons/Rounds"
+import { Screen as VariantsScreen } from "../screens/LogPlay/addons/Variants"
 
 const LogPlayStackNavigator = StackNavigator(
   {
     Main: { screen: LogPlayScreen },
     EditParticipantScreen: { screen: EditParticipantScreen },
     AddParticipantsScreen: { screen: AddParticipantsScreen },
+    LocationScreen: { screen: LocationScreen },
+    PlaytimeScreen: { screen: PlaytimeScreen },
+    RoundsScreen: { screen: RoundsScreen },
+    VariantsScreen: { screen: VariantsScreen },
   },
   {
     initialRouteName: "Main",
