@@ -255,6 +255,12 @@ addMockFunctionsToSchema({
             `${host}/static/photos/IMG_2669.jpg`,
             `${host}/static/photos/pic3809378.jpg`,
             `${host}/static/photos/IMG_2667.jpg`,
+            `${host}/static/photos/IMG_0695.jpg`,
+            `${host}/static/photos/IMG_0766.jpg`,
+            `${host}/static/photos/IMG_0808.jpg`,
+            `${host}/static/photos/IMG_0972.jpg`,
+            `${host}/static/photos/IMG_1093.jpg`,
+            `${host}/static/photos/IMG_1161.jpg`,
           ])
       }
       return { url }
