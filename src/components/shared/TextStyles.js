@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { Text, StyleSheet } from "react-native"
 import PropTypes from "prop-types"
 import Fonts from "../../constants/Fonts"
@@ -8,6 +8,13 @@ export const DefaultText = ({ style, ...props }) => (
   <Text {...props} style={[styles.default, style]} />
 )
 DefaultText.propTypes = {
+  style: PropTypes.any,
+}
+
+export const SmallText = ({ style, ...props }) => (
+  <Text {...props} style={[styles.small, style]} />
+)
+SmallText.propTypes = {
   style: PropTypes.any,
 }
 
@@ -43,6 +50,11 @@ const styles = StyleSheet.create({
   default: {
     fontFamily: Fonts.families.nunito.regular,
     fontSize: Fonts.sizes.default,
+    color: Colors.text,
+  },
+  small: {
+    fontFamily: Fonts.families.nunito.regular,
+    fontSize: Fonts.sizes.small,
     color: Colors.text,
   },
   bold: {

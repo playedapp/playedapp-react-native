@@ -6,6 +6,7 @@ export default {
   cyan: "#80FFF7",
   textOnPrimary: "#fff",
   white: "#fff",
+  black: "#000",
   mainBackground: "#f3f0e7",
   text: "#1c1a13",
   textMuted: "#89836b",

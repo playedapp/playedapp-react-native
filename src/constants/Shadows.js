@@ -17,4 +17,12 @@ export default {
     },
     borderWidth: 20,
   },
+  textShadow: {
+    textShadowColor: "#00000099",
+    textShadowRadius: 1,
+    textShadowOpacity: 0.5,
+    textShadowOffset: {
+      height: 1,
+    },
+  },
 }
