@@ -2,6 +2,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Image, View } from "react-native"
+import Spacing from "../../constants/Spacing"
 
 const YellowLeft = require("../../../assets/images/rating/YellowLeft.png")
 const YellowRight = require("../../../assets/images/rating/YellowRight.png")
@@ -34,7 +35,17 @@ const StarRating = ({ rating, compareTo }) => {
             image = left ? GreyLeft : GreyRight
           }
         }
-        return <Image key={index} source={image} />
+        return (
+          <Image
+            key={index}
+            source={image}
+            style={{
+              width: 10,
+              height: 23,
+              marginRight: left ? 0 : Spacing.xs,
+            }}
+          />
+        )
       })}
     </View>
   )
