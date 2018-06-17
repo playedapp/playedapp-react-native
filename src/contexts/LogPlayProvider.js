@@ -1,4 +1,4 @@
-import { SessionContext } from "./session-context"
+import { CreateSessionContext } from "./create-session-context"
 import React, { Component } from "react"
 import { removeFromArray } from "../lib/utils"
 import PropTypes from "prop-types"
@@ -91,9 +91,9 @@ class LogPlayProvider extends Component {
 
   render() {
     return (
-      <SessionContext.Provider value={this.state}>
+      <CreateSessionContext.Provider value={this.state}>
         {this.props.children}
-      </SessionContext.Provider>
+      </CreateSessionContext.Provider>
     )
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Image, View, ActionSheetIOS } from "react-native"
 import Spacing from "../../constants/Spacing"
 import Colors from "../../constants/Colors"
-import { SessionContext } from "../../contexts/session-context"
+import { CreateSessionContext } from "../../contexts/create-session-context"
 import DividerHeading from "../../components/shared/DividerHeading"
 import Expo from "expo"
 import ButtonSquare from "../../components/shared/ButtonSquare"
@@ -124,7 +124,7 @@ class PhotosSection extends Component {
 }
 
 export default () => (
-  <SessionContext.Consumer>
+  <CreateSessionContext.Consumer>
     {({ photos, addPhoto, removePhoto }) => {
       return (
         <PhotosSection
@@ -134,5 +134,5 @@ export default () => (
         />
       )
     }}
-  </SessionContext.Consumer>
+  </CreateSessionContext.Consumer>
 )

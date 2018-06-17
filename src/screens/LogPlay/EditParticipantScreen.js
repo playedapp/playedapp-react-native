@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Switch,
 } from "react-native"
-import { SessionContext } from "../../contexts/session-context"
+import { CreateSessionContext } from "../../contexts/create-session-context"
 import Colors from "../../constants/Colors"
 import Spacing from "../../constants/Spacing"
 import Box from "../../components/shared/Box"
@@ -131,7 +131,7 @@ export default class X extends Component {
     const { index } = this.props.navigation.state.params
 
     return (
-      <SessionContext.Consumer>
+      <CreateSessionContext.Consumer>
         {({ participants, updateParticipant }) => {
           return (
             <EditParticipantScreen
@@ -146,7 +146,7 @@ export default class X extends Component {
             />
           )
         }}
-      </SessionContext.Consumer>
+      </CreateSessionContext.Consumer>
     )
   }
 }

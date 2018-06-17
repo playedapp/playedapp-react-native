@@ -5,12 +5,12 @@ import TextInput from "../../../components/shared/TextInput"
 import { withNavigation } from "react-navigation"
 import { BoldText, MutedText } from "../../../components/shared/TextStyles"
 import Spacing from "../../../constants/Spacing"
-import { SessionContext } from "../../../contexts/session-context"
+import { CreateSessionContext } from "../../../contexts/create-session-context"
 import AddOnButton from "./AddOnButton"
 import AddOnRow from "./AddOnRow"
 
 export const Button = withNavigation(({ navigation }) => (
-  <SessionContext.Consumer>
+  <CreateSessionContext.Consumer>
     {({ playtime }) => (
       <AddOnButton
         title="Playtime"
@@ -21,7 +21,7 @@ export const Button = withNavigation(({ navigation }) => (
         }}
       />
     )}
-  </SessionContext.Consumer>
+  </CreateSessionContext.Consumer>
 ))
 
 Button.propTypes = {
@@ -29,7 +29,7 @@ Button.propTypes = {
 }
 
 export const Row = withNavigation(({ navigation }) => (
-  <SessionContext.Consumer>
+  <CreateSessionContext.Consumer>
     {({ playtime, setPlaytime }) =>
       playtime !== undefined && (
         <AddOnRow
@@ -41,7 +41,7 @@ export const Row = withNavigation(({ navigation }) => (
         </AddOnRow>
       )
     }
-  </SessionContext.Consumer>
+  </CreateSessionContext.Consumer>
 ))
 
 Row.propTypes = {
@@ -55,7 +55,7 @@ export class Screen extends Component {
 
   render() {
     return (
-      <SessionContext.Consumer>
+      <CreateSessionContext.Consumer>
         {({ playtime, setPlaytime }) => (
           <View style={{ padding: Spacing.m }}>
             <TextInput
@@ -71,7 +71,7 @@ export class Screen extends Component {
             />
           </View>
         )}
-      </SessionContext.Consumer>
+      </CreateSessionContext.Consumer>
     )
   }
 }

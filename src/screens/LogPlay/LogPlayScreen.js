@@ -21,7 +21,7 @@ import {
 } from "../../components/shared/TextStyles"
 import Cover from "../../components/shared/Cover"
 import Avatar from "../../components/flow/Avatar"
-import { SessionContext } from "../../contexts/session-context"
+import { CreateSessionContext } from "../../contexts/create-session-context"
 import DividerHeading from "../../components/shared/DividerHeading"
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons"
 import PhotosSection from "./PhotosSection"
@@ -127,7 +127,7 @@ export default class LogPlayScreen extends React.Component {
                 if (error) return <Text>Error!</Text>
 
                 return (
-                  <SessionContext.Consumer>
+                  <CreateSessionContext.Consumer>
                     {({ addGame }) => (
                       <Box>
                         {data.games.map(game => {
@@ -160,12 +160,12 @@ export default class LogPlayScreen extends React.Component {
                         })}
                       </Box>
                     )}
-                  </SessionContext.Consumer>
+                  </CreateSessionContext.Consumer>
                 )
               }}
             </Query>
           )}
-          <SessionContext.Consumer>
+          <CreateSessionContext.Consumer>
             {({ games, removeGame }) =>
               games.map(game => {
                 const { id, title } = game
@@ -209,7 +209,7 @@ export default class LogPlayScreen extends React.Component {
                 )
               })
             }
-          </SessionContext.Consumer>
+          </CreateSessionContext.Consumer>
         </View>
         <DividerHeading>Review or notes</DividerHeading>
         <View style={{ padding: Spacing.m }}>
@@ -226,7 +226,7 @@ export default class LogPlayScreen extends React.Component {
         <DividerHeading>Players</DividerHeading>
         <View style={{ padding: Spacing.m }}>
           <Box>
-            <SessionContext.Consumer>
+            <CreateSessionContext.Consumer>
               {({ participants, removeParticipant }) =>
                 participants.map((participant, index) => {
                   const {
@@ -277,7 +277,7 @@ export default class LogPlayScreen extends React.Component {
                   )
                 })
               }
-            </SessionContext.Consumer>
+            </CreateSessionContext.Consumer>
             <TouchableOpacity
               onPress={this.showAddParticipantsScreen}
               style={{ flexDirection: "row", justifyContent: "center" }}

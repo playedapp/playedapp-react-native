@@ -1,6 +1,6 @@
 import React from "react"
 
-export const SessionContext = React.createContext({
+export const CreateSessionContext = React.createContext({
   // games: [],
   // addGame: () => {},
   // removeGame: () => {},

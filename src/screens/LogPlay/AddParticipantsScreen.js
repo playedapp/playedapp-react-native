@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native"
-import { SessionContext } from "../../contexts/session-context"
+import { CreateSessionContext } from "../../contexts/create-session-context"
 import Colors from "../../constants/Colors"
 import Spacing from "../../constants/Spacing"
 import Box from "../../components/shared/Box"
@@ -141,7 +141,7 @@ export default class X extends Component {
 
   render() {
     return (
-      <SessionContext.Consumer>
+      <CreateSessionContext.Consumer>
         {({ participants, addParticipant, removeParticipant }) => {
           return (
             <AddParticipantsScreen
@@ -151,7 +151,7 @@ export default class X extends Component {
             />
           )
         }}
-      </SessionContext.Consumer>
+      </CreateSessionContext.Consumer>
     )
   }
 }

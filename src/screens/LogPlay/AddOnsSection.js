@@ -5,7 +5,7 @@ import Box from "../../components/shared/Box"
 import DividerHeading from "../../components/shared/DividerHeading"
 import Spacing from "../../constants/Spacing"
 import styled from "styled-components"
-import { SessionContext } from "../../contexts/session-context"
+import { CreateSessionContext } from "../../contexts/create-session-context"
 import { Button as LocationButton, Row as LocationRow } from "./addons/Location"
 import { Button as PlaytimeButton, Row as PlaytimeRow } from "./addons/Playtime"
 import { Button as RoundsButton, Row as RoundsRow } from "./addons/Rounds"
@@ -24,7 +24,7 @@ class AddOnsSection extends Component {
     return (
       <View>
         <DividerHeading>Add-ons</DividerHeading>
-        <SessionContext.Consumer>
+        <CreateSessionContext.Consumer>
           {({ location, playtime, rounds, variants }) => {
             const hasAddons =
               location !== undefined ||
@@ -72,7 +72,7 @@ class AddOnsSection extends Component {
               </View>
             )
           }}
-        </SessionContext.Consumer>
+        </CreateSessionContext.Consumer>
       </View>
     )
   }
