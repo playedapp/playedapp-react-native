@@ -1,11 +1,11 @@
-import React, { Component } from "react"
-import { View, Text, ScrollView } from "react-native"
-import PropTypes from "prop-types"
+import React from "react"
+import { View, Text } from "react-native"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
-import Box from "../components/shared/Box"
-import LinkedAvatar from "../components/flow/LinkedAvatar"
-import { toOrdinal } from "../lib/utils"
+import Box from "../../components/shared/Box"
+import LinkedAvatar from "../../components/flow/LinkedAvatar"
+import { toOrdinal } from "../../lib/utils"
+import { SessionContext } from "./session-context"
 
 const GET_SESSION = gql`
   query GET_SESSION($id: ID!) {
@@ -23,27 +23,9 @@ const GET_SESSION = gql`
   }
 `
 
-class SessionDetailsScreen extends Component {
-  static navigationOptions = {
-    title: "Scoreboard",
-  }
-
-  static propTypes = {
-    screenProps: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func,
-      state: PropTypes.shape({
-        params: PropTypes.object,
-      }),
-    }).isRequired,
-  }
-
-  render() {
-    const { id } = this.props.screenProps
-
-    return (
+const SessionDetailsScreen = () => (
+  <SessionContext.Consumer>
+    {({ id }) => (
       <Query query={GET_SESSION} variables={{ id }}>
         {({ loading, error, data }) => {
           if (loading) return <Text>Loading…</Text>
@@ -52,7 +34,7 @@ class SessionDetailsScreen extends Component {
           const { participants } = data.session
 
           return (
-            <ScrollView>
+            <View>
               {participants
                 .slice(0)
                 .sort((a, b) => a.rank - b.rank)
@@ -72,12 +54,12 @@ class SessionDetailsScreen extends Component {
                     </View>
                   </Box>
                 ))}
-            </ScrollView>
+            </View>
           )
         }}
       </Query>
-    )
-  }
-}
+    )}
+  </SessionContext.Consumer>
+)
 
 export default SessionDetailsScreen
