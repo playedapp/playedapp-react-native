@@ -247,7 +247,17 @@ addMockFunctionsToSchema({
         case "avatar":
           url = casual.random_element([
             `${host}/static/avatars/frdh.jpg`,
+            `${host}/static/avatars/13.jpg`,
+            `${host}/static/avatars/N8kxcjRw.jpg`,
+            `${host}/static/avatars/male - 65.jpg`,
+            `${host}/static/avatars/2AG8omMO.jpg`,
+            `${host}/static/avatars/Oh_gkODg.jpg`,
             `${host}/static/avatars/micke.jpg`,
+            `${host}/static/avatars/72.jpg`,
+            `${host}/static/avatars/frdh.jpg`,
+            `${host}/static/avatars/vBouAZKK.jpg`,
+            `${host}/static/avatars/9.jpg`,
+            `${host}/static/avatars/israel.jpg`,
           ])
           break
         default:
