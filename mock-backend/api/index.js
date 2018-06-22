@@ -128,6 +128,8 @@ const schemaString = `
       url: String
       session: [Session]
       isReported: Boolean
+      width: Int
+      height: Int
       # createdAt: Date
    }
 
@@ -242,38 +244,67 @@ addMockFunctionsToSchema({
       let url
       switch (fieldName) {
         case "cover":
-          url = `${host}/static/covers/clansofcaledonia.png`
+          return casual.random_element([
+            {
+              url: `${host}/static/covers/caverna.jpg`,
+              width: 638,
+              height: 893,
+            },
+            {
+              url: `${host}/static/covers/clansofcaledonia.png`,
+              width: 1024,
+              height: 768,
+            },
+            {
+              url: `${host}/static/covers/gloomhaven.jpg`,
+              width: 1024,
+              height: 731,
+            },
+            {
+              url: `${host}/static/covers/powergrid.jpg`,
+              width: 749,
+              height: 1024,
+            },
+            {
+              url: `${host}/static/covers/race.jpg`,
+              width: 288,
+              height: 415,
+            },
+          ])
           break
         case "avatar":
-          url = casual.random_element([
-            `${host}/static/avatars/frdh.jpg`,
-            `${host}/static/avatars/13.jpg`,
-            `${host}/static/avatars/N8kxcjRw.jpg`,
-            `${host}/static/avatars/male - 65.jpg`,
-            `${host}/static/avatars/2AG8omMO.jpg`,
-            `${host}/static/avatars/Oh_gkODg.jpg`,
-            `${host}/static/avatars/micke.jpg`,
-            `${host}/static/avatars/72.jpg`,
-            `${host}/static/avatars/frdh.jpg`,
-            `${host}/static/avatars/vBouAZKK.jpg`,
-            `${host}/static/avatars/9.jpg`,
-            `${host}/static/avatars/israel.jpg`,
-          ])
+          return {
+            url: casual.random_element([
+              `${host}/static/avatars/frdh.jpg`,
+              `${host}/static/avatars/13.jpg`,
+              `${host}/static/avatars/N8kxcjRw.jpg`,
+              `${host}/static/avatars/male - 65.jpg`,
+              `${host}/static/avatars/2AG8omMO.jpg`,
+              `${host}/static/avatars/Oh_gkODg.jpg`,
+              `${host}/static/avatars/micke.jpg`,
+              `${host}/static/avatars/72.jpg`,
+              `${host}/static/avatars/frdh.jpg`,
+              `${host}/static/avatars/vBouAZKK.jpg`,
+              `${host}/static/avatars/9.jpg`,
+              `${host}/static/avatars/israel.jpg`,
+            ]),
+          }
           break
         default:
-          url = casual.random_element([
-            `${host}/static/photos/IMG_2669.jpg`,
-            `${host}/static/photos/pic3809378.jpg`,
-            `${host}/static/photos/IMG_2667.jpg`,
-            `${host}/static/photos/IMG_0695.jpg`,
-            `${host}/static/photos/IMG_0766.jpg`,
-            `${host}/static/photos/IMG_0808.jpg`,
-            `${host}/static/photos/IMG_0972.jpg`,
-            `${host}/static/photos/IMG_1093.jpg`,
-            `${host}/static/photos/IMG_1161.jpg`,
-          ])
+          return {
+            url: casual.random_element([
+              `${host}/static/photos/IMG_2669.jpg`,
+              `${host}/static/photos/pic3809378.jpg`,
+              `${host}/static/photos/IMG_2667.jpg`,
+              `${host}/static/photos/IMG_0695.jpg`,
+              `${host}/static/photos/IMG_0766.jpg`,
+              `${host}/static/photos/IMG_0808.jpg`,
+              `${host}/static/photos/IMG_0972.jpg`,
+              `${host}/static/photos/IMG_1093.jpg`,
+              `${host}/static/photos/IMG_1161.jpg`,
+            ]),
+          }
       }
-      return { url }
     },
     Comment: () => ({
       content: casual.sentence,
