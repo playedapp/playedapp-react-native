@@ -11,7 +11,7 @@ import PropTypes from "prop-types"
 import { SummarySentence } from "./SummarySentence"
 import AvatarStack from "./AvatarStack"
 import Colors from "../../constants/Colors"
-import Whitespace from "../../constants/Spacing"
+import Spacing from "../../constants/Spacing"
 import Layout from "../../constants/Layout"
 import { joinTexts } from "./utils"
 import StarRating from "../shared/StarRating"
@@ -95,8 +95,14 @@ class Item extends Component {
       <TouchableHighlight onPress={this.handleDetailsPress}>
         <View style={[styles.header, { alignItems: "center" }]}>
           <AvatarStack people={followed} />
-          <View style={{ marginLeft: Whitespace.m }}>
-            <DefaultText>{personLinks}</DefaultText>
+          <View
+            style={{
+              marginLeft: Spacing.m,
+              flexDirection: "col",
+              flexShrink: 1,
+            }}
+          >
+            <DefaultText numberOfLines={1}>{personLinks}</DefaultText>
             {location && (
               <MutedText style={styles.mutedText}>{location.name}</MutedText>
             )}
@@ -117,16 +123,16 @@ class Item extends Component {
         return (
           <View
             key={id}
-            style={{ flexDirection: "row", marginBottom: Whitespace.m }}
+            style={{ flexDirection: "row", marginBottom: Spacing.m }}
           >
             <LinkedAvatar id={id} />
-            <View style={{ marginLeft: Whitespace.m }}>
+            <View style={{ marginLeft: Spacing.m }}>
               <View style={{ flexDirection: "row", alignItems: "baseline" }}>
                 <BoldText>
                   {rank === 1 && "👑"}
                   {name}
                 </BoldText>
-                <MutedText style={{ marginLeft: Whitespace.m }}>
+                <MutedText style={{ marginLeft: Spacing.m }}>
                   {toOrdinal(rank)}, {score}p
                 </MutedText>
               </View>
@@ -143,7 +149,7 @@ class Item extends Component {
                     )
                   })}
               {comment && (
-                <DefaultText style={{ marginTop: Whitespace.s }}>
+                <DefaultText style={{ marginTop: Spacing.s }}>
                   {comment}
                 </DefaultText>
               )}
@@ -176,13 +182,13 @@ class Item extends Component {
           style={{
             flexDirection: "row",
             width: "100%",
-            paddingHorizontal: Whitespace.m,
+            paddingHorizontal: Spacing.m,
           }}
         >
           <View
-            style={{ flexShrink: 1, flexGrow: 1, marginVertical: Whitespace.m }}
+            style={{ flexShrink: 1, flexGrow: 1, marginVertical: Spacing.m }}
           >
-            <View style={{ marginBottom: Whitespace.m }}>
+            <View style={{ marginBottom: Spacing.m }}>
               <SummarySentence
                 games={games}
                 notFollowedPlayers={this.notFollowedParticipants}
@@ -200,7 +206,7 @@ class Item extends Component {
         <View
           style={{
             flexDirection: "row",
-            margin: Whitespace.m,
+            margin: Spacing.m,
             borderTopWidth: StyleSheet.hairlineWidth,
             borderTopColor: Colors.textMuted,
           }}
@@ -219,7 +225,8 @@ export default withNavigation(Item)
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
-    padding: Whitespace.m,
+    paddingHorizontal: Spacing.m,
+    paddingVertical: Spacing.s,
   },
   image: {
     width: Dimensions.get("window").width,

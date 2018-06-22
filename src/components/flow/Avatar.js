@@ -30,12 +30,9 @@ class Avatar extends Component {
           if (loading || error) return <Image style={styles.imageAvatar} />
 
           return person.avatar ? (
-            <Image
-              style={styles.imageAvatar}
-              source={{ uri: person.avatar.url }}
-            />
+            <Image style={styles.circle} source={{ uri: person.avatar.url }} />
           ) : (
-            <View style={styles.textAvatar}>
+            <View style={[styles.circle, styles.textAvatar]}>
               <Text style={styles.text}>{person.name[0].toUppercase()}</Text>
             </View>
           )
@@ -46,19 +43,14 @@ class Avatar extends Component {
 }
 
 const styles = StyleSheet.create({
-  imageAvatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+  circle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     borderWidth: 2,
     borderColor: Colors.mainBackground,
   },
   textAvatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    borderWidth: 2,
-    borderColor: Colors.mainBackground,
     backgroundColor: Colors.primary,
     alignItems: "center",
     justifyContent: "center",
