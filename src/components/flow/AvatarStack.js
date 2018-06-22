@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import { View, StyleSheet } from "react-native"
 import Avatar from "./Avatar"
 import Colors from "../../constants/Colors"
-import Spacing from "../../constants/Spacing"
 import { BoldText } from "../shared/TextStyles"
 
 class AvatarStack extends Component {
@@ -64,9 +63,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   textAvatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     borderWidth: 2,
     borderColor: Colors.mainBackground,
     backgroundColor: Colors.primary,
