@@ -39,6 +39,9 @@ const GET_FLOW = gql`
       images {
         url
       }
+      location {
+        name
+      }
     }
   }
 `

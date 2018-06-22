@@ -98,7 +98,7 @@ class Item extends Component {
           <View
             style={{
               marginLeft: Spacing.m,
-              flexDirection: "col",
+              flexDirection: "column",
               flexShrink: 1,
             }}
           >
