@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  TouchableHighlight,
+  TouchableOpacity,
   Button,
   Image,
   Animated,
@@ -60,6 +60,11 @@ class Item extends Component {
     coverPosition: new Animated.Value(-15),
   }
 
+  handleGamePress = ({ id }) => {
+    const { navigate } = this.props.navigation
+    navigate("Game", { id })
+  }
+
   handlePersonPress = ({ name }) => {
     const { navigate } = this.props.navigation
     navigate("Person", { name })
@@ -113,7 +118,7 @@ class Item extends Component {
     const personLinks = joinTexts(...followed.map(({ name }) => name))
 
     return (
-      <TouchableHighlight onPress={this.handleDetailsPress}>
+      <TouchableOpacity onPress={this.handleDetailsPress}>
         <View style={[styles.header, { alignItems: "center" }]}>
           <AvatarStack people={followed} />
           <View
@@ -129,7 +134,7 @@ class Item extends Component {
             )}
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 
@@ -199,7 +204,12 @@ class Item extends Component {
 
     return (
       <Animated.View style={{ transform: [{ translateY: coverPosition }] }}>
-        {<Cover id={mainGame.id} />}
+        {
+          <Cover
+            id={mainGame.id}
+            onPress={() => this.handleGamePress({ id: mainGame.id })}
+          />
+        }
         <MutedText>Avg. 3.8</MutedText>
         {expansions.length > 0 && (
           <View
