@@ -24,9 +24,9 @@ const notFollowedPlayer1 = {
 }
 
 const notFollowedPlayer2 = {
-  key: "116",
+  id: "116",
   person: {
-    key: "116",
+    id: "116",
     name: "Nina",
 
     isFollowedByMe: false,
@@ -37,9 +37,9 @@ const notFollowedPlayer2 = {
 }
 
 const notFollowedPlayer3 = {
-  key: "114",
+  id: "114",
   person: {
-    key: "114",
+    id: "114",
     name: "Nina",
     isFollowedByMe: false,
   },
@@ -49,7 +49,7 @@ const notFollowedPlayer3 = {
 }
 
 const anonymousPlayer = {
-  key: 117,
+  id: "117",
   name: "Player 7",
   score: 2,
   rank: 7,

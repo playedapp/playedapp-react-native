@@ -29,3 +29,17 @@ export const removeFromArray = (array, item) => {
   newArray.splice(newArray.indexOf(item), 1)
   return newArray
 }
+
+export const constrainImageSize = (originalWidth, originalHeight, maxSize) => {
+  let newWidth, newHeight
+
+  if (originalWidth > originalHeight) {
+    newWidth = maxSize
+    newHeight = maxSize * (originalHeight / originalWidth)
+  } else {
+    newWidth = maxSize * (originalWidth / originalHeight)
+    newHeight = maxSize
+  }
+
+  return [newWidth, newHeight]
+}

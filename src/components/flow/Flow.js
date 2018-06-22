@@ -15,6 +15,8 @@ const GET_FLOW = gql`
         title
         cover {
           url
+          width
+          height
         }
       }
       participants {

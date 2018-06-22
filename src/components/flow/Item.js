@@ -6,6 +6,9 @@ import {
   Dimensions,
   TouchableHighlight,
   Button,
+  Image,
+  Animated,
+  Easing,
 } from "react-native"
 import PropTypes from "prop-types"
 import { SummarySentence } from "./SummarySentence"
@@ -16,7 +19,7 @@ import Layout from "../../constants/Layout"
 import { joinTexts } from "./utils"
 import StarRating from "../shared/StarRating"
 import LinkedAvatar from "./LinkedAvatar"
-import { toOrdinal } from "../../lib/utils"
+import { toOrdinal, constrainImageSize } from "../../lib/utils"
 import Cover from "../shared/Cover"
 import Slideshow from "../shared/Slideshow"
 import { DefaultText, MutedText, BoldText } from "../shared/TextStyles"
@@ -31,7 +34,15 @@ class Item extends Component {
     images: PropTypes.arrayOf(
       PropTypes.shape({ url: PropTypes.string.isRequired }),
     ),
-    games: PropTypes.array,
+    games: PropTypes.arrayOf(
+      PropTypes.shape({
+        cover: PropTypes.shape({
+          url: PropTypes.string.isRequired,
+          width: PropTypes.number.isRequired,
+          height: PropTypes.number.isRequired,
+        }),
+      }),
+    ),
     participants: PropTypes.array,
     location: PropTypes.shape({ name: PropTypes.string }),
     likes: PropTypes.shape({
@@ -45,7 +56,8 @@ class Item extends Component {
   }
 
   state = {
-    slideshowActive: false,
+    slideshowTouched: false,
+    coverPosition: new Animated.Value(-15),
   }
 
   handlePersonPress = ({ name }) => {
@@ -68,6 +80,15 @@ class Item extends Component {
       action: NavigationActions.navigate({ routeName: "Comments" }),
     })
     dispatch(action)
+  }
+
+  handleSlideshowTouchStart = () => {
+    Animated.timing(this.state.coverPosition, {
+      toValue: 15,
+      duration: 400,
+      easing: Easing.out(Easing.circle),
+    }).start()
+    this.setState({ slideshowTouched: true })
   }
 
   get followedParticipants() {
@@ -126,7 +147,7 @@ class Item extends Component {
             style={{ flexDirection: "row", marginBottom: Spacing.m }}
           >
             <LinkedAvatar id={id} />
-            <View style={{ marginLeft: Spacing.m }}>
+            <View style={{ marginLeft: Spacing.m, flexShrink: 1 }}>
               <View style={{ flexDirection: "row", alignItems: "baseline" }}>
                 <BoldText>
                   {rank === 1 && "👑"}
@@ -165,14 +186,50 @@ class Item extends Component {
     return (
       <Slideshow
         images={images}
-        onTouchStart={() => this.setState({ slideshowActive: true })}
+        onTouchStart={this.handleSlideshowTouchStart}
       />
+    )
+  }
+
+  renderCovers() {
+    const { games } = this.props
+    const { coverPosition } = this.state
+    const mainGame = games[0]
+    const expansions = games.slice(1)
+
+    return (
+      <Animated.View style={{ transform: [{ translateY: coverPosition }] }}>
+        {<Cover id={mainGame.id} />}
+        <MutedText>Avg. 3.8</MutedText>
+        {expansions.length > 0 && (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              marginRight: 3,
+            }}
+          >
+            <MutedText>+</MutedText>
+            {expansions.map(({ id, cover }) => {
+              const { url, width: w, height: h } = cover
+              const [width, height] = constrainImageSize(w, h, 35)
+              return (
+                <Image
+                  key={id}
+                  source={{ uri: url }}
+                  style={{ width, height, marginLeft: Spacing.s }}
+                />
+              )
+            })}
+          </View>
+        )}
+      </Animated.View>
     )
   }
 
   render() {
     const { games, likes } = this.props
-    const { slideshowActive } = this.state
 
     return (
       <View style={{ width: Layout.window.width }}>
@@ -186,7 +243,12 @@ class Item extends Component {
           }}
         >
           <View
-            style={{ flexShrink: 1, flexGrow: 1, marginVertical: Spacing.m }}
+            style={{
+              flexShrink: 1,
+              flexGrow: 1,
+              marginVertical: Spacing.m,
+              marginRight: Spacing.m,
+            }}
           >
             <View style={{ marginBottom: Spacing.m }}>
               <SummarySentence
@@ -199,9 +261,7 @@ class Item extends Component {
             </View>
             {this.renderParticipantDetails()}
           </View>
-          <View style={slideshowActive && { transform: [{ translateY: 30 }] }}>
-            {games.map(({ id }) => <Cover key={id} id={id} />)}
-          </View>
+          {this.renderCovers()}
         </View>
         <View
           style={{
