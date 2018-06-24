@@ -1,5 +1,6 @@
+/* global require */
 import React, { Component } from "react"
-import { Image, StyleSheet, View, Text } from "react-native"
+import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native"
 import PropTypes from "prop-types"
 import Colors from "../../constants/Colors"
 import gql from "graphql-tag"
@@ -18,51 +19,97 @@ const GET_PERSON = gql`
 
 class Avatar extends Component {
   static propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    winner: PropTypes.bool,
+    large: PropTypes.bool,
+    onPress: PropTypes.func,
+  }
+
+  static defaultProps = {
+    winner: false,
+    large: false,
   }
 
   render() {
-    const { id } = this.props
+    const { id, winner, large, onPress } = this.props
 
-    return (
+    const avatar = (
       <Query query={GET_PERSON} variables={{ id }}>
         {({ loading, error, data: { person } }) => {
           if (loading || error) return <Image style={styles.imageAvatar} />
 
           return (
-            <View style={styles.circle}>
-              {person.avatar ? (
+            <View style={{ alignItems: "center" }}>
+              {winner && (
                 <Image
-                  style={styles.circleInner}
-                  source={{ uri: person.avatar.url }}
+                  source={require("../../../assets/images/winner-crown.png")}
+                  style={{
+                    width: 20,
+                    height: 13,
+                    position: "absolute",
+                    top: -13,
+                  }}
                 />
-              ) : (
-                <View style={[styles.circleInner, styles.textAvatar]}>
-                  <Text style={styles.text}>
-                    {person.name[0].toUppercase()}
-                  </Text>
-                </View>
               )}
+              <View style={[styles.circle, large && styles.circleLarge]}>
+                {person.avatar ? (
+                  <Image
+                    style={[
+                      styles.circleInner,
+                      large && styles.circleInnerLarge,
+                    ]}
+                    source={{ uri: person.avatar.url }}
+                  />
+                ) : (
+                  <View
+                    style={[
+                      styles.circleInner,
+                      large && styles.circleInnerLarge,
+                      styles.textAvatar,
+                    ]}
+                  >
+                    <Text style={styles.text}>
+                      {person.name[0].toUppercase()}
+                    </Text>
+                  </View>
+                )}
+              </View>
             </View>
           )
         }}
       </Query>
+    )
+
+    return onPress ? (
+      <TouchableOpacity onPress={onPress}>{avatar}</TouchableOpacity>
+    ) : (
+      avatar
     )
   }
 }
 
 const styles = StyleSheet.create({
   circle: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 39,
+    height: 39,
+    borderRadius: 19.5,
     borderWidth: 2,
     borderColor: Colors.mainBackground,
   },
+  circleLarge: {
+    width: 49,
+    height: 49,
+    borderRadius: 24.5,
+  },
   circleInner: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 35,
+    height: 35,
+    borderRadius: 17.5,
+  },
+  circleInnerLarge: {
+    width: 45,
+    height: 45,
+    borderRadius: 22.5,
   },
   textAvatar: {
     backgroundColor: Colors.primary,

@@ -18,11 +18,11 @@ import Spacing from "../../constants/Spacing"
 import Layout from "../../constants/Layout"
 import { joinTexts } from "./utils"
 import StarRating from "../shared/StarRating"
-import LinkedAvatar from "./LinkedAvatar"
 import { toOrdinal, constrainImageSize } from "../../lib/utils"
 import Cover from "../shared/Cover"
 import Slideshow from "../shared/Slideshow"
 import { DefaultText, MutedText, BoldText } from "../shared/TextStyles"
+import Avatar from "./Avatar"
 
 class Item extends Component {
   static propTypes = {
@@ -151,13 +151,15 @@ class Item extends Component {
             key={id}
             style={{ flexDirection: "row", marginBottom: Spacing.m }}
           >
-            <LinkedAvatar id={id} />
+            <Avatar
+              id={id}
+              winner={rank === 1}
+              large={true}
+              onPress={() => this.handlePersonPress(person)}
+            />
             <View style={{ marginLeft: Spacing.m, flexShrink: 1 }}>
               <View style={{ flexDirection: "row", alignItems: "baseline" }}>
-                <BoldText>
-                  {rank === 1 && "👑"}
-                  {name}
-                </BoldText>
+                <BoldText>{name}</BoldText>
                 <MutedText style={{ marginLeft: Spacing.m }}>
                   {toOrdinal(rank)}, {score}p
                 </MutedText>
@@ -266,7 +268,7 @@ class Item extends Component {
                 notFollowedPlayers={this.notFollowedParticipants}
                 anonymousPlayers={this.anonymousParticipants}
                 onGamePress={this.handleGamePress}
-                onPlayerPress={this.handlePersonPress}
+                onPlayerPress={({ person }) => this.handlePersonPress(person)}
               />
             </View>
             {this.renderParticipantDetails()}

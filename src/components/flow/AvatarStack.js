@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   textAvatar: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 39,
+    height: 39,
+    borderRadius: 19.5,
     borderWidth: 2,
     borderColor: Colors.mainBackground,
     backgroundColor: Colors.primary,
