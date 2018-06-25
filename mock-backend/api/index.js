@@ -209,6 +209,7 @@ addMockFunctionsToSchema({
     Person: (o, { id }) => ({
       id,
       name: casual.first_name,
+      stats: () => new MockList(1),
     }),
     Participant: () => ({
       score: casual.integer(30, 130),
@@ -308,6 +309,13 @@ addMockFunctionsToSchema({
     },
     Comment: () => ({
       content: casual.sentence,
+    }),
+    Stats: () => ({
+      plays: casual.integer(1, 50),
+      wins: casual.integer(10, 30),
+      best: casual.integer(150, 200),
+      worst: casual.integer(70, 120),
+      average: casual.integer(120, 180),
     }),
   },
 })

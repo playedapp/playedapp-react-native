@@ -15,6 +15,7 @@ const GET_SESSION = gql`
   query GET_SESSION($id: ID!) {
     session(id: $id) {
       games {
+        id
         title
       }
       images {
@@ -55,13 +56,15 @@ export default class SessionScreen extends Component {
     const { id } = this.props.navigation.state.params
 
     return (
-      <SessionContext.Provider value={{ id }}>
-        <Query query={GET_SESSION} variables={{ id }}>
-          {({ loading, error, data }) => {
-            if (loading) return <Text>Loading…</Text>
-            if (error) return <Text>Error!</Text>
+      <Query query={GET_SESSION} variables={{ id }}>
+        {({ loading, error, data }) => {
+          if (loading) return <Text>Loading…</Text>
+          if (error) return <Text>Error!</Text>
 
-            return (
+          return (
+            <SessionContext.Provider
+              value={{ id, games: data.session.games.map(game => game.id) }}
+            >
               <ScrollView style={{ flex: 1 }}>
                 <Slideshow images={data.session.images} />
                 <TabView
@@ -75,10 +78,10 @@ export default class SessionScreen extends Component {
                   onIndexChange={index => this.setState({ index })}
                 />
               </ScrollView>
-            )
-          }}
-        </Query>
-      </SessionContext.Provider>
+            </SessionContext.Provider>
+          )
+        }}
+      </Query>
     )
   }
 }

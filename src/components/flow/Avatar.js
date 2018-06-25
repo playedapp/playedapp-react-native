@@ -36,6 +36,7 @@ class Avatar extends Component {
     const avatar = (
       <Query query={GET_PERSON} variables={{ id }}>
         {({ loading, error, data: { person } }) => {
+          // TODO: style loading avatar
           if (loading || error) return <Image style={styles.imageAvatar} />
 
           return (

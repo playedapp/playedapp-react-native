@@ -9,6 +9,7 @@ class SessionProvider extends Component {
 
   state = {
     id: null,
+    games: [],
   }
 
   render() {
