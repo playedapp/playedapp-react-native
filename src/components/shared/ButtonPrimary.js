@@ -1,14 +1,17 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { TouchableOpacity, View, StyleSheet } from "react-native"
+import { TouchableOpacity, View, StyleSheet, Text } from "react-native"
 import Colors from "../../constants/Colors"
-import { ExtraBoldText } from "./TextStyles"
+import text from "../../styles/text"
+import colors from "../../styles/colors"
 
 const ButtonPrimary = ({ title, ...props }) => {
   return (
     <TouchableOpacity {...props} style={styles.outer}>
       <View style={styles.inner}>
-        <ExtraBoldText style={styles.text}>{title.toUpperCase()}</ExtraBoldText>
+        <Text style={[text.extraBold, colors.white, styles.text]}>
+          {title.toUpperCase()}
+        </Text>
       </View>
     </TouchableOpacity>
   )
@@ -48,7 +51,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   text: {
-    color: Colors.white,
     textShadowColor: Colors.primaryDarker,
     textShadowOffset: { height: -1 },
     textShadowRadius: 1,

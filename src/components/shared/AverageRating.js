@@ -2,7 +2,8 @@ import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import Colors from "../../constants/Colors"
 import PropTypes from "prop-types"
-import Fonts from "../../constants/Fonts"
+import fontFamilies from "../../styles/font-families"
+import fontSizes from "../../styles/font-sizes"
 
 const AverageRating = ({ rating, size = "small" }) => {
   const isSmall = size === "small"
@@ -51,12 +52,14 @@ const styles = StyleSheet.create({
     height: 27,
     borderRadius: 3,
   },
-  text: {
-    color: Colors.cyan,
-    transform: [{ rotate: "-45deg" }],
-    fontFamily: Fonts.families.fredokaOne.regular,
-    fontSize: 20,
-  },
+  text: StyleSheet.flatten([
+    fontFamilies.fredokaOneRegular,
+    fontSizes.l,
+    {
+      color: Colors.cyan,
+      transform: [{ rotate: "-45deg" }],
+    },
+  ]),
   textSmall: {
     fontSize: 14,
   },

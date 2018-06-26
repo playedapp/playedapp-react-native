@@ -1,15 +1,15 @@
 import React from "react"
-import { View, StyleSheet } from "react-native"
-import { MutedText, BoldText } from "../shared/TextStyles"
+import { View, StyleSheet, Text } from "react-native"
 import PropTypes from "prop-types"
 import Spacing from "../../constants/Spacing"
 import Colors from "../../constants/Colors"
+import text from "../../styles/text"
 
 const GameHistory = ({ stats }) => {
   const { plays, wins, best, worst, average } = stats
   return (
     <View style={{ alignItems: "center" }}>
-      <MutedText>GAME HISTORY</MutedText>
+      <Text style={text.muted}>GAME HISTORY</Text>
       <View
         style={{
           flexDirection: "row",
@@ -23,24 +23,24 @@ const GameHistory = ({ stats }) => {
         }}
       >
         <View style={styles.cell}>
-          <MutedText>Plays</MutedText>
-          <BoldText>{plays}</BoldText>
+          <Text style={text.muted}>Plays</Text>
+          <Text style={text.bold}>{plays}</Text>
         </View>
         <View style={styles.cell}>
-          <MutedText>Won</MutedText>
-          <BoldText>{wins}</BoldText>
+          <Text style={text.muted}>Won</Text>
+          <Text style={text.bold}>{wins}</Text>
         </View>
         <View style={styles.cell}>
-          <MutedText>Best</MutedText>
-          <BoldText>{best}</BoldText>
+          <Text style={text.muted}>Best</Text>
+          <Text style={text.bold}>{best}</Text>
         </View>
         <View style={styles.cell}>
-          <MutedText>Worst</MutedText>
-          <BoldText>{worst}</BoldText>
+          <Text style={text.muted}>Worst</Text>
+          <Text style={text.bold}>{worst}</Text>
         </View>
         <View style={styles.cell}>
-          <MutedText>Avg.</MutedText>
-          <BoldText>{average}</BoldText>
+          <Text style={text.muted}>Avg.</Text>
+          <Text style={text.bold}>{average}</Text>
         </View>
       </View>
     </View>

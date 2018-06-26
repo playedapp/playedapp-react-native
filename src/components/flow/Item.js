@@ -9,6 +9,7 @@ import {
   Image,
   Animated,
   Easing,
+  Text,
 } from "react-native"
 import PropTypes from "prop-types"
 import { SummarySentence } from "./SummarySentence"
@@ -21,8 +22,8 @@ import StarRating from "../shared/StarRating"
 import { toOrdinal, constrainImageSize } from "../../lib/utils"
 import Cover from "../shared/Cover"
 import Slideshow from "../shared/Slideshow"
-import { DefaultText, MutedText, BoldText } from "../shared/TextStyles"
 import Avatar from "./Avatar"
+import text from "../../styles/text"
 
 class Item extends Component {
   static propTypes = {
@@ -128,10 +129,10 @@ class Item extends Component {
               flexShrink: 1,
             }}
           >
-            <DefaultText numberOfLines={1}>{personLinks}</DefaultText>
-            {location && (
-              <MutedText style={styles.mutedText}>{location.name}</MutedText>
-            )}
+            <Text style={text.default} numberOfLines={1}>
+              {personLinks}
+            </Text>
+            {location && <Text style={text.muted}>{location.name}</Text>}
           </View>
         </View>
       </TouchableOpacity>
@@ -159,10 +160,10 @@ class Item extends Component {
             />
             <View style={{ marginLeft: Spacing.m, flexShrink: 1 }}>
               <View style={{ flexDirection: "row", alignItems: "baseline" }}>
-                <BoldText>{name}</BoldText>
-                <MutedText style={{ marginLeft: Spacing.m }}>
+                <Text style={text.bold}>{name}</Text>
+                <Text style={[text.muted, { marginLeft: Spacing.m }]}>
                   {toOrdinal(rank)}, {score}p
-                </MutedText>
+                </Text>
               </View>
               {ratings &&
                 ratings
@@ -177,9 +178,9 @@ class Item extends Component {
                     )
                   })}
               {comment && (
-                <DefaultText style={{ marginTop: Spacing.s }}>
+                <Text style={[text.default, { marginTop: Spacing.s }]}>
                   {comment}
-                </DefaultText>
+                </Text>
               )}
             </View>
           </View>
@@ -212,7 +213,7 @@ class Item extends Component {
             onPress={() => this.handleGamePress({ id: mainGame.id })}
           />
         }
-        <MutedText>Avg. 3.8</MutedText>
+        <Text style={text.muted}>Avg. 3.8</Text>
         {expansions.length > 0 && (
           <View
             style={{
@@ -222,7 +223,7 @@ class Item extends Component {
               marginRight: 3,
             }}
           >
-            <MutedText>+</MutedText>
+            <Text style={text.muted}>+</Text>
             {expansions.map(({ id, cover }) => {
               const { url, width: w, height: h } = cover
               const [width, height] = constrainImageSize(w, h, 35)

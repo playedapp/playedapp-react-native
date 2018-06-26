@@ -1,22 +1,24 @@
 import React from "react"
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet, Text } from "react-native"
 import PropTypes from "prop-types"
-import { DefaultText } from "./TextStyles"
 import Spacing from "../../constants/Spacing"
 import Colors from "../../constants/Colors"
+import text from "../../styles/text"
 
 const DividerHeading = ({ children }) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.line} />
-      <DefaultText
-        style={{
-          marginHorizontal: Spacing.m,
-          color: Colors.textMuted,
-        }}
+      <Text
+        style={[
+          text.muted,
+          {
+            marginHorizontal: Spacing.m,
+          },
+        ]}
       >
         {children.toUpperCase()}
-      </DefaultText>
+      </Text>
       <View style={styles.line} />
     </View>
   )

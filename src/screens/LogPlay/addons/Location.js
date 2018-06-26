@@ -2,13 +2,13 @@ import React, { Component } from "react"
 import { CreateSessionContext } from "../../../contexts/create-session-context"
 import AddOnButton from "./AddOnButton"
 import AddOnRow from "./AddOnRow"
-import { BoldText, MutedText } from "../../../components/shared/TextStyles"
 import PropTypes from "prop-types"
 import { withNavigation } from "react-navigation"
 import TextInput from "../../../components/shared/TextInput"
-import { View } from "react-native"
+import { View, Text } from "react-native"
 import Spacing from "../../../constants/Spacing"
 import { MapView } from "expo"
+import text from "../../../styles/text"
 
 export const Button = withNavigation(({ navigation }) => (
   <CreateSessionContext.Consumer>
@@ -37,8 +37,8 @@ export const Row = withNavigation(({ navigation }) => (
           onPress={() => navigation.navigate("LocationScreen")}
           onRemove={() => setLocation(undefined)}
         >
-          <BoldText>Location</BoldText>
-          <MutedText>{location}</MutedText>
+          <Text style={text.bold}>Location</Text>
+          <Text style={text.muted}>{location}</Text>
         </AddOnRow>
       )
     }

@@ -3,17 +3,13 @@ import { View, Text, Image } from "react-native"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import Box from "../../components/shared/Box"
-import {
-  MutedText,
-  DefaultText,
-  BoldText,
-} from "../../components/shared/TextStyles"
 import Spacing from "../../constants/Spacing"
 import { formatDuration, constrainImageSize } from "../../lib/utils"
 import { SessionContext } from "./session-context"
 import AverageRating from "../../components/shared/AverageRating"
 import PropTypes from "prop-types"
 import { withNavigation } from "react-navigation"
+import text from "../../styles/text"
 
 const GET_SESSION = gql`
   query GET_SESSION($id: ID!) {
@@ -111,9 +107,9 @@ class SessionDetailsScreen extends Component {
                             marginRight: Spacing.m,
                           }}
                         >
-                          <MutedText>2-4</MutedText>
-                          <MutedText>90 min</MutedText>
-                          <MutedText>13+</MutedText>
+                          <Text style={text.muted}>2-4</Text>
+                          <Text style={text.muted}>90 min</Text>
+                          <Text style={text.muted}>13+</Text>
                         </View>
                         <View style={{ marginTop: -Spacing.l }}>
                           {renderCover(
@@ -130,7 +126,7 @@ class SessionDetailsScreen extends Component {
                           />
                         </View>
                       </View>
-                      <BoldText>{mainGame.title}</BoldText>
+                      <Text style={text.bold}>{mainGame.title}</Text>
                     </View>
                   </Box>
                   {expansions.length &&
@@ -163,7 +159,7 @@ class SessionDetailsScreen extends Component {
                             )}
                           </View>
                           <View style={{ marginLeft: Spacing.m }}>
-                            <BoldText>{title}</BoldText>
+                            <Text style={text.bold}>{title}</Text>
                           </View>
                         </View>
                       </Box>
@@ -171,28 +167,28 @@ class SessionDetailsScreen extends Component {
                   <Box>
                     {playtime && (
                       <View style={{ padding: Spacing.m }}>
-                        <MutedText>PLAYTIME</MutedText>
-                        <DefaultText>
+                        <Text style={text.muted}>PLAYTIME</Text>
+                        <Text style={text.default}>
                           Total {formatDuration(playtime)}
-                        </DefaultText>
-                        <DefaultText>
+                        </Text>
+                        <Text style={text.default}>
                           Per player{" "}
                           {formatDuration(playtime / participants.length)}
-                        </DefaultText>
+                        </Text>
                       </View>
                     )}
                     {variants && (
                       <View style={{ padding: Spacing.m }}>
-                        <MutedText>VARIANTS</MutedText>
-                        <DefaultText>{variants}</DefaultText>
+                        <Text style={text.muted}>VARIANTS</Text>
+                        <Text style={text.default}>{variants}</Text>
                       </View>
                     )}
                     {location && (
                       <View style={{ padding: Spacing.m }}>
-                        <MutedText>LOCATION</MutedText>
-                        <DefaultText>
+                        <Text style={text.muted}>LOCATION</Text>
+                        <Text style={text.default}>
                           {location.name} {location.address}
-                        </DefaultText>
+                        </Text>
                       </View>
                     )}
                   </Box>

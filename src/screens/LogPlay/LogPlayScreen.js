@@ -7,18 +7,12 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native"
-import Fonts from "../../constants/Fonts"
 import gql from "graphql-tag"
 import { Query, Mutation } from "react-apollo"
 import { debounce } from "lodash-es"
 import Box from "../../components/shared/Box"
 import Spacing from "../../constants/Spacing"
 import Colors from "../../constants/Colors"
-import {
-  DefaultText,
-  MutedText,
-  BoldText,
-} from "../../components/shared/TextStyles"
 import Cover from "../../components/shared/Cover"
 import Avatar from "../../components/flow/Avatar"
 import { CreateSessionContext } from "../../contexts/create-session-context"
@@ -28,6 +22,7 @@ import PhotosSection from "./PhotosSection"
 import ButtonPrimary from "../../components/shared/ButtonPrimary"
 import AddOnsSection from "./AddOnsSection"
 import TextInput from "../../components/shared/TextInput"
+import text from "../../styles/text"
 
 const SEARCH_GAMES = gql`
   query SEARCH_GAMES($search: String) {
@@ -150,8 +145,10 @@ export default class LogPlayScreen extends React.Component {
                                 }}
                               >
                                 <Text style={{ flexGrow: 1 }}>
-                                  <DefaultText>{title}</DefaultText>
-                                  <MutedText>{yearPublished}</MutedText>
+                                  <Text style={text.default}>{title}</Text>
+                                  <Text style={text.muted}>
+                                    {yearPublished}
+                                  </Text>
                                 </Text>
                                 <Cover id={id} />
                               </View>
@@ -192,18 +189,21 @@ export default class LogPlayScreen extends React.Component {
                           />
                         </TouchableOpacity>
                       </View>
-                      <BoldText style={{ textAlign: "center" }}>
+                      <Text style={[text.bold, { textAlign: "center" }]}>
                         {title}
-                      </BoldText>
-                      <MutedText
-                        style={{
-                          paddingHorizontal: Spacing.l,
-                          textAlign: "center",
-                        }}
+                      </Text>
+                      <Text
+                        style={[
+                          text.muted,
+                          {
+                            paddingHorizontal: Spacing.l,
+                            textAlign: "center",
+                          },
+                        ]}
                       >
                         You’ve rated this game before. Adjusting the rating here
                         will change your overall rating for this game.
-                      </MutedText>
+                      </Text>
                     </View>
                   </Box>
                 )
@@ -257,15 +257,15 @@ export default class LogPlayScreen extends React.Component {
                       </TouchableOpacity>
                       <Avatar id={id} />
                       <View style={{ flexGrow: 1 }}>
-                        <BoldText>
-                          {name} <MutedText>{score}p</MutedText>
-                        </BoldText>
+                        <Text style={text.bold}>
+                          {name} <Text style={text.muted}>{score}p</Text>
+                        </Text>
                         {(isFirstPlay || rank || role) && (
-                          <MutedText>
+                          <Text style={text.muted}>
                             {isFirstPlay && "First play "}
                             {rank === 1 && "👑 "}
                             {role}
-                          </MutedText>
+                          </Text>
                         )}
                       </View>
                       <Feather
@@ -315,9 +315,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.mainBackground,
-  },
-  text: {
-    fontFamily: Fonts.families.nunito.regular,
   },
   textInput: {
     padding: Spacing.m,

@@ -1,13 +1,13 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
-import { View, SegmentedControlIOS } from "react-native"
+import { View, SegmentedControlIOS, Text } from "react-native"
 import TextInput from "../../../components/shared/TextInput"
 import { withNavigation } from "react-navigation"
-import { BoldText, MutedText } from "../../../components/shared/TextStyles"
 import Spacing from "../../../constants/Spacing"
 import { CreateSessionContext } from "../../../contexts/create-session-context"
 import AddOnButton from "./AddOnButton"
 import AddOnRow from "./AddOnRow"
+import text from "../../../styles/text"
 
 export const Button = withNavigation(({ navigation }) => (
   <CreateSessionContext.Consumer>
@@ -36,8 +36,8 @@ export const Row = withNavigation(({ navigation }) => (
           onPress={() => navigation.navigate("PlaytimeScreen")}
           onRemove={() => setPlaytime(undefined)}
         >
-          <BoldText>Playtime</BoldText>
-          <MutedText>{playtime}</MutedText>
+          <Text style={text.bold}>Playtime</Text>
+          <Text style={text.muted}>{playtime}</Text>
         </AddOnRow>
       )
     }

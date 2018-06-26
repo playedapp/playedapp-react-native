@@ -1,7 +1,9 @@
 import React from "react"
-import { Text } from "react-native"
+import { Text, StyleSheet } from "react-native"
 import Colors from "../constants/Colors"
-import Fonts from "../constants/Fonts"
+import fontFamilies from "../styles/font-families"
+import fontSizes from "../styles/font-sizes"
+import colors from "../styles/colors"
 
 export default {
   headerStyle: {
@@ -11,10 +13,13 @@ export default {
   headerTitle: ({ style, children }) => (
     <Text style={style}>{String(children).toUpperCase()}</Text>
   ),
-  headerTitleStyle: {
-    fontFamily: Fonts.families.fredokaOne.regular,
-    fontSize: Fonts.sizes.default,
-    letterSpacing: 2,
-  },
+  headerTitleStyle: StyleSheet.flatten([
+    fontFamilies.fredokaOneRegular,
+    fontSizes.m,
+    colors.white,
+    {
+      letterSpacing: 2,
+    },
+  ]),
   headerTintColor: Colors.textOnPrimary,
 }

@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { DefaultText, Link } from "../shared/TextStyles"
+import { Text } from "react-native"
+import text from "../../styles/text"
 
 export const SummarySentence = ({
   games,
@@ -11,12 +12,13 @@ export const SummarySentence = ({
 }) => {
   const players = [
     ...notFollowedPlayers.map(player => (
-      <Link
+      <Text
+        style={text.link}
         key={player.id}
         onPress={() => onPlayerPress && onPlayerPress(player)}
       >
         {player.person.name}
-      </Link>
+      </Text>
     )),
   ]
 
@@ -27,11 +29,14 @@ export const SummarySentence = ({
   }
 
   return (
-    <DefaultText>
+    <Text style={text.default}>
       {"Played "}
-      <Link onPress={() => onGamePress && onGamePress(games[0])}>
+      <Text
+        style={text.link}
+        onPress={() => onGamePress && onGamePress(games[0])}
+      >
         {games[0].title}
-      </Link>
+      </Text>
       {players.length > 0 && " with "}
       {players.reduce((arr, player, index, players) => {
         if (index === 0) {
@@ -42,7 +47,7 @@ export const SummarySentence = ({
           return [...arr, ", ", player]
         }
       }, [])}
-    </DefaultText>
+    </Text>
   )
 }
 

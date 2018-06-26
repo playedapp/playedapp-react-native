@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { TouchableOpacity, View } from "react-native"
+import { TouchableOpacity, View, Text } from "react-native"
 import Colors from "../../constants/Colors"
 import { Feather } from "@expo/vector-icons"
-import { DefaultText } from "./TextStyles"
 import Box from "./Box"
+import text from "../../styles/text"
 
 const ButtonSquare = ({ title, icon, color, ...props }) => {
   return (
@@ -25,14 +25,7 @@ const ButtonSquare = ({ title, icon, color, ...props }) => {
         >
           <Feather name={icon} size={32} color={color} />
         </View>
-        <DefaultText
-          style={{
-            color: Colors.textMuted,
-            fontSize: 11,
-          }}
-        >
-          {title.toUpperCase()}
-        </DefaultText>
+        <Text style={text.muted}>{title.toUpperCase()}</Text>
       </Box>
     </TouchableOpacity>
   )

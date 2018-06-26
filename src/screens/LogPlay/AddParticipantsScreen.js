@@ -1,6 +1,12 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native"
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from "react-native"
 import { CreateSessionContext } from "../../contexts/create-session-context"
 import Colors from "../../constants/Colors"
 import Spacing from "../../constants/Spacing"
@@ -9,10 +15,10 @@ import Avatar from "../../components/flow/Avatar"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import { debounce } from "lodash-es"
-import { DefaultText } from "../../components/shared/TextStyles"
 import { Feather } from "@expo/vector-icons"
 import Expo from "expo"
 import TextInput from "../../components/shared/TextInput"
+import text from "../../styles/text"
 
 const { Haptic } = Expo
 
@@ -82,7 +88,7 @@ class AddParticipantsScreen extends Component {
                 }}
               >
                 <Avatar id={id} />
-                <DefaultText style={{ flexGrow: 1 }}>{name}</DefaultText>
+                <Text style={[text.default, { flexGrow: 1 }]}>{name}</Text>
                 {isParticipating && <Feather name="check" size={32} />}
               </View>
             </TouchableOpacity>

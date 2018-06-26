@@ -1,10 +1,9 @@
 import React from "react"
-import { FlatList, View, StyleSheet, StatusBar } from "react-native"
+import { FlatList, View, StyleSheet, StatusBar, Text } from "react-native"
 import Item from "./Item"
 import Colors from "../../constants/Colors"
 import { Query } from "react-apollo"
 import gql from "graphql-tag"
-import { DefaultText } from "../shared/TextStyles"
 
 const GET_FLOW = gql`
   {
@@ -51,8 +50,8 @@ const GET_FLOW = gql`
 const Flow = () => (
   <Query query={GET_FLOW}>
     {({ loading, error, data }) => {
-      if (loading) return <DefaultText>Loading…</DefaultText>
-      if (error) return <DefaultText>Error!</DefaultText>
+      if (loading) return <Text>Loading…</Text>
+      if (error) return <Text>Error!</Text>
 
       return (
         <View style={styles.container}>

@@ -1,17 +1,17 @@
 import React from "react"
-import { View, Image, StyleSheet, Dimensions } from "react-native"
+import { View, Image, StyleSheet, Dimensions, Text } from "react-native"
 import Swiper from "react-native-swiper"
 import PropTypes from "prop-types"
 import Spacing from "../../constants/Spacing"
-import { SmallText } from "./TextStyles"
-import Colors from "../../constants/Colors"
 import Shadows from "../../constants/Shadows"
+import text from "../../styles/text"
+import colors from "../../styles/colors"
 
 const renderPagination = (index, total) => (
   <View style={styles.pagination}>
-    <SmallText style={{ color: Colors.white, ...Shadows.textShadow }}>
+    <Text style={[text.small, colors.white, Shadows.textShadow]}>
       {index + 1}/{total}
-    </SmallText>
+    </Text>
   </View>
 )
 

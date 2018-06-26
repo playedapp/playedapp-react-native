@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet, Text } from "react-native"
 import Avatar from "./Avatar"
 import Colors from "../../constants/Colors"
-import { BoldText } from "../shared/TextStyles"
+import text from "../../styles/text"
 
 class AvatarStack extends Component {
   static propTypes = {
@@ -46,9 +46,9 @@ class AvatarStack extends Component {
             </View>
           ))}
           <View style={styles.textAvatar}>
-            <BoldText style={{ color: Colors.cyan }}>
+            <Text style={[text.bold, { color: Colors.cyan }]}>
               +{people.length - 2}
-            </BoldText>
+            </Text>
           </View>
         </View>
       )

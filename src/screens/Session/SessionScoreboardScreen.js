@@ -9,12 +9,8 @@ import { SessionContext } from "./session-context"
 import Spacing from "../../constants/Spacing"
 import Avatar from "../../components/flow/Avatar"
 import { withNavigation } from "react-navigation"
-import {
-  BoldText,
-  DefaultText,
-  MutedText,
-} from "../../components/shared/TextStyles"
 import GameHistory from "../../components/session/GameHistory"
+import text from "../../styles/text"
 
 const GET_SESSION = gql`
   query GET_SESSION($id: ID!, $games: [ID!]) {
@@ -85,23 +81,26 @@ class SessionScoreboardScreen extends Component {
                         <View style={{ flexGrow: 1 }}>
                           <View style={{ flexDirection: "row" }}>
                             <View>
-                              <BoldText>{person.name}</BoldText>
+                              <Text style={text.bold}>{person.name}</Text>
                               <Text>
                                 {rank === 1 ? (
-                                  <DefaultText>
-                                    Winner with <BoldText>{score}</BoldText>!
-                                  </DefaultText>
+                                  <Text style={text.default}>
+                                    Winner with{" "}
+                                    <Text style={text.bold}>{score}</Text>!
+                                  </Text>
                                 ) : (
-                                  <DefaultText>
+                                  <Text style={text.default}>
                                     {toOrdinal(rank)} with{" "}
-                                    <BoldText>{score}</BoldText>
-                                  </DefaultText>
+                                    <Text style={text.bold}>{score}</Text>
+                                  </Text>
                                 )}
                               </Text>
                             </View>
 
                             <View style={{ marginLeft: "auto" }}>
-                              {role && <MutedText>Role:{role}</MutedText>}
+                              {role && (
+                                <Text style={text.muted}>Role: {role}</Text>
+                              )}
                             </View>
                           </View>
                           <View style={{ marginTop: Spacing.m }}>
