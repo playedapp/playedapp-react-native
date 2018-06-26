@@ -1,6 +1,7 @@
-import Colors from "./Colors"
+import Colors from "../constants/Colors"
+import { StyleSheet } from "react-native"
 
-export default {
+export default StyleSheet.create({
   box: {
     shadowColor: Colors.shadow,
     shadowOpacity: 0.7,
@@ -24,4 +25,4 @@ export default {
       height: 1,
     },
   },
-}
+})

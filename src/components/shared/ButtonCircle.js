@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { TouchableOpacity } from "react-native"
 import Colors from "../../constants/Colors"
 import { Feather } from "@expo/vector-icons"
-import Shadows from "../../constants/Shadows"
+import shadows from "../../styles/shadows"
 
 const ButtonCircle = ({ title, icon, color, style = {}, ...props }) => {
   return (
@@ -18,8 +18,8 @@ const ButtonCircle = ({ title, icon, color, style = {}, ...props }) => {
           justifyContent: "center",
           backgroundColor: Colors.white,
           borderRadius: 16,
-          ...Shadows.box,
         },
+        shadows.box,
         style,
       ]}
     >
@@ -32,6 +32,7 @@ ButtonCircle.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   color: PropTypes.string,
+  style: PropTypes.object,
 }
 
 ButtonCircle.defaultProps = {

@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   wrapper: { flexDirection: "row", width: "100%", alignItems: "center" },
   line: {
     height: 1,
-    backgroundColor: Colors.textMuted,
+    backgroundColor: Colors.brownGrey,
     opacity: 0.5,
     flexGrow: 1,
   },

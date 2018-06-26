@@ -2,12 +2,15 @@ import React from "react"
 import { View, TouchableOpacity, StyleSheet } from "react-native"
 import PropTypes from "prop-types"
 import Colors from "../../constants/Colors"
-import Shadows from "../../constants/Shadows"
 import Spacing from "../../constants/Spacing"
+import shadows from "../../styles/shadows"
 
 const Box = ({ children, style = {}, onPress }) => {
   return onPress ? (
-    <TouchableOpacity onPress={onPress} style={[styles.box, style]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.box, shadows.box, style]}
+    >
       {children}
     </TouchableOpacity>
   ) : (
@@ -26,7 +29,6 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.l,
     backgroundColor: Colors.white,
     borderRadius: 12,
-    ...Shadows.box,
   },
 })
 

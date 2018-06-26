@@ -21,5 +21,5 @@ export default {
       letterSpacing: 2,
     },
   ]),
-  headerTintColor: Colors.textOnPrimary,
+  headerTintColor: Colors.white,
 }

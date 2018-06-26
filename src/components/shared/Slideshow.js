@@ -3,13 +3,13 @@ import { View, Image, StyleSheet, Dimensions, Text } from "react-native"
 import Swiper from "react-native-swiper"
 import PropTypes from "prop-types"
 import Spacing from "../../constants/Spacing"
-import Shadows from "../../constants/Shadows"
 import text from "../../styles/text"
 import colors from "../../styles/colors"
+import shadows from "../../styles/shadows"
 
 const renderPagination = (index, total) => (
   <View style={styles.pagination}>
-    <Text style={[text.small, colors.white, Shadows.textShadow]}>
+    <Text style={[text.small, colors.white, shadows.textShadow]}>
       {index + 1}/{total}
     </Text>
   </View>

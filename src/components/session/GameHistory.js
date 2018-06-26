@@ -17,7 +17,7 @@ const GameHistory = ({ stats }) => {
           flexGrow: 1,
           alignSelf: "stretch",
           borderWidth: StyleSheet.hairlineWidth,
-          borderColor: Colors.textMuted,
+          borderColor: Colors.brownGrey,
           borderRadius: 5,
           paddingHorizontal: Spacing.s,
         }}

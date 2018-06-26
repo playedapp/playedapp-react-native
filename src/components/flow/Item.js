@@ -281,7 +281,7 @@ class Item extends Component {
             flexDirection: "row",
             margin: Spacing.m,
             borderTopWidth: StyleSheet.hairlineWidth,
-            borderTopColor: Colors.textMuted,
+            borderTopColor: Colors.brownGrey,
           }}
         >
           <Button title={`❤️ ${likes.count}`} onPress={this.handleLikePress} />
