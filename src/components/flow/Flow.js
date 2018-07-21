@@ -1,6 +1,6 @@
 import React from "react"
 import { FlatList, View, StyleSheet, StatusBar, Text } from "react-native"
-import Item from "./Item"
+import Item from "./FlowItem/FlowItem"
 import Colors from "../../constants/Colors"
 import { Query } from "react-apollo"
 import gql from "graphql-tag"

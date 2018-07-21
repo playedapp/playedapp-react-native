@@ -3,8 +3,6 @@ import { withNavigation, NavigationActions } from "react-navigation"
 import {
   View,
   StyleSheet,
-  Dimensions,
-  TouchableOpacity,
   Button,
   Image,
   Animated,
@@ -12,24 +10,23 @@ import {
   Text,
 } from "react-native"
 import PropTypes from "prop-types"
-import { SummarySentence } from "./SummarySentence"
-import AvatarStack from "./AvatarStack"
-import Colors from "../../constants/Colors"
-import Spacing from "../../constants/Spacing"
-import Layout from "../../constants/Layout"
-import { joinTexts } from "./utils"
-import StarRating from "../shared/StarRating"
+import { SummarySentence } from "../SummarySentence"
+import Colors from "../../../constants/Colors"
+import Spacing from "../../../constants/Spacing"
+import Layout from "../../../constants/Layout"
+import StarRating from "../../shared/StarRating"
 import {
   toOrdinal,
   constrainImageSize,
   followedParticipants,
   notFollowedParticipants,
   anonymousParticipants,
-} from "../../lib/utils"
-import Cover from "../shared/Cover"
-import Slideshow from "../shared/Slideshow"
-import Avatar from "./Avatar"
-import text from "../../styles/text"
+} from "../../../lib/utils"
+import Cover from "../../shared/Cover"
+import Slideshow from "../../shared/Slideshow"
+import Avatar from "../Avatar"
+import text from "../../../styles/text"
+import FlowItemHeader from "./FlowItemHeader"
 
 class Item extends Component {
   static propTypes = {
@@ -101,34 +98,6 @@ class Item extends Component {
       easing: Easing.out(Easing.circle),
     }).start()
     this.setState({ slideshowTouched: true })
-  }
-
-  renderHeader() {
-    const { location, participants } = this.props
-    const followed = followedParticipants(participants).map(
-      ({ person }) => person,
-    )
-    const personLinks = joinTexts(...followed.map(({ name }) => name))
-
-    return (
-      <TouchableOpacity onPress={this.handleDetailsPress}>
-        <View style={[styles.header, { alignItems: "center" }]}>
-          <AvatarStack people={followed} />
-          <View
-            style={{
-              marginLeft: Spacing.m,
-              flexDirection: "column",
-              flexShrink: 1,
-            }}
-          >
-            <Text style={text.default} numberOfLines={1}>
-              {personLinks}
-            </Text>
-            {location && <Text style={text.muted}>{location.name}</Text>}
-          </View>
-        </View>
-      </TouchableOpacity>
-    )
   }
 
   renderParticipantDetails() {
@@ -234,11 +203,15 @@ class Item extends Component {
   }
 
   render() {
-    const { games, likes, participants } = this.props
+    const { games, likes, participants, location } = this.props
 
     return (
       <View style={{ width: Layout.window.width }}>
-        {this.renderHeader()}
+        <FlowItemHeader
+          location={location}
+          participants={participants}
+          onPress={this.handleDetailsPress}
+        />
         {this.renderImages()}
         <View
           style={{
@@ -286,19 +259,3 @@ class Item extends Component {
 }
 
 export default withNavigation(Item)
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    paddingHorizontal: Spacing.m,
-    paddingVertical: Spacing.s,
-  },
-  image: {
-    width: Dimensions.get("window").width,
-    height: 300,
-  },
-  link: {
-    color: Colors.primary,
-    fontWeight: "bold",
-  },
-})
