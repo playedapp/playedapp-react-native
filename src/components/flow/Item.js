@@ -19,7 +19,13 @@ import Spacing from "../../constants/Spacing"
 import Layout from "../../constants/Layout"
 import { joinTexts } from "./utils"
 import StarRating from "../shared/StarRating"
-import { toOrdinal, constrainImageSize } from "../../lib/utils"
+import {
+  toOrdinal,
+  constrainImageSize,
+  followedParticipants,
+  notFollowedParticipants,
+  anonymousParticipants,
+} from "../../lib/utils"
 import Cover from "../shared/Cover"
 import Slideshow from "../shared/Slideshow"
 import Avatar from "./Avatar"
@@ -97,25 +103,11 @@ class Item extends Component {
     this.setState({ slideshowTouched: true })
   }
 
-  get followedParticipants() {
-    return this.props.participants.filter(
-      participant => participant.person && participant.person.isFollowedByMe,
-    )
-  }
-
-  get notFollowedParticipants() {
-    return this.props.participants.filter(
-      participant => participant.person && !participant.person.isFollowedByMe,
-    )
-  }
-
-  get anonymousParticipants() {
-    return this.props.participants.filter(participant => !participant.person)
-  }
-
   renderHeader() {
-    const { location } = this.props
-    const followed = this.followedParticipants.map(({ person }) => person)
+    const { location, participants } = this.props
+    const followed = followedParticipants(participants).map(
+      ({ person }) => person,
+    )
     const personLinks = joinTexts(...followed.map(({ name }) => name))
 
     return (
@@ -140,7 +132,7 @@ class Item extends Component {
   }
 
   renderParticipantDetails() {
-    return this.followedParticipants
+    return followedParticipants(this.props.participants)
       .sort((a, b) => a.rank - b.rank)
       .map(participant => {
         const { id, rank, score, person, ratings } = participant
@@ -242,7 +234,7 @@ class Item extends Component {
   }
 
   render() {
-    const { games, likes } = this.props
+    const { games, likes, participants } = this.props
 
     return (
       <View style={{ width: Layout.window.width }}>
@@ -266,8 +258,8 @@ class Item extends Component {
             <View style={{ marginBottom: Spacing.m }}>
               <SummarySentence
                 games={games}
-                notFollowedPlayers={this.notFollowedParticipants}
-                anonymousPlayers={this.anonymousParticipants}
+                notFollowedPlayers={notFollowedParticipants(participants)}
+                anonymousPlayers={anonymousParticipants(participants)}
                 onGamePress={this.handleGamePress}
                 onPlayerPress={({ person }) => this.handlePersonPress(person)}
               />

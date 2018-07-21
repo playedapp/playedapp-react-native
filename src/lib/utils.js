@@ -43,3 +43,19 @@ export const constrainImageSize = (originalWidth, originalHeight, maxSize) => {
 
   return [newWidth, newHeight]
 }
+
+export const followedParticipants = participants => {
+  return participants.filter(
+    participant => participant.person && participant.person.isFollowedByMe,
+  )
+}
+
+export const notFollowedParticipants = participants => {
+  return participants.filter(
+    participant => participant.person && !participant.person.isFollowedByMe,
+  )
+}
+
+export const anonymousParticipants = participants => {
+  return participants.filter(participant => !participant.person)
+}
