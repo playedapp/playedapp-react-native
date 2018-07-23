@@ -18,6 +18,7 @@ const GET_SESSION = gql`
       participants {
         id
         person {
+          id
           name
           stats(games: $games) {
             plays
@@ -43,9 +44,9 @@ class SessionScoreboardScreen extends Component {
     }),
   }
 
-  handlePersonPress = ({ name }) => {
+  handlePersonPress = ({ name, id }) => {
     const { navigate } = this.props.navigation
-    navigate("Person", { name })
+    navigate("Person", { name, id })
   }
 
   render() {
@@ -64,7 +65,10 @@ class SessionScoreboardScreen extends Component {
                   .slice(0)
                   .sort((a, b) => a.rank - b.rank)
                   .map(({ id, person, score, rank, role }) => (
-                    <Box key={id}>
+                    <Box
+                      key={id}
+                      onPress={() => this.handlePersonPress(person)}
+                    >
                       <View
                         style={{
                           flexDirection: "row",
@@ -72,11 +76,7 @@ class SessionScoreboardScreen extends Component {
                         }}
                       >
                         <View style={{ marginRight: Spacing.m }}>
-                          <Avatar
-                            id={id}
-                            onPress={() => this.handlePersonPress(person)}
-                            winner={rank === 1}
-                          />
+                          <Avatar id={id} winner={rank === 1} />
                         </View>
                         <View style={{ flexGrow: 1 }}>
                           <View style={{ flexDirection: "row" }}>

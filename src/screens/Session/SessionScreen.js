@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Text, View, ScrollView } from "react-native"
+import { Text, ScrollView } from "react-native"
 import PropTypes from "prop-types"
 import { TabView, SceneMap } from "react-native-tab-view"
 import SessionDetailsScreen from "./SessionDetailsScreen"

@@ -1,14 +1,6 @@
 import React, { Component } from "react"
 import { withNavigation, NavigationActions } from "react-navigation"
-import {
-  View,
-  StyleSheet,
-  Button,
-  Image,
-  Animated,
-  Easing,
-  Text,
-} from "react-native"
+import { View, Button, Image, Animated, Easing, Text } from "react-native"
 import PropTypes from "prop-types"
 import { SummarySentence } from "../SummarySentence"
 import Colors from "../../../constants/Colors"
@@ -69,9 +61,9 @@ class Item extends Component {
     navigate("Game", { id })
   }
 
-  handlePersonPress = ({ name }) => {
+  handlePersonPress = ({ name, id }) => {
     const { navigate } = this.props.navigation
-    navigate("Person", { name })
+    navigate("Person", { name, id })
   }
 
   handleDetailsPress = () => {
@@ -213,45 +205,48 @@ class Item extends Component {
           onPress={this.handleDetailsPress}
         />
         {this.renderImages()}
-        <View
-          style={{
-            flexDirection: "row",
-            width: "100%",
-            paddingHorizontal: Spacing.m,
-          }}
-        >
+        <View style={{ backgroundColor: Colors.white }}>
           <View
             style={{
-              flexShrink: 1,
-              flexGrow: 1,
-              marginVertical: Spacing.m,
-              marginRight: Spacing.m,
+              flexDirection: "row",
+              width: "100%",
+              paddingHorizontal: Spacing.m,
             }}
           >
-            <View style={{ marginBottom: Spacing.m }}>
-              <SummarySentence
-                games={games}
-                notFollowedPlayers={notFollowedParticipants(participants)}
-                anonymousPlayers={anonymousParticipants(participants)}
-                onGamePress={this.handleGamePress}
-                onPlayerPress={({ person }) => this.handlePersonPress(person)}
-              />
+            <View
+              style={{
+                flexShrink: 1,
+                flexGrow: 1,
+                marginVertical: Spacing.m,
+                marginRight: Spacing.m,
+              }}
+            >
+              <View style={{ marginBottom: Spacing.m }}>
+                <SummarySentence
+                  games={games}
+                  notFollowedPlayers={notFollowedParticipants(participants)}
+                  anonymousPlayers={anonymousParticipants(participants)}
+                  onGamePress={this.handleGamePress}
+                  onPlayerPress={({ person }) => this.handlePersonPress(person)}
+                />
+              </View>
+              {this.renderParticipantDetails()}
             </View>
-            {this.renderParticipantDetails()}
+            {this.renderCovers()}
           </View>
-          {this.renderCovers()}
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            margin: Spacing.m,
-            borderTopWidth: StyleSheet.hairlineWidth,
-            borderTopColor: Colors.brownGrey,
-          }}
-        >
-          <Button title={`❤️ ${likes.count}`} onPress={this.handleLikePress} />
-          <Button title={`💬`} onPress={this.handleCommentsPress} />
-          <Button title="Details" onPress={this.handleDetailsPress} />
+          <View
+            style={{
+              flexDirection: "row",
+              margin: Spacing.m,
+            }}
+          >
+            <Button
+              title={`❤️ ${likes.count}`}
+              onPress={this.handleLikePress}
+            />
+            <Button title={`💬`} onPress={this.handleCommentsPress} />
+            <Button title="Details" onPress={this.handleDetailsPress} />
+          </View>
         </View>
       </View>
     )
