@@ -5,7 +5,7 @@ import ApolloClient from "apollo-boost"
 // import { ApolloLink } from "apollo-link"
 
 const client = new ApolloClient({
-  uri: "https://playedapp-mock.glitch.me/graphql",
+  uri: "https://playedapp-mock.glitch.me",
   connectToDevTools: true, // Not working yet… :(
 })
 
